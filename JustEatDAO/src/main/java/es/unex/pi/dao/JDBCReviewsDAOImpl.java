@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import es.unex.pi.model.Review;
+import es.unex.pi.model.Restaurant_User;
 
 public class JDBCReviewsDAOImpl implements ReviewsDAO {
 
@@ -16,17 +16,17 @@ public class JDBCReviewsDAOImpl implements ReviewsDAO {
 	private static final Logger logger = Logger.getLogger(JDBCReviewsDAOImpl.class.getName());
 
 	@Override
-	public List<Review> getAll() {
+	public List<Restaurant_User> getAll() {
 
 		if (conn == null) return null;
 						
-		ArrayList<Review> reviewList = new ArrayList<Review>();
+		ArrayList<Restaurant_User> reviewList = new ArrayList<Restaurant_User>();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Reviews");
 						
 			while ( rs.next() ) {
-				Review review = new Review();
+				Restaurant_User review = new Restaurant_User();
 				review.setIdr(rs.getInt("idr"));
 				review.setIdu(rs.getInt("idu"));
 				review.setReview(rs.getString("review"));
@@ -46,17 +46,17 @@ public class JDBCReviewsDAOImpl implements ReviewsDAO {
 	}
 
 	@Override
-	public List<Review> getAllByUser(long idu) {
+	public List<Restaurant_User> getAllByUser(long idu) {
 		
 		if (conn == null) return null;
 						
-		ArrayList<Review> reviewList = new ArrayList<Review>();
+		ArrayList<Restaurant_User> reviewList = new ArrayList<Restaurant_User>();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Reviews WHERE idu="+idu);
 
 			while ( rs.next() ) {
-				Review review = new Review();
+				Restaurant_User review = new Restaurant_User();
 				review.setIdr(rs.getInt("idr"));
 				review.setIdu(rs.getInt("idu"));
 				review.setReview(rs.getString("review"));
@@ -75,17 +75,17 @@ public class JDBCReviewsDAOImpl implements ReviewsDAO {
 	}
 	
 	@Override
-	public List<Review> getAllByRestaurant(long idr) {
+	public List<Restaurant_User> getAllByRestaurant(long idr) {
 		
 		if (conn == null) return null;
 						
-		ArrayList<Review> reviewList = new ArrayList<Review>();
+		ArrayList<Restaurant_User> reviewList = new ArrayList<Restaurant_User>();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Reviews WHERE Idr="+idr);
 
 			while ( rs.next() ) {
-				Review review = new Review();
+				Restaurant_User review = new Restaurant_User();
 				review.setIdr(rs.getInt("idr"));
 				review.setIdu(rs.getInt("idu"));
 				review.setReview(rs.getString("review"));
@@ -104,16 +104,16 @@ public class JDBCReviewsDAOImpl implements ReviewsDAO {
 	
 	
 	@Override
-	public Review get(long idr,long idu) {
+	public Restaurant_User get(long idr,long idu) {
 		if (conn == null) return null;
 		
-		Review review = null;		
+		Restaurant_User review = null;		
 		
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM Reviews WHERE Idr="+idr+" AND idu="+idu);			 
 			if (!rs.next()) return null;
-			review= new Review();
+			review= new Restaurant_User();
 			review.setIdr(rs.getInt("idr"));
 			review.setIdu(rs.getInt("idu"));
 			review.setReview(rs.getString("review"));
@@ -133,7 +133,7 @@ public class JDBCReviewsDAOImpl implements ReviewsDAO {
 	
 
 	@Override
-	public boolean add(Review review) {
+	public boolean add(Restaurant_User review) {
 		boolean done = false;
 		if (conn != null){
 			
@@ -157,7 +157,7 @@ public class JDBCReviewsDAOImpl implements ReviewsDAO {
 	}
 
 	@Override
-	public boolean update(Review review) {
+	public boolean update(Restaurant_User review) {
 		boolean done = false;
 		if (conn != null){
 

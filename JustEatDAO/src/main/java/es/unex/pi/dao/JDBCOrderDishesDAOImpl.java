@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import es.unex.pi.model.OrderDishes;
+import es.unex.pi.model.Order_Dish;
 
 public class JDBCOrderDishesDAOImpl implements OrderDishesDAO {
 
@@ -16,17 +16,17 @@ public class JDBCOrderDishesDAOImpl implements OrderDishesDAO {
 	private static final Logger logger = Logger.getLogger(JDBCOrderDishesDAOImpl.class.getName());
 
 	@Override
-	public List<OrderDishes> getAll() {
+	public List<Order_Dish> getAll() {
 
 		if (conn == null) return null;
 						
-		ArrayList<OrderDishes> OrderDishesList = new ArrayList<OrderDishes>();
+		ArrayList<Order_Dish> OrderDishesList = new ArrayList<Order_Dish>();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM OrderDishes");
 						
 			while ( rs.next() ) {
-				OrderDishes orderDishes = new OrderDishes();
+				Order_Dish orderDishes = new Order_Dish();
 				orderDishes.setIdo(rs.getInt("ido"));
 				orderDishes.setIddi(rs.getInt("iddi"));
 						
@@ -44,17 +44,17 @@ public class JDBCOrderDishesDAOImpl implements OrderDishesDAO {
 	}
 
 	@Override
-	public List<OrderDishes> getAllByDish(long iddi) {
+	public List<Order_Dish> getAllByDish(long iddi) {
 		
 		if (conn == null) return null;
 						
-		ArrayList<OrderDishes> OrderDishesList = new ArrayList<OrderDishes>();
+		ArrayList<Order_Dish> OrderDishesList = new ArrayList<Order_Dish>();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM OrderDishes WHERE iddi="+iddi);
 
 			while ( rs.next() ) {
-				OrderDishes orderDishes = new OrderDishes();
+				Order_Dish orderDishes = new Order_Dish();
 				orderDishes.setIdo(rs.getInt("ido"));
 				orderDishes.setIddi(rs.getInt("iddi"));
 
@@ -71,17 +71,17 @@ public class JDBCOrderDishesDAOImpl implements OrderDishesDAO {
 	}
 	
 	@Override
-	public List<OrderDishes> getAllByOrder(long ido) {
+	public List<Order_Dish> getAllByOrder(long ido) {
 		
 		if (conn == null) return null;
 						
-		ArrayList<OrderDishes> OrderDishesList = new ArrayList<OrderDishes>();
+		ArrayList<Order_Dish> OrderDishesList = new ArrayList<Order_Dish>();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM OrderDishes WHERE ido="+ido);
 
 			while ( rs.next() ) {
-				OrderDishes orderDishes = new OrderDishes();
+				Order_Dish orderDishes = new Order_Dish();
 				orderDishes.setIdo(rs.getInt("ido"));
 				orderDishes.setIddi(rs.getInt("iddi"));
 							
@@ -98,16 +98,16 @@ public class JDBCOrderDishesDAOImpl implements OrderDishesDAO {
 	
 	
 	@Override
-	public OrderDishes get(long ido,long iddi) {
+	public Order_Dish get(long ido,long iddi) {
 		if (conn == null) return null;
 		
-		OrderDishes orderDishes = null;		
+		Order_Dish orderDishes = null;		
 		
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM OrderDishes WHERE Ido="+ido+" AND iddi="+iddi);			 
 			if (!rs.next()) return null;
-			orderDishes= new OrderDishes();
+			orderDishes= new Order_Dish();
 			orderDishes.setIdo(rs.getInt("ido"));
 			orderDishes.setIddi(rs.getInt("iddi"));
 
@@ -125,7 +125,7 @@ public class JDBCOrderDishesDAOImpl implements OrderDishesDAO {
 	
 
 	@Override
-	public boolean add(OrderDishes orderDishes) {
+	public boolean add(Order_Dish orderDishes) {
 		boolean done = false;
 		if (conn != null){
 			
@@ -147,7 +147,7 @@ public class JDBCOrderDishesDAOImpl implements OrderDishesDAO {
 	}
 
 	@Override
-	public boolean update(OrderDishes dbOrderDishes, OrderDishes newOrderDishes) {
+	public boolean update(Order_Dish dbOrderDishes, Order_Dish newOrderDishes) {
 		boolean done = false;
 		if (conn != null){
 

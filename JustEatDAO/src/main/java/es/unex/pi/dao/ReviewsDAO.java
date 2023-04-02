@@ -3,7 +3,7 @@ package es.unex.pi.dao;
 import java.sql.Connection;
 import java.util.List;
 
-import es.unex.pi.model.Review;
+import es.unex.pi.model.Restaurant_User;
 
 
 public interface ReviewsDAO {
@@ -22,7 +22,7 @@ public interface ReviewsDAO {
 	 * @return List of all the restaurant and the categories related to them from the database.
 	 */
 	
-	public List<Review> getAll();
+	public List<Restaurant_User> getAll();
 
 	/**
 	 *Gets all the Review that are related to a user.
@@ -32,7 +32,7 @@ public interface ReviewsDAO {
 	 * 
 	 * @return List of all the Review related to a user.
 	 */
-	public List<Review> getAllByUser(long idu);
+	public List<Restaurant_User> getAllByUser(long idu);
 	
 	/**
 	 * Gets all the Review that contains an specific restaurant.
@@ -42,7 +42,7 @@ public interface ReviewsDAO {
 	 * 
 	 * @return List of all the Review that contains an specific restaurant
 	 */
-	public List<Review> getAllByRestaurant(long idr);
+	public List<Restaurant_User> getAllByRestaurant(long idr);
 
 	/**
 	 * Gets a Review from the DB using idr and idu.
@@ -56,7 +56,7 @@ public interface ReviewsDAO {
 	 * @return Review with that idr and idu.
 	 */
 	
-	public Review get(long idr,long idu);
+	public Restaurant_User get(long idr,long idu);
 
 	/**
 	 * Adds an Review to the database.
@@ -67,7 +67,7 @@ public interface ReviewsDAO {
 	 * @return restaurant identifier or -1 in case the operation failed.
 	 */
 	
-	public boolean add(Review Review);
+	public boolean add(Restaurant_User Review);
 
 	/**
 	 * Updates an existing Review in the database.
@@ -78,7 +78,7 @@ public interface ReviewsDAO {
 	 * @return True if the operation was made and False if the operation failed.
 	 */
 	
-	public boolean update(Review Review);
+	public boolean update(Restaurant_User Review);
 
 	/**
 	 * Deletes an Review from the database.

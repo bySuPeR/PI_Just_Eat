@@ -1,7 +1,7 @@
 package es.unex.pi.dao;
 
 import java.sql.Connection;
-import java.util.List;
+import java.util.ArrayList;
 
 import es.unex.pi.model.Category;
 
@@ -14,7 +14,9 @@ public interface CategoryDAO {
 	 * @param conn
 	 *            database connection.
 	 */
-	public void setConnection(Connection conn);
+	
+	public void setConnection (Connection conn);
+	
 	
 	/**
 	 * Gets a category from the DB using id.
@@ -24,8 +26,10 @@ public interface CategoryDAO {
 	 * 
 	 * @return Category object with that id.
 	 */
-	public Category get(long id);
+	
+	public Category get (long id);
 
+	
 	/**
 	 * Gets a category from the DB using name.
 	 * 
@@ -34,7 +38,8 @@ public interface CategoryDAO {
 	 * 
 	 * @return Category object with that name.
 	 */
-	public Category get(String name);
+	
+	public Category get (String name);
 
 	
 	/**
@@ -42,7 +47,9 @@ public interface CategoryDAO {
 	 * 
 	 * @return List of all the categories from the database.
 	 */
-	public List<Category> getAll();
+	
+	public ArrayList <Category> getAll ();
+	
 	
 	/**
 	 * Gets all the categories from the database that contain a text in the name.
@@ -51,8 +58,9 @@ public interface CategoryDAO {
 	 *            Search string .
 	 * 
 	 * @return List of all the categories from the database that contain a text in the name.
-	 */	
-	public List<Category> getAllBySearchName(String search);
+	 */
+	
+	public ArrayList <Category> getAllBySearchName (String search);
 
 
 	/**
@@ -64,8 +72,9 @@ public interface CategoryDAO {
 	 * @return Category identifier or -1 in case the operation failed.
 	 */
 	
-	public long add(Category category);
+	public long add (Category category);
 
+	
 	/**
 	 * Updates an existing category in the database.
 	 * 
@@ -75,9 +84,9 @@ public interface CategoryDAO {
 	 * @return True if the operation was made and False if the operation failed.
 	 */
 	
-	
-	public boolean update(Category category);
+	public boolean update (Category category);
 
+	
 	/**
 	 * Deletes a category from the database.
 	 * 
@@ -87,5 +96,5 @@ public interface CategoryDAO {
 	 * @return True if the operation was made and False if the operation failed.
 	 */
 	
-	public boolean delete(long id);
+	public boolean delete (long id);
 }

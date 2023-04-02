@@ -14,7 +14,7 @@ import org.junit.runners.MethodSorters;
 
 import es.unex.pi.dao.ReviewsDAO;
 import es.unex.pi.dao.JDBCReviewsDAOImpl;
-import es.unex.pi.model.Review;
+import es.unex.pi.model.Restaurant_User;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
@@ -46,9 +46,9 @@ public class TestReviewDAO {
 	@Test
 	public void test1BaseData() {
 		
-		List<Review> reviewsList = reviewsDAO.getAll();
+		List<Restaurant_User> reviewsList = reviewsDAO.getAll();
 		
-		Review review = reviewsDAO.get(0,2);
+		Restaurant_User review = reviewsDAO.get(0,2);
 		
 		assertEquals(review.getIdr(),0);
 		assertEquals(review.getIdu(),2);
@@ -60,22 +60,22 @@ public class TestReviewDAO {
 	@Test
 	public void test2BaseDataByUser() {
 		
-		List<Review> reviewsList = reviewsDAO.getAllByUser(4);
-		for(Review reviews: reviewsList)			
+		List<Restaurant_User> reviewsList = reviewsDAO.getAllByUser(4);
+		for(Restaurant_User reviews: reviewsList)			
 			assertEquals(reviews.getIdu(),4);			
 	}
 	
 	@Test
 	public void test3BaseDataByRestaurant() {
 		
-		List<Review> reviewsList = reviewsDAO.getAllByRestaurant(0);
-		for(Review reviews: reviewsList)			
+		List<Restaurant_User> reviewsList = reviewsDAO.getAllByRestaurant(0);
+		for(Restaurant_User reviews: reviewsList)			
 			assertEquals(reviews.getIdr(),0);			
 	}
 	
 	@Test
 	public void test4Add(){
-		Review review01 = new Review();
+		Restaurant_User review01 = new Restaurant_User();
 		review01.setIdr(4);
 		review01.setIdu(1);
 		review01.setReview("NewReviewComment");
@@ -83,7 +83,7 @@ public class TestReviewDAO {
 		
 		reviewsDAO.add(review01);
 		
-		Review review02 = reviewsDAO.get(4,1);
+		Restaurant_User review02 = reviewsDAO.get(4,1);
 		
 		assertEquals(4,review02.getIdr());
 		assertEquals(1,review02.getIdu());
@@ -94,7 +94,7 @@ public class TestReviewDAO {
 	@Test
 	public void test5Modify(){
 		
-		Review review01 = reviewsDAO.get(3,0);
+		Restaurant_User review01 = reviewsDAO.get(3,0);
 		String oldReview = review01.getReview();
 		int oldGrade = review01.getGrade();
 		
@@ -102,7 +102,7 @@ public class TestReviewDAO {
 		review01.setGrade(5);
 		reviewsDAO.update(review01);
 		
-		Review review02 = reviewsDAO.get(3,0);
+		Restaurant_User review02 = reviewsDAO.get(3,0);
 		assertEquals("NewReview",review02.getReview());
 		assertEquals(5,review02.getGrade());
 
@@ -121,13 +121,13 @@ public class TestReviewDAO {
 	public void test6Delete(){
 		 
 		reviewsDAO.delete(4,1);
-		List<Review> reviewsList = reviewsDAO.getAll();
+		List<Restaurant_User> reviewsList = reviewsDAO.getAll();
 		 
-		 Review reviews01 = new Review();
+		 Restaurant_User reviews01 = new Restaurant_User();
 		 reviews01.setIdr(3);
 		 reviews01.setIdu(1);
 		 		 
-		for(Review reviews: reviewsList) {
+		for(Restaurant_User reviews: reviewsList) {
 				assertNotEquals(reviews,reviews01);
 		}
 		 

@@ -21,7 +21,7 @@ import es.unex.pi.dao.JDBCUserDAOImpl;
 import es.unex.pi.dao.UserDAO;
 import es.unex.pi.model.Category;
 import es.unex.pi.model.Restaurant;
-import es.unex.pi.model.RestaurantCategories;
+import es.unex.pi.model.Restaurant_Category;
 import es.unex.pi.model.User;
 import es.unex.pi.util.Triplet;
 
@@ -72,16 +72,16 @@ public class ListRestaurantServlet extends HttpServlet {
 		
 		Iterator<Restaurant> itRestaurantList = restaurantsList.iterator();
 
-		List<Triplet<Restaurant, User, List<RestaurantCategories>>> restaurantsUserList = new ArrayList<Triplet<Restaurant, User, List<RestaurantCategories>>>();
+		List<Triplet<Restaurant, User, List<Restaurant_Category>>> restaurantsUserList = new ArrayList<Triplet<Restaurant, User, List<Restaurant_Category>>>();
 
 		while(itRestaurantList.hasNext()) {
 			Restaurant restaurant = (Restaurant) itRestaurantList.next();
 			User user = userDAO.get(restaurant.getIdu());
-			List<RestaurantCategories> restaurantsCategories = restaurantsCategoriesDAO.getAllByRestaurant(restaurant.getId());
+			List<Restaurant_Category> restaurantsCategories = restaurantsCategoriesDAO.getAllByRestaurant(restaurant.getId());
 			
 			logger.info("User " + user.getName());
 
-			restaurantsUserList.add(new Triplet<Restaurant, User, List<RestaurantCategories>>(restaurant,user,restaurantsCategories));
+			restaurantsUserList.add(new Triplet<Restaurant, User, List<Restaurant_Category>>(restaurant,user,restaurantsCategories));
 		}
 		
 		

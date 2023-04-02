@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import es.unex.pi.model.RestaurantCategories;
+import es.unex.pi.model.Restaurant_Category;
 
 public class JDBCRestaurantCategoriesDAOImpl implements RestaurantCategoriesDAO {
 
@@ -16,17 +16,17 @@ public class JDBCRestaurantCategoriesDAOImpl implements RestaurantCategoriesDAO 
 	private static final Logger logger = Logger.getLogger(JDBCRestaurantCategoriesDAOImpl.class.getName());
 
 	@Override
-	public List<RestaurantCategories> getAll() {
+	public List<Restaurant_Category> getAll() {
 
 		if (conn == null) return null;
 						
-		ArrayList<RestaurantCategories> restaurantCategoriesList = new ArrayList<RestaurantCategories>();
+		ArrayList<Restaurant_Category> restaurantCategoriesList = new ArrayList<Restaurant_Category>();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM RestaurantCategories");
 						
 			while ( rs.next() ) {
-				RestaurantCategories restaurantCategories = new RestaurantCategories();
+				Restaurant_Category restaurantCategories = new Restaurant_Category();
 				restaurantCategories.setIdr(rs.getInt("idr"));
 				restaurantCategories.setIdct(rs.getInt("idct"));
 						
@@ -44,17 +44,17 @@ public class JDBCRestaurantCategoriesDAOImpl implements RestaurantCategoriesDAO 
 	}
 
 	@Override
-	public List<RestaurantCategories> getAllByCategory(long idct) {
+	public List<Restaurant_Category> getAllByCategory(long idct) {
 		
 		if (conn == null) return null;
 						
-		ArrayList<RestaurantCategories> restaurantCategoriesList = new ArrayList<RestaurantCategories>();
+		ArrayList<Restaurant_Category> restaurantCategoriesList = new ArrayList<Restaurant_Category>();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM RestaurantCategories WHERE idct="+idct);
 
 			while ( rs.next() ) {
-				RestaurantCategories restaurantCategories = new RestaurantCategories();
+				Restaurant_Category restaurantCategories = new Restaurant_Category();
 				restaurantCategories.setIdr(rs.getInt("idr"));
 				restaurantCategories.setIdct(rs.getInt("idct"));
 
@@ -71,17 +71,17 @@ public class JDBCRestaurantCategoriesDAOImpl implements RestaurantCategoriesDAO 
 	}
 	
 	@Override
-	public List<RestaurantCategories> getAllByRestaurant(long idr) {
+	public List<Restaurant_Category> getAllByRestaurant(long idr) {
 		
 		if (conn == null) return null;
 						
-		ArrayList<RestaurantCategories> restaurantCategoriesList = new ArrayList<RestaurantCategories>();
+		ArrayList<Restaurant_Category> restaurantCategoriesList = new ArrayList<Restaurant_Category>();
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM RestaurantCategories WHERE Idr="+idr);
 
 			while ( rs.next() ) {
-				RestaurantCategories restaurantCategories = new RestaurantCategories();
+				Restaurant_Category restaurantCategories = new Restaurant_Category();
 				restaurantCategories.setIdr(rs.getInt("idr"));
 				restaurantCategories.setIdct(rs.getInt("idct"));
 							
@@ -98,16 +98,16 @@ public class JDBCRestaurantCategoriesDAOImpl implements RestaurantCategoriesDAO 
 	
 	
 	@Override
-	public RestaurantCategories get(long idr,long idct) {
+	public Restaurant_Category get(long idr,long idct) {
 		if (conn == null) return null;
 		
-		RestaurantCategories restaurantCategories = null;		
+		Restaurant_Category restaurantCategories = null;		
 		
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM RestaurantCategories WHERE idr="+idr+" AND idct="+idct);			 
 			if (!rs.next()) return null;
-			restaurantCategories= new RestaurantCategories();
+			restaurantCategories= new Restaurant_Category();
 			restaurantCategories.setIdr(rs.getInt("idr"));
 			restaurantCategories.setIdct(rs.getInt("idct"));
 
@@ -125,7 +125,7 @@ public class JDBCRestaurantCategoriesDAOImpl implements RestaurantCategoriesDAO 
 	
 
 	@Override
-	public boolean add(RestaurantCategories restaurantCategories) {
+	public boolean add(Restaurant_Category restaurantCategories) {
 		boolean done = false;
 		if (conn != null){
 			
@@ -147,7 +147,7 @@ public class JDBCRestaurantCategoriesDAOImpl implements RestaurantCategoriesDAO 
 	}
 
 	@Override
-	public boolean update(RestaurantCategories dbObject, RestaurantCategories newObject) {
+	public boolean update(Restaurant_Category dbObject, Restaurant_Category newObject) {
 		boolean done = false;
 		if (conn != null){
 

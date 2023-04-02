@@ -14,7 +14,7 @@ import org.junit.runners.MethodSorters;
 
 import es.unex.pi.dao.RestaurantCategoriesDAO;
 import es.unex.pi.dao.JDBCRestaurantCategoriesDAOImpl;
-import es.unex.pi.model.RestaurantCategories;
+import es.unex.pi.model.Restaurant_Category;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
@@ -46,9 +46,9 @@ public class TestRestaurantCategoriesDAO {
 	@Test
 	public void test1BaseData() {
 		
-		List<RestaurantCategories> RestaurantsCategoriesList = RestaurantsCategoriesDAO.getAll();
+		List<Restaurant_Category> RestaurantsCategoriesList = RestaurantsCategoriesDAO.getAll();
 		
-		RestaurantCategories RestaurantsCategories = RestaurantsCategoriesDAO.get(0,4);
+		Restaurant_Category RestaurantsCategories = RestaurantsCategoriesDAO.get(0,4);
 		
 		assertEquals(RestaurantsCategories.getIdr(),0);
 		assertEquals(RestaurantsCategories.getIdct(),4);
@@ -60,27 +60,27 @@ public class TestRestaurantCategoriesDAO {
 	@Test
 	public void test2BaseDataByCategory() {
 		
-		List<RestaurantCategories> RestaurantsCategoriesList = RestaurantsCategoriesDAO.getAllByCategory(4);
-		for(RestaurantCategories RestaurantsCategories: RestaurantsCategoriesList)			
+		List<Restaurant_Category> RestaurantsCategoriesList = RestaurantsCategoriesDAO.getAllByCategory(4);
+		for(Restaurant_Category RestaurantsCategories: RestaurantsCategoriesList)			
 			assertEquals(RestaurantsCategories.getIdct(),4);			
 	}
 	
 	@Test
 	public void test3BaseDataByRestaurant() {
 		
-		List<RestaurantCategories> RestaurantsCategoriesList = RestaurantsCategoriesDAO.getAllByRestaurant(0);
-		for(RestaurantCategories RestaurantsCategories: RestaurantsCategoriesList)			
+		List<Restaurant_Category> RestaurantsCategoriesList = RestaurantsCategoriesDAO.getAllByRestaurant(0);
+		for(Restaurant_Category RestaurantsCategories: RestaurantsCategoriesList)			
 			assertEquals(RestaurantsCategories.getIdr(),0);			
 	}
 	
 	@Test
 	public void test4Add(){
-		RestaurantCategories restaurantCategories01 = new RestaurantCategories();
+		Restaurant_Category restaurantCategories01 = new Restaurant_Category();
 		restaurantCategories01.setIdr(3);
 		restaurantCategories01.setIdct(0);
 		RestaurantsCategoriesDAO.add(restaurantCategories01);
 		
-		RestaurantCategories restaurantCategories02 = RestaurantsCategoriesDAO.get(3,0);
+		Restaurant_Category restaurantCategories02 = RestaurantsCategoriesDAO.get(3,0);
 		
 		assertEquals(3,restaurantCategories02.getIdr());
 		assertEquals(0,restaurantCategories02.getIdct());
@@ -91,12 +91,12 @@ public class TestRestaurantCategoriesDAO {
 	@Test
 	public void test5Modify(){
 		
-		RestaurantCategories restaurantCategories01 = RestaurantsCategoriesDAO.get(3,0);
-		RestaurantCategories restaurantCategories02 = RestaurantsCategoriesDAO.get(3,0);
+		Restaurant_Category restaurantCategories01 = RestaurantsCategoriesDAO.get(3,0);
+		Restaurant_Category restaurantCategories02 = RestaurantsCategoriesDAO.get(3,0);
 		restaurantCategories02.setIdct(1);
 		RestaurantsCategoriesDAO.update(restaurantCategories01,restaurantCategories02);
 		
-		RestaurantCategories restaurantCategories03 = RestaurantsCategoriesDAO.get(3,1);
+		Restaurant_Category restaurantCategories03 = RestaurantsCategoriesDAO.get(3,1);
 		assertEquals(3,restaurantCategories03.getIdr());
 		assertEquals(1,restaurantCategories03.getIdct());
 	}
@@ -105,13 +105,13 @@ public class TestRestaurantCategoriesDAO {
 	public void test6Delete(){
 		 
 		RestaurantsCategoriesDAO.delete(3,1);
-		List<RestaurantCategories> RestaurantsCategoriesList = RestaurantsCategoriesDAO.getAll();
+		List<Restaurant_Category> RestaurantsCategoriesList = RestaurantsCategoriesDAO.getAll();
 		 
-		 RestaurantCategories RestaurantsCategories01 = new RestaurantCategories();
+		 Restaurant_Category RestaurantsCategories01 = new Restaurant_Category();
 		 RestaurantsCategories01.setIdr(3);
 		 RestaurantsCategories01.setIdct(1);
 		 		 
-		for(RestaurantCategories RestaurantsCategories: RestaurantsCategoriesList) {
+		for(Restaurant_Category RestaurantsCategories: RestaurantsCategoriesList) {
 				assertNotEquals(RestaurantsCategories,RestaurantsCategories01);
 		}
 		 

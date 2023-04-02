@@ -1,23 +1,23 @@
 package es.unex.pi.model;
 
-public class OrderDishes {
+public class Order_Dish {
 
 	private long ido;
 	private long iddi;
 	
-	public long getIdo() {
+	public long getIdo () {
 		return ido;
 	}
 	
-	public void setIdo(long ido) {
+	public void setIdo (long ido) {
 		this.ido = ido;
 	}
 	
-	public long getIddi() {
+	public long getIddi () {
 		return iddi;
 	}
 	
-	public void setIddi(long iddi) {
+	public void setIddi (long iddi) {
 		this.iddi = iddi;
 	}
 }

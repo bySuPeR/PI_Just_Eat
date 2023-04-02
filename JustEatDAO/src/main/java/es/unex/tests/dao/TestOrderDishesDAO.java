@@ -14,7 +14,7 @@ import org.junit.runners.MethodSorters;
 
 import es.unex.pi.dao.OrderDishesDAO;
 import es.unex.pi.dao.JDBCOrderDishesDAOImpl;
-import es.unex.pi.model.OrderDishes;
+import es.unex.pi.model.Order_Dish;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
@@ -46,9 +46,9 @@ public class TestOrderDishesDAO {
 	@Test
 	public void test1BaseData() {
 		
-		List<OrderDishes> OrderDishesList = OrderDishesDAO.getAll();
+		List<Order_Dish> OrderDishesList = OrderDishesDAO.getAll();
 		
-		OrderDishes OrderDishes = OrderDishesDAO.get(0,0);
+		Order_Dish OrderDishes = OrderDishesDAO.get(0,0);
 		
 		assertEquals(OrderDishes.getIdo(),0);
 		assertEquals(OrderDishes.getIddi(),0);
@@ -60,27 +60,27 @@ public class TestOrderDishesDAO {
 	@Test
 	public void test2BaseDataByDish() {
 		
-		List<OrderDishes> OrderDishesList = OrderDishesDAO.getAllByDish(2);
-		for(OrderDishes OrderDishes: OrderDishesList)			
+		List<Order_Dish> OrderDishesList = OrderDishesDAO.getAllByDish(2);
+		for(Order_Dish OrderDishes: OrderDishesList)			
 			assertEquals(OrderDishes.getIddi(),2);			
 	}
 	
 	@Test
 	public void test3BaseDataByOrder() {
 		
-		List<OrderDishes> OrderDishesList = OrderDishesDAO.getAllByOrder(1);
-		for(OrderDishes OrderDishes: OrderDishesList)			
+		List<Order_Dish> OrderDishesList = OrderDishesDAO.getAllByOrder(1);
+		for(Order_Dish OrderDishes: OrderDishesList)			
 			assertEquals(OrderDishes.getIdo(),1);			
 	}
 	
 	@Test
 	public void test4Add(){
-		OrderDishes orderDishes01 = new OrderDishes();
+		Order_Dish orderDishes01 = new Order_Dish();
 		orderDishes01.setIdo(2);
 		orderDishes01.setIddi(1);
 		OrderDishesDAO.add(orderDishes01);
 		
-		OrderDishes orderDishes02 = OrderDishesDAO.get(2,1);
+		Order_Dish orderDishes02 = OrderDishesDAO.get(2,1);
 		
 		assertEquals(2,orderDishes02.getIdo());
 		assertEquals(1,orderDishes02.getIddi());
@@ -91,12 +91,12 @@ public class TestOrderDishesDAO {
 	@Test
 	public void test5Modify(){
 		
-		OrderDishes orderDishes01 = OrderDishesDAO.get(2,1);
-		OrderDishes orderDishes02 = OrderDishesDAO.get(2,1);
+		Order_Dish orderDishes01 = OrderDishesDAO.get(2,1);
+		Order_Dish orderDishes02 = OrderDishesDAO.get(2,1);
 		orderDishes02.setIddi(0);
 		OrderDishesDAO.update(orderDishes01,orderDishes02);
 		
-		OrderDishes orderDishes03 = OrderDishesDAO.get(2,0);
+		Order_Dish orderDishes03 = OrderDishesDAO.get(2,0);
 		assertEquals(2,orderDishes03.getIdo());
 		assertEquals(0,orderDishes03.getIddi());
 	}
@@ -105,13 +105,13 @@ public class TestOrderDishesDAO {
 	public void test6Delete(){
 		 
 		OrderDishesDAO.delete(2,0);
-		List<OrderDishes> OrderDishesList = OrderDishesDAO.getAll();
+		List<Order_Dish> OrderDishesList = OrderDishesDAO.getAll();
 		 
-		 OrderDishes OrderDishes01 = new OrderDishes();
+		 Order_Dish OrderDishes01 = new Order_Dish();
 		 OrderDishes01.setIdo(2);
 		 OrderDishes01.setIddi(0);
 		 		 
-		for(OrderDishes OrderDishes: OrderDishesList) {
+		for(Order_Dish OrderDishes: OrderDishesList) {
 				assertNotEquals(OrderDishes,OrderDishes01);
 		}
 		 

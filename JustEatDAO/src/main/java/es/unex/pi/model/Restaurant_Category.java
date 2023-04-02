@@ -1,23 +1,23 @@
 package es.unex.pi.model;
 
-public class RestaurantCategories {
+public class Restaurant_Category {
 
 	private long idr;
 	private long idct;
 	
-	public long getIdr() {
+	public long getIdr () {
 		return idr;
 	}
 	
-	public void setIdr(long idr) {
+	public void setIdr (long idr) {
 		this.idr = idr;
 	}
 	
-	public long getIdct() {
+	public long getIdct () {
 		return idct;
 	}
 	
-	public void setIdct(long idct) {
+	public void setIdct (long idct) {
 		this.idct = idct;
 	}
 }

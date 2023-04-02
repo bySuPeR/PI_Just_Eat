@@ -3,7 +3,7 @@ package es.unex.pi.dao;
 import java.sql.Connection;
 import java.util.List;
 
-import es.unex.pi.model.OrderDishes;
+import es.unex.pi.model.Order_Dish;
 
 
 public interface OrderDishesDAO {
@@ -22,7 +22,7 @@ public interface OrderDishesDAO {
 	 * @return List of all the order and the dishes related to them from the database.
 	 */
 	
-	public List<OrderDishes> getAll();
+	public List<Order_Dish> getAll();
 
 	/**
 	 *Gets all the OrderDish that are related to a dish.
@@ -32,7 +32,7 @@ public interface OrderDishesDAO {
 	 * 
 	 * @return List of all the OrderDish related to a dish.
 	 */
-	public List<OrderDishes> getAllByDish(long iddi);
+	public List<Order_Dish> getAllByDish(long iddi);
 	
 	/**
 	 * Gets all the OrderDish that contains an specific order.
@@ -42,7 +42,7 @@ public interface OrderDishesDAO {
 	 * 
 	 * @return List of all the OrderDish that contains an specific order
 	 */
-	public List<OrderDishes> getAllByOrder(long ido);
+	public List<Order_Dish> getAllByOrder(long ido);
 
 	/**
 	 * Gets a OrderDish from the DB using ido and iddi.
@@ -56,7 +56,7 @@ public interface OrderDishesDAO {
 	 * @return OrderDish with that ido and iddi.
 	 */
 	
-	public OrderDishes get(long ido,long iddi);
+	public Order_Dish get(long ido,long iddi);
 
 	/**
 	 * Adds an OrderDish to the database.
@@ -67,7 +67,7 @@ public interface OrderDishesDAO {
 	 * @return order identifier or -1 in case the operation failed.
 	 */
 	
-	public boolean add(OrderDishes OrderDish);
+	public boolean add(Order_Dish OrderDish);
 
 	/**
 	 * Updates an existing OrderDish in the database.
@@ -81,7 +81,7 @@ public interface OrderDishesDAO {
 	 * @return True if the operation was made and False if the operation failed.
 	 */
 	
-	public boolean update(OrderDishes dbOrderDishes, OrderDishes newOrderDishes);
+	public boolean update(Order_Dish dbOrderDishes, Order_Dish newOrderDishes);
 
 	/**
 	 * Deletes an OrderDish from the database.
