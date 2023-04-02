@@ -3,9 +3,8 @@ package es.unex.pi.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import es.unex.pi.model.Restaurant;
@@ -13,269 +12,308 @@ import es.unex.pi.model.Restaurant;
 public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 
 	private Connection conn;
-	private static final Logger logger = Logger.getLogger(JDBCRestaurantDAOImpl.class.getName());
+	private static final Logger logger = Logger.getLogger (JDBCRestaurantDAOImpl.class.getName ());
 	
 	@Override
-	public Restaurant get(long id) {
-		if (conn == null) return null;
+	public Restaurant get (long id) {
+		if (conn == null) {
+			return null;
+		}
 		
-		Restaurant restaurant = null;		
+		Restaurant restaurant = null;
+		String query = "SELECT * FROM Restaurant WHERE id = ?";
 		
 		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM restaurant WHERE id ="+id);			 
-			if (!rs.next()) return null; 
-			restaurant  = new Restaurant();	 
-			restaurant.setId(rs.getInt("id"));
-			restaurant.setName(rs.getString("name"));
-			restaurant.setAddress(rs.getString("address"));
-			restaurant.setTelephone(rs.getString("telephone"));
-			restaurant.setCity(rs.getString("city"));
-			restaurant.setIdu(rs.getInt("idu"));
-			restaurant.setGradesAverage(rs.getInt("gradesAverage"));
-			restaurant.setMinPrice(rs.getInt("minPrice"));
-			restaurant.setContactEmail(rs.getString("contactemail"));
-			restaurant.setMaxPrice(rs.getInt("maxPrice"));
-			restaurant.setBikeFriendly(rs.getInt("bikeFriendly"));
-			restaurant.setAvailable(rs.getInt("available"));
-
-			logger.info("fetching restaurant: "+restaurant.getId());
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			PreparedStatement stmt = this.conn.prepareStatement (query);
+			stmt.clearParameters ();
+			stmt.setLong (1, id);
+			ResultSet rs = stmt.executeQuery ();
+			if (rs.next ()) {
+				restaurant = new Restaurant ();
+				restaurant.setId (rs.getLong ("id"));
+				restaurant.setName (rs.getString ("name"));
+				restaurant.setAddress (rs.getString ("address"));
+				restaurant.setTelephone (rs.getString ("telephone"));
+				restaurant.setGradesAverage (rs.getDouble ("gradesAverage"));
+				restaurant.setCity (rs.getString ("city"));
+				restaurant.setMinPrice (rs.getInt ("minPrice"));
+				restaurant.setContactEmail (rs.getString ("contactEmail"));
+				restaurant.setMaxPrice (rs.getInt ("maxPrice"));
+				restaurant.setBikeFriendly (rs.getInt ("bikeFriendly"));
+				restaurant.setAvailable (rs.getInt ("available"));
+				restaurant.setIdu (rs.getLong ("idu"));
+				logger.info ("Fetching restaurant (" + id + "): " + restaurant.getName () + "...");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace ();
 		}
 		return restaurant;
 	}
 	
-	public List<Restaurant> getAll() {
-
-		if (conn == null) return null;
-		
-		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-		try {
-			Statement stmt;
-			ResultSet rs;
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM restaurant");
-			while ( rs.next() ) {
-				Restaurant restaurant = new Restaurant();
-				restaurant  = new Restaurant();	 
-				restaurant.setId(rs.getInt("id"));
-				restaurant.setName(rs.getString("name"));
-				restaurant.setAddress(rs.getString("address"));
-				restaurant.setTelephone(rs.getString("telephone"));
-				restaurant.setCity(rs.getString("city"));
-				restaurant.setIdu(rs.getInt("idu"));
-				restaurant.setGradesAverage(rs.getInt("gradesAverage"));
-				restaurant.setMinPrice(rs.getInt("minPrice"));
-				restaurant.setContactEmail(rs.getString("contactemail"));
-				restaurant.setMaxPrice(rs.getInt("maxPrice"));
-				restaurant.setBikeFriendly(rs.getInt("bikeFriendly"));
-				restaurant.setAvailable(rs.getInt("available"));
-				
-				restaurants.add(restaurant);
-				logger.info("fetching restaurant: "+restaurant.getId());							
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return restaurants;
-	}
-	
-	public List<Restaurant> getAllBySearchName(String search) {
-		search = search.toUpperCase();
-		if (conn == null)
+	public ArrayList <Restaurant> getAll () {
+		if (conn == null) {
 			return null;
-
-		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM restaurant WHERE UPPER(name) LIKE '%" + search + "%'");
-
-			while (rs.next()) {
-				Restaurant restaurant = new Restaurant();
-				
-				restaurant  = new Restaurant();	 
-				restaurant.setId(rs.getInt("id"));
-				restaurant.setName(rs.getString("name"));
-				restaurant.setAddress(rs.getString("address"));
-				restaurant.setTelephone(rs.getString("telephone"));
-				restaurant.setCity(rs.getString("city"));
-				restaurant.setIdu(rs.getInt("idu"));
-				restaurant.setGradesAverage(rs.getInt("gradesAverage"));
-				restaurant.setMinPrice(rs.getInt("minPrice"));
-				restaurant.setContactEmail(rs.getString("contactemail"));
-				restaurant.setMaxPrice(rs.getInt("maxPrice"));
-				restaurant.setBikeFriendly(rs.getInt("bikeFriendly"));
-				restaurant.setAvailable(rs.getInt("available"));
-				
-				restaurants.add(restaurant);
-				
-				logger.info("fetching restaurant: "+restaurant.getId());
-				
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-
+		
+		Restaurant restaurant = null;
+		ArrayList <Restaurant> restaurants = null;
+		String query = "SELECT * FROM Restaurant";
+		
+		try {
+			PreparedStatement stmt = this.conn.prepareStatement (query);
+			ResultSet rs = stmt.executeQuery ();
+			restaurants = new ArrayList <Restaurant> ();
+			while (rs.next ()) {
+				restaurant = new Restaurant ();
+				restaurant.setId (rs.getLong ("id"));
+				restaurant.setName (rs.getString ("name"));
+				restaurant.setAddress (rs.getString ("address"));
+				restaurant.setTelephone (rs.getString ("telephone"));
+				restaurant.setGradesAverage (rs.getDouble ("gradesAverage"));
+				restaurant.setCity (rs.getString ("city"));
+				restaurant.setMinPrice (rs.getInt ("minPrice"));
+				restaurant.setContactEmail (rs.getString ("contactEmail"));
+				restaurant.setMaxPrice (rs.getInt ("maxPrice"));
+				restaurant.setBikeFriendly (rs.getInt ("bikeFriendly"));
+				restaurant.setAvailable (rs.getInt ("available"));
+				restaurant.setIdu (rs.getLong ("idu"));
+				
+				restaurants.add (restaurant);
+				logger.info ("Fetching restaurant (" + restaurant.getId () + "): " + restaurant.getName () + "...");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace ();
+		}
 		return restaurants;
 	}
 	
-
-	
-	public List<Restaurant> getAllByUser(long idu) {
-		
-		if (conn == null)
+	public ArrayList <Restaurant> getAllBySearchName (String search) {
+		if (conn == null) {
 			return null;
-
-		ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM restaurant WHERE idu = "+ idu);
-
-			while (rs.next()) {
-				Restaurant restaurant = new Restaurant();
-				restaurant  = new Restaurant();	 
-				restaurant.setId(rs.getInt("id"));
-				restaurant.setName(rs.getString("name"));
-				restaurant.setAddress(rs.getString("address"));
-				restaurant.setTelephone(rs.getString("telephone"));
-				restaurant.setCity(rs.getString("city"));
-				restaurant.setIdu(rs.getInt("idu"));
-				restaurant.setGradesAverage(rs.getInt("gradesAverage"));
-				restaurant.setMinPrice(rs.getInt("minPrice"));
-				restaurant.setContactEmail(rs.getString("contactemail"));
-				restaurant.setMaxPrice(rs.getInt("maxPrice"));
-				restaurant.setBikeFriendly(rs.getInt("bikeFriendly"));
-				restaurant.setAvailable(rs.getInt("available"));
-				restaurants.add(restaurant);
-		
-				logger.info("fetching restaurants: "+restaurant.getId());
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-
+		search = search.toUpperCase ();
+		search = "%" + search + "%";
+		Restaurant restaurant = null;
+		ArrayList <Restaurant> restaurants = null;
+		String query = "SELECT * FROM Restaurant WHERE UPPER (name) LIKE ?";
+		
+		try {
+			PreparedStatement stmt = this.conn.prepareStatement (query);
+			stmt.clearParameters ();
+			stmt.setString (1, search);
+			ResultSet rs = stmt.executeQuery ();
+			restaurants = new ArrayList <Restaurant> ();
+			while (rs.next ()) {
+				restaurant = new Restaurant ();
+				restaurant.setId (rs.getLong ("id"));
+				restaurant.setName (rs.getString ("name"));
+				restaurant.setAddress (rs.getString ("address"));
+				restaurant.setTelephone (rs.getString ("telephone"));
+				restaurant.setGradesAverage (rs.getDouble ("gradesAverage"));
+				restaurant.setCity (rs.getString ("city"));
+				restaurant.setMinPrice (rs.getInt ("minPrice"));
+				restaurant.setContactEmail (rs.getString ("contactEmail"));
+				restaurant.setMaxPrice (rs.getInt ("maxPrice"));
+				restaurant.setBikeFriendly (rs.getInt ("bikeFriendly"));
+				restaurant.setAvailable (rs.getInt ("available"));
+				restaurant.setIdu (rs.getLong ("idu"));
+				
+				restaurants.add (restaurant);
+				logger.info ("Fetching restaurant (" + restaurant.getId () + "): " + restaurant.getName () + "...");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace ();
+		}
 		return restaurants;
 	}
-
-	
-	
 	
 	@Override
-	public long add(Restaurant restaurant) {
-		long id=-1;
-		long lastid=-1;
-		if (conn != null){
-
-			Statement stmt;
-			
-			
-			try {
-				stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM sqlite_sequence WHERE name ='restaurant'");			 
-				if (!rs.next()) return -1; 
-				lastid=rs.getInt("seq");
-								
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			try {
-				stmt = conn.createStatement();
-				stmt.executeUpdate("INSERT INTO restaurant (name,address,telephone,idu,gradesAverage,city,minPrice,contactemail,maxPrice,bikeFriendly,available) VALUES('"
-									+restaurant.getName()+"','"+restaurant.getAddress()+"','" + restaurant.getTelephone() + "'," 
-									+ restaurant.getIdu() + "," + restaurant.getGradesAverage()+",'"+ restaurant.getCity() +"',"+ restaurant.getMinPrice() +",'" + restaurant.getContactEmail() + "'," 
-									+ restaurant.getMaxPrice() + "," + restaurant.getBikeFriendly() +"," + restaurant.getAvailable() + ")");
+	public ArrayList <Restaurant> getAllByUser (long idu) {
+		if (conn == null) {
+			return null;
+		}
+		Restaurant restaurant = null;
+		ArrayList <Restaurant> restaurants = null;
+		String query = "SELECT * FROM Restaurant WHERE idu = ?";
+		
+		try {
+			PreparedStatement stmt = this.conn.prepareStatement (query);
+			stmt.clearParameters ();
+			stmt.setLong (1, idu);
+			ResultSet rs = stmt.executeQuery ();
+			restaurants = new ArrayList <Restaurant> ();
+			while (rs.next()) {
+				restaurant = new Restaurant ();
+				restaurant.setId (rs.getLong ("id"));
+				restaurant.setName (rs.getString ("name"));
+				restaurant.setAddress (rs.getString ("address"));
+				restaurant.setTelephone (rs.getString ("telephone"));
+				restaurant.setGradesAverage (rs.getDouble ("gradesAverage"));
+				restaurant.setCity (rs.getString ("city"));
+				restaurant.setMinPrice (rs.getInt ("minPrice"));
+				restaurant.setContactEmail (rs.getString ("contactEmail"));
+				restaurant.setMaxPrice (rs.getInt ("maxPrice"));
+				restaurant.setBikeFriendly (rs.getInt ("bikeFriendly"));
+				restaurant.setAvailable (rs.getInt ("available"));
+				restaurant.setIdu (rs.getLong ("idu"));
 				
-								
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				restaurants.add (restaurant);
+				logger.info ("Fetching restaurant (" + restaurant.getId () + "): " + restaurant.getName () + "...");
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace ();
+		}
+		return restaurants;
+	}
+
+	@Override
+	public long add (Restaurant restaurant) {
+		long id = -1;
+		if (conn != null) {
+			long lastid = -1;
+			int updatedRows = -1;
+			String query = "SELECT * FROM sqlite_sequence WHERE name = 'Restaurant'";
+			PreparedStatement stmt = null;
+			try {
+				stmt = this.conn.prepareStatement (query);
+				ResultSet rs = stmt.executeQuery ();
+				if (rs.next ()) {
+					lastid = rs.getInt ("seq");
+				}			
+			}
+			catch (SQLException e) {
+				e.printStackTrace ();
+			}			
+			
+			String query2 = "INSERT INTO Restaurant (name, address, telephone, gradesAverage, city, minPrice, contactEmail, maxPrice, bikeFriendly, available, idu) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			try {
+				stmt = this.conn.prepareStatement (query2);
+				stmt.clearParameters ();
+				stmt.setString (1, restaurant.getName ());
+				stmt.setString (2, restaurant.getAddress ());
+				stmt.setString (3, restaurant.getTelephone ());
+				stmt.setDouble (4, restaurant.getGradesAverage ());
+				stmt.setString (5, restaurant.getCity ());
+				stmt.setInt (6, restaurant.getMinPrice ());
+				stmt.setString (7, restaurant.getContactEmail ());
+				stmt.setInt (8, restaurant.getMaxPrice ());
+				stmt.setInt (9, restaurant.getBikeFriendly ());
+				stmt.setInt (10, restaurant.getAvailable ());
+				stmt.setLong (11, restaurant.getIdu ());
+				updatedRows = stmt.executeUpdate ();
+			}
+			catch (SQLException e) {
+				e.printStackTrace ();
 			}
 			
 			try {
-				stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM sqlite_sequence WHERE name ='restaurant'");			 
-				if (!rs.next()) return -1; 
-				id=rs.getInt("seq");
-				if (id<=lastid) return -1;
-											
-				logger.info("CREATING restaurant("+id+"): "+restaurant.getName());
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				stmt = this.conn.prepareStatement (query);
+				ResultSet rs = stmt.executeQuery ();			 
+				if (rs.next ()) {
+					id = rs.getInt ("seq");
+				}
+				if ((id <= lastid) || (updatedRows != 1)) {
+					id = -1;
+				}							
+				logger.info ("CREATING restaurant (" + id + "): " + restaurant.getName () + "...");
 			}
-			
+			catch (SQLException e) {
+				e.printStackTrace ();
+			}
 		}
 		return id;
 	}
 
 	@Override
-	public boolean update(Restaurant restaurant) {
+	public boolean update (Restaurant restaurant) {
 		boolean done = false;
-		if (conn != null){
+		int updatedRows = -1;
+		if (conn != null) {
+			PreparedStatement stmt = null;
+			String query = "UPDATE Restaurant " +
+						   "SET name = ?, " +
+						   "address = ?, " +
+						   "telephone = ?, " +
+						   "gradesAverage = ?, " +
+						   "city = ?, " +
+						   "minPrice = ?, " +
+						   "contactEmail = ?, " +
+						   "maxPrice = ?, " +
+						   "bikeFriendly = ?, " +
+						   "available = ?, " +
+						   "idu = ? " +
+						   "WHERE id = ?";
+			try {
+				stmt = this.conn.prepareStatement (query);
+				stmt.clearParameters ();
+				stmt.setString (1, restaurant.getName ());
+				stmt.setString (2, restaurant.getAddress ());
+				stmt.setString (3, restaurant.getTelephone ());
+				stmt.setDouble (4, restaurant.getGradesAverage ());
+				stmt.setString (5, restaurant.getCity ());
+				stmt.setInt (6, restaurant.getMinPrice ());
+				stmt.setString (7, restaurant.getContactEmail ());
+				stmt.setInt (8, restaurant.getMaxPrice ());
+				stmt.setInt (9, restaurant.getBikeFriendly ());
+				stmt.setInt (10, restaurant.getAvailable ());
+				stmt.setLong (11, restaurant.getIdu ());
+				stmt.setLong (12, restaurant.getId ());
+				updatedRows = stmt.executeUpdate ();
+				if (updatedRows == 1) {
+					done = true;
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace ();
+			}
+		}
+		return done;
+	}
+
+	@Override
+	public boolean delete (long id) {
+		boolean deletedRow = false;
+		boolean updatedRow = false;
+		int deletedRows = -1;
+		int updatedRows = -1;
+		if (conn != null) {
+			PreparedStatement stmt = null;
+			String query = "DELETE FROM Restaurant WHERE id = ?";
+			try {
+				stmt = this.conn.prepareStatement (query);
+				stmt.clearParameters ();
+				stmt.setLong (1, id);
+				deletedRows = stmt.executeUpdate ();
+				logger.info ("Deleting restaurant: " + id);
+				if (deletedRows == 1) {
+					deletedRow = true;
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace ();
+			}
 			
-			Statement stmt;
+			query = "UPDATE sqlite_sequence SET seq = (SELECT count (*) FROM Restaurant) WHERE name = 'Restaurant'";
 			try {
-				stmt = conn.createStatement();
-				stmt.executeUpdate("UPDATE restaurant SET name='"+restaurant.getName()
-				+"', address='"+restaurant.getAddress()
-				+"', telephone='"+restaurant.getTelephone()
-				+"', idu="+restaurant.getIdu()
-				+", gradesAverage="+restaurant.getGradesAverage()
-				+", city='"+restaurant.getCity()
-				+"', minPrice="+restaurant.getMinPrice()
-				+", contactemail='"+restaurant.getContactEmail()				
-				+"', maxPrice="+restaurant.getMaxPrice()
-				+", bikeFriendly="+restaurant.getBikeFriendly()
-				+", available="+restaurant.getAvailable()
-				+" WHERE id = "+restaurant.getId());
-				logger.info("updating restaurant: "+restaurant.getId());
-						
-				done= true;
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				stmt = this.conn.prepareStatement (query);
+				updatedRows = stmt.executeUpdate ();
+				if (updatedRows == 1) {
+					updatedRow = true;
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace ();
 			}
 		}
-		return done;
-
+		return (deletedRow && updatedRow);
 	}
 
 	@Override
-	public boolean delete(long id) {
-		boolean done = false;
-		if (conn != null){
-
-			Statement stmt;
-			try {
-				stmt = conn.createStatement();
-				stmt.executeUpdate("DELETE FROM restaurant WHERE id ="+id);
-				logger.info("deleting restaurant: "+id);
-				done= true;
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return done;
-	}
-
-	@Override
-	public void setConnection(Connection conn) {
-		// TODO Auto-generated method stub
+	public void setConnection (Connection conn) {
 		this.conn = conn;
 	}
-
-	
 }

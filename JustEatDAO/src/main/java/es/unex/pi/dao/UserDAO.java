@@ -1,7 +1,7 @@
 package es.unex.pi.dao;
 
 import java.sql.Connection;
-import java.util.List;
+import java.util.ArrayList;
 
 import es.unex.pi.model.User;
 
@@ -14,8 +14,10 @@ public interface UserDAO {
 	 * @param conn
 	 *            database connection.
 	 */
-	public void setConnection(Connection conn);
+	
+	public void setConnection (Connection conn);
 
+	
 	/**
 	 * Gets an user from the DB using idu.
 	 * 
@@ -24,8 +26,10 @@ public interface UserDAO {
 	 * 
 	 * @return User object with that id.
 	 */
-	public User get(long id);
+	
+	public User get (long id);
 
+	
 	/**
 	 * Gets an user from the DB using name.
 	 * 
@@ -34,15 +38,19 @@ public interface UserDAO {
 	 * 
 	 * @return User object with that name.
 	 */
-	public User get(String name);
+	
+	public User get (String name);
 
+	
 	/**
 	 * Gets all the users from the database.
 	 * 
 	 * @return List of all the users from the database.
 	 */
-	public List<User> getAll();
+	
+	public ArrayList <User> getAll ();
 
+	
 	/**
 	 * Adds an user to the database.
 	 * 
@@ -51,8 +59,10 @@ public interface UserDAO {
 	 * 
 	 * @return User identifier or -1 in case the operation failed.
 	 */
-	public long add(User user);
+	
+	public long add (User user);
 
+	
 	/**
 	 * Updates an existing user in the database.
 	 * 
@@ -61,8 +71,10 @@ public interface UserDAO {
 	 * 
 	 * @return True if the operation was made and False if the operation failed.
 	 */
-	public boolean update(User user);
+	
+	public boolean update (User user);
 
+	
 	/**
 	 * Deletes an user from the database.
 	 * 
@@ -71,5 +83,6 @@ public interface UserDAO {
 	 * 
 	 * @return True if the operation was made and False if the operation failed.
 	 */
-	public boolean delete(long idu);
+	
+	public boolean delete (long idu);
 }

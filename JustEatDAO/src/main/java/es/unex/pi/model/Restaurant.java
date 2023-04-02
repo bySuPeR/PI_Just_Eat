@@ -13,7 +13,7 @@ public class Restaurant {
 	private Double gradesAverage;
 	private int bikeFriendly;
 	private int available;
-	private int idu;
+	private long idu;
 	
 	public String getName () {
 		return name;
@@ -102,10 +102,10 @@ public class Restaurant {
 		this.available = available;
 	}
 	
-	public int getIdu () {
+	public long getIdu () {
 		return idu;
 	}
-	public void setIdu (int idu) {
+	public void setIdu (long idu) {
 		this.idu = idu;
 	}
 }

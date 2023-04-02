@@ -3,9 +3,8 @@ package es.unex.pi.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Logger;
 
 import es.unex.pi.model.User;
@@ -17,130 +16,142 @@ public class JDBCUserDAOImpl implements UserDAO {
 	
 	@Override
 	public User get(long id) {
-		if (conn == null) return null;
+		if (conn == null) {
+			return null;
+		}
 		
-		User user = null;		
+		User user = null;
+		String query = "SELECT * FROM User WHERE id = ?";
 		
 		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE id ="+id);			 
-			if (!rs.next()) return null; 
-			user  = new User();	 
-			user.setId(rs.getInt("id"));
-			user.setName(rs.getString("name"));
-			user.setSurname(rs.getString("surname"));
-			user.setEmail(rs.getString("email"));
-			user.setPassword(rs.getString("password"));
-			logger.info("fetching User by id: "+id+" -> "+user.getId()+" "+user.getName()+" "+user.getEmail()+" "+user.getPassword());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			PreparedStatement stmt = this.conn.prepareStatement (query);
+			stmt.clearParameters ();
+			stmt.setLong (1, id);
+			ResultSet rs = stmt.executeQuery ();
+			if (rs.next ()) {
+				user = new User ();
+				user.setId (rs.getLong ("id"));
+				user.setEmail (rs.getString ("email"));
+				user.setPassword (rs.getString ("password"));
+				user.setName (rs.getString ("name"));
+				user.setSurname (rs.getString ("surname"));
+				logger.info ("Fetching User by id: " + id + " -> " + user.getId () + " " + user.getName () + " " + user.getEmail () + " " + user.getPassword ());
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace ();
 		}
 		return user;
 	}
 	
 	@Override
 	public User get(String name) {
-		if (conn == null) return null;
+		if (conn == null) {
+			return null;
+		}
 		
-		User user = null;		
+		User user = null;
+		String query = "SELECT * FROM User WHERE name = ?";
 		
 		try {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE name ='"+name+"'");			 
-			if (!rs.next()) return null; 
-			user  = new User();	 
-			user.setId(rs.getInt("id"));
-			user.setName(rs.getString("name"));
-			user.setSurname(rs.getString("surname"));
-			user.setEmail(rs.getString("email"));
-			user.setPassword(rs.getString("password"));
-			logger.info("fetching User by name: "+ name + " -> "+ user.getId()+" "+user.getName()+" "+user.getEmail()+" "+user.getPassword());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			PreparedStatement stmt = this.conn.prepareStatement (query);
+			stmt.clearParameters ();
+			stmt.setString (1, name);
+			ResultSet rs = stmt.executeQuery ();
+			if (rs.next ()) {
+				user = new User ();
+				user.setId (rs.getLong ("id"));
+				user.setEmail (rs.getString ("email"));
+				user.setPassword (rs.getString ("password"));
+				user.setName (rs.getString ("name"));
+				user.setSurname (rs.getString ("surname"));
+				logger.info ("Fetching User by name (" + name + "): " + user.getId () + ",  " + user.getEmail () + " " + user.getPassword ());
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace ();
 		}
 		return user;
 	}
 	
-	
-	public List<User> getAll() {
-
-		if (conn == null) return null;
-		
-		ArrayList<User> users = new ArrayList<User>();
-		try {
-			Statement stmt;
-			ResultSet rs;
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM users");
-			while ( rs.next() ) {
-				User user = new User();
-				user.setId(rs.getInt("id"));
-				user.setName(rs.getString("name"));
-				user.setSurname(rs.getString("surname"));
-				user.setEmail(rs.getString("email"));
-				//user.setPassword(rs.getString("password"));
-				user.setPassword("********");//We return all users with a hidden password
-				
-				users.add(user);
-				logger.info("fetching users: "+user.getId()+" "+user.getName()+" "+user.getEmail()+" "+user.getPassword());
-								
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
+	@Override
+	public ArrayList <User> getAll () {
+		if (conn == null) {
+			return null;
 		}
-
+		User user = null;
+		ArrayList <User> users = null;
+		String query = "SELECT * FROM User";
+		
+		try {
+			PreparedStatement stmt = this.conn.prepareStatement (query);
+			ResultSet rs = stmt.executeQuery ();
+			users = new ArrayList <User> ();
+			while (rs.next()) {
+				user = new User ();
+				user.setId (rs.getLong ("id"));
+				user.setEmail (rs.getString ("email"));
+				user.setPassword (rs.getString ("password"));
+				user.setName (rs.getString ("name"));
+				user.setSurname (rs.getString ("surname"));
+				
+				users.add (user);
+				logger.info ("Fetching users: " + user.getId () + " " + user.getName () + " " + user.getEmail () + " " + user.getPassword ());
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace ();
+		}
 		return users;
 	}
 	
-
 	@Override
-	public long add(User user) {
-		long id=-1;
-		long lastidu=-1;
-		if (conn != null){
-
-			Statement stmt;
-			
+	public long add (User user) {
+		long id = -1;
+		if (conn != null) {
+			long lastid = -1;
+			int updatedRows = -1;
+			String query = "SELECT * FROM sqlite_sequence WHERE name = 'User'";
+			PreparedStatement stmt = null;
 			try {
-				stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM sqlite_sequence WHERE name ='users'");			 
-				if (!rs.next()) return -1; 
-				lastidu=rs.getInt("seq");
-								
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				stmt = this.conn.prepareStatement (query);
+				ResultSet rs = stmt.executeQuery ();
+				if (rs.next ()) {
+					lastid = rs.getInt ("seq");
+				}				
+			}
+			catch (SQLException e) {
+				e.printStackTrace ();
 			}
 			
-			
+			String query2 = "INSERT INTO User (email, password, name, surname) VALUES (?, ?, ?, ?)";
 			try {
-				stmt = conn.createStatement();
-				stmt.executeUpdate("INSERT INTO Users (email,password,name,surname) VALUES('"
-									+user.getEmail()+"','"
-									+user.getPassword()+"','"
-									+user.getName()+"','"
-									+user.getSurname()+"')");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				stmt = this.conn.prepareStatement (query2);
+				stmt.clearParameters ();
+				stmt.setString (1, user.getEmail ());
+				stmt.setString (2, user.getPassword ());
+				stmt.setString (3, user.getName ());
+				stmt.setString (4, user.getSurname ());
+				updatedRows = stmt.executeUpdate ();
+			}
+			catch (SQLException e) {
+				e.printStackTrace ();
 			}
 			
 			try {
-				stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT * FROM sqlite_sequence WHERE name ='users'");			 
-				if (!rs.next()) return -1; 
-				id=rs.getInt("seq");
-				if (id<=lastidu) return -1;
-											
-				logger.info("CREATING User("+id+"): "+user.getName()+" "+user.getEmail()+" "+user.getPassword());
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				stmt = this.conn.prepareStatement (query);
+				ResultSet rs = stmt.executeQuery ();
+				if (rs.next ()) {
+					id = rs.getInt ("seq");
+				}
+				if ((id <= lastid) || (updatedRows != 1)) {
+					id = -1;
+				}							
+				logger.info ("CREATING User (" + id + "): " + user.getName () + " " + user.getEmail () + " " + user.getPassword ());
 			}
-			
+			catch (SQLException e) {
+				e.printStackTrace ();
+			}
 		}
 		return id;
 	}
@@ -148,52 +159,71 @@ public class JDBCUserDAOImpl implements UserDAO {
 	@Override
 	public boolean update(User user) {
 		boolean done = false;
-		if (conn != null){
-			
-			Statement stmt;
+		int updatedRows = -1;
+		if (conn != null) {
+			PreparedStatement stmt = null;
+			String query = "UPDATE User SET email = ?, password = ?, name = ?, surname = ? WHERE id = ?";
 			try {
-				stmt = conn.createStatement();
-				stmt.executeUpdate("UPDATE users SET email='"+user.getEmail()
-									+"', password='"+user.getPassword()
-									+"', name='"+user.getName()
-									+"', surname='"+user.getSurname()
-									+"' WHERE id = "+user.getId());
-				logger.info("updating User: "+user.getId()+" "+user.getName()+" "+user.getEmail()+" "+user.getPassword());
-				done= true;
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				stmt = this.conn.prepareStatement (query);
+				stmt.clearParameters ();
+				stmt.setString (1, user.getEmail ());
+				stmt.setString (2, user.getPassword ());
+				stmt.setString (3, user.getName ());
+				stmt.setString (4, user.getSurname ());
+				stmt.setLong (5, user.getId ());
+				updatedRows = stmt.executeUpdate ();
+				logger.info ("Updating User: " + user.getId () + " " + user.getName () + " " + user.getEmail () + " " + user.getPassword ());
+				if (updatedRows == 1) {
+					done = true;
+				}
 			}
-			
-		}
-		return done;
-
-	}
-
-	@Override
-	public boolean delete(long id) {
-		boolean done = false;
-		if (conn != null){
-
-			Statement stmt;
-			try {
-				stmt = conn.createStatement();
-				stmt.executeUpdate("DELETE FROM users WHERE id ="+id);
-				logger.info("deleting User: "+id);
-				done= true;
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			catch (SQLException e) {
+				e.printStackTrace ();
 			}
 		}
 		return done;
 	}
 
 	@Override
-	public void setConnection(Connection conn) {
-		// TODO Auto-generated method stub
+	public boolean delete (long id) {
+		boolean deletedRow = false;
+		boolean updatedRow = false;
+		int deletedRows = -1;
+		int updatedRows = -1;
+		if (conn != null) {
+			PreparedStatement stmt = null;
+			String query = "DELETE FROM User WHERE id = ?";
+			try {
+				stmt = this.conn.prepareStatement (query);
+				stmt.clearParameters ();
+				stmt.setLong (1, id);
+				deletedRows = stmt.executeUpdate ();
+				logger.info ("Deleting User: " + id);
+				if (deletedRows == 1) {
+					deletedRow = true;
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace ();
+			}
+			
+			query = "UPDATE sqlite_sequence SET seq = (SELECT count (*) FROM User) WHERE name = 'User'";
+			try {
+				stmt = this.conn.prepareStatement (query);
+				updatedRows = stmt.executeUpdate ();
+				if (updatedRows == 1) {
+					updatedRow = true;
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace ();
+			}
+		}
+		return (deletedRow && updatedRow);
+	}
+
+	@Override
+	public void setConnection (Connection conn) {
 		this.conn = conn;
 	}
-
-	
 }

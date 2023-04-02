@@ -230,6 +230,7 @@ public class JDBCCategoryDAOImpl implements CategoryDAO {
 			catch (SQLException e) {
 				e.printStackTrace ();
 			}
+			
 			query = "UPDATE sqlite_sequence SET seq = (SELECT count (*) FROM Category) WHERE name = 'Category'";
 			try {
 				stmt = this.conn.prepareStatement (query);
