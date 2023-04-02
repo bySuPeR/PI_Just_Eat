@@ -109,6 +109,9 @@ public class TestCategoryDAO {
 		
 		ArrayList <Category> categoriesNameList = categoryDAO.getAllBySearchName ("an");
 		assertEquals (categoriesNameList.size (), 3);
+		
+		Category cat = categoryDAO.get (10);
+		assertEquals (cat, null);
 	}
 	
 	@Test
@@ -119,10 +122,12 @@ public class TestCategoryDAO {
 		long newID = categoryDAO.add (category01);
 		
 		Category category02 = categoryDAO.get (newID);
+		assertEquals (newID, category02.getId ());
 		assertEquals (category01.getName (), category02.getName());
 		assertEquals (category01.getDescription (), category02.getDescription ());
 		
 		Category category03 = categoryDAO.get ("newCategory");
+		assertEquals (newID, category03.getId ());
 		assertEquals (category01.getName (), category03.getName());
 		assertEquals (category01.getDescription (), category03.getDescription ());
 	}
@@ -135,6 +140,7 @@ public class TestCategoryDAO {
 		assertEquals (result, true);
 		
 		Category category02 = categoryDAO.get ("newCategoryUpdated");
+		assertEquals (category01.getId (), category01.getId ());
 		assertEquals (category01.getName (), category02.getName ());
 		assertEquals (category01.getDescription (), category02.getDescription ());
 	}

@@ -1,7 +1,7 @@
 package es.unex.pi.dao;
 
 import java.sql.Connection;
-import java.util.List;
+import java.util.ArrayList;
 
 import es.unex.pi.model.Dish;
 
@@ -14,7 +14,9 @@ public interface DishDAO {
 	 * @param conn
 	 *            database connection.
 	 */
-	public void setConnection(Connection conn);
+	
+	public void setConnection (Connection conn);
+	
 	
 	/**
 	 * Gets a dish from the DB using id.
@@ -24,8 +26,10 @@ public interface DishDAO {
 	 * 
 	 * @return Dish object with that id.
 	 */
-	public Dish get(long id);
+	
+	public Dish get (long id);
 
+	
 	/**
 	 * Gets a dish from the DB using name.
 	 * 
@@ -34,7 +38,8 @@ public interface DishDAO {
 	 * 
 	 * @return Dish object with that name.
 	 */
-	public Dish get(String name);
+	
+	public Dish get (String name);
 
 	
 	/**
@@ -42,7 +47,9 @@ public interface DishDAO {
 	 * 
 	 * @return List of all the dishes from the database.
 	 */
-	public List<Dish> getAll();
+	
+	public ArrayList <Dish> getAll ();
+	
 	
 	/**
 	 * Gets all the dishes from the database that contain a text in the name.
@@ -51,8 +58,9 @@ public interface DishDAO {
 	 *            Search string .
 	 * 
 	 * @return List of all the dishes from the database that contain a text in the name.
-	 */	
-	public List<Dish> getAllBySearchName(String search);
+	 */
+	
+	public ArrayList <Dish> getAllBySearchName (String search);
 
 
 	/**
@@ -64,8 +72,9 @@ public interface DishDAO {
 	 * @return Dish identifier or -1 in case the operation failed.
 	 */
 	
-	public long add(Dish dish);
+	public long add (Dish dish);
 
+	
 	/**
 	 * Updates an existing dish in the database.
 	 * 
@@ -75,8 +84,7 @@ public interface DishDAO {
 	 * @return True if the operation was made and False if the operation failed.
 	 */
 	
-	
-	public boolean update(Dish dish);
+	public boolean update (Dish dish);
 
 	/**
 	 * Deletes a dish from the database.
@@ -87,5 +95,5 @@ public interface DishDAO {
 	 * @return True if the operation was made and False if the operation failed.
 	 */
 	
-	public boolean delete(long id);
+	public boolean delete (long id);
 }

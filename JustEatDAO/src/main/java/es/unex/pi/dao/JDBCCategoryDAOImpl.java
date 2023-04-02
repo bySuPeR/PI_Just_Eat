@@ -34,8 +34,8 @@ public class JDBCCategoryDAOImpl implements CategoryDAO {
 				category.setId (rs.getLong ("id"));
 				category.setName (rs.getString ("name"));
 				category.setDescription (rs.getString ("description"));
+				logger.info ("fetching Category by id: " + id + " -> " + category.getId () + " " + category.getName () + " " + category.getDescription ());
 			}
-			logger.info ("fetching Category by id: " + id + " -> " + category.getId () + " " + category.getName () + " " + category.getDescription ());
 		}
 		catch (SQLException e) {
 			e.printStackTrace ();
@@ -62,8 +62,8 @@ public class JDBCCategoryDAOImpl implements CategoryDAO {
 				category.setId (rs.getLong ("id"));
 				category.setName (rs.getString ("name"));
 				category.setDescription (rs.getString ("description"));
+				logger.info ("fetching Category by name: " + category.getId () + " " + category.getName () + " " + category.getDescription ());
 			}
-			logger.info ("fetching Category by name: " + category.getId () + " " + category.getName () + " " + category.getDescription ());
 		}
 		catch (SQLException e) {
 			e.printStackTrace ();
@@ -77,6 +77,7 @@ public class JDBCCategoryDAOImpl implements CategoryDAO {
 			return null;
 		}
 		
+		Category category = null;
 		ArrayList <Category> categories = null;
 		String query = "SELECT * FROM Category";
 		
@@ -85,7 +86,7 @@ public class JDBCCategoryDAOImpl implements CategoryDAO {
 			ResultSet rs = stmt.executeQuery ();
 			categories = new ArrayList <Category> ();
 			while (rs.next ()) {
-				Category category = new Category ();
+				category = new Category ();
 				category.setId (rs.getLong ("id"));
 				category.setName (rs.getString ("name"));
 				category.setDescription (rs.getString ("description"));
@@ -106,8 +107,10 @@ public class JDBCCategoryDAOImpl implements CategoryDAO {
 		}
 		
 		search = search.toUpperCase ();
+		search = "%" + search + "%";
+		Category category = null;
 		ArrayList <Category> categories = null;
-		String query = "SELECT * FROM Category WHERE UPPER (name) LIKE '%?%'";
+		String query = "SELECT * FROM Category WHERE UPPER (name) LIKE ?";
 		
 		try {
 			PreparedStatement stmt = this.conn.prepareStatement (query);
@@ -116,7 +119,7 @@ public class JDBCCategoryDAOImpl implements CategoryDAO {
 			ResultSet rs = stmt.executeQuery ();
 			categories = new ArrayList <Category> ();
 			while (rs.next()) {
-				Category category = new Category ();
+				category = new Category ();
 				category.setId (rs.getLong ("id"));
 				category.setName (rs.getString ("name"));
 				category.setDescription (rs.getString ("description"));
@@ -149,7 +152,7 @@ public class JDBCCategoryDAOImpl implements CategoryDAO {
 				e.printStackTrace ();
 			}
 			
-			String query2 = "INSERT INTO Category VALUES (?, ?)";
+			String query2 = "INSERT INTO Category (name, description) VALUES (?, ?)";
 			try {
 				stmt = this.conn.prepareStatement (query2);
 				stmt.clearParameters ();
@@ -207,7 +210,9 @@ public class JDBCCategoryDAOImpl implements CategoryDAO {
 
 	@Override
 	public boolean delete (long id) {
-		boolean done = false;
+		boolean deletedRow = false;
+		boolean updatedRow = false;
+		int deletedRows = -1;
 		int updatedRows = -1;
 		if (conn != null) {
 			PreparedStatement stmt = null;
@@ -216,17 +221,28 @@ public class JDBCCategoryDAOImpl implements CategoryDAO {
 				stmt = this.conn.prepareStatement (query);
 				stmt.clearParameters ();
 				stmt.setLong (1, id);
-				updatedRows = stmt.executeUpdate ();
+				deletedRows = stmt.executeUpdate ();
 				logger.info ("Deleting Category: " + id);
+				if (deletedRows == 1) {
+					deletedRow = true;
+				}
+			}
+			catch (SQLException e) {
+				e.printStackTrace ();
+			}
+			query = "UPDATE sqlite_sequence SET seq = (SELECT count (*) FROM Category) WHERE name = 'Category'";
+			try {
+				stmt = this.conn.prepareStatement (query);
+				updatedRows = stmt.executeUpdate ();
 				if (updatedRows == 1) {
-					done = true;
+					updatedRow = true;
 				}
 			}
 			catch (SQLException e) {
 				e.printStackTrace ();
 			}
 		}
-		return done;
+		return (deletedRow && updatedRow);
 	}
 
 	@Override

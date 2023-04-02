@@ -1,7 +1,7 @@
 package es.unex.pi.dao;
 
 import java.sql.Connection;
-import java.util.List;
+import java.util.ArrayList;
 
 import es.unex.pi.model.Order;
 
@@ -14,7 +14,9 @@ public interface OrderDAO {
 	 * @param conn
 	 *            database connection.
 	 */
-	public void setConnection(Connection conn);
+	
+	public void setConnection (Connection conn);
+	
 	
 	/**
 	 * Gets a order from the DB using id.
@@ -24,7 +26,8 @@ public interface OrderDAO {
 	 * 
 	 * @return Order object with that id.
 	 */
-	public Order get(long id);
+	
+	public Order get (long id);
 	
 	
 	/**
@@ -37,16 +40,17 @@ public interface OrderDAO {
 	 * 
 	 * @return Order object with that id.
 	 */
-	public Order get(long idu,int totalPrice);
-
-
 	
+	public Order get (long idu, int totalPrice);
+
+
 	/**
 	 * Gets all the orderes from the database.
 	 * 
 	 * @return List of all the orderes from the database.
 	 */
-	public List<Order> getAll();
+	
+	public ArrayList <Order> getAll ();
 	
 
 	/**
@@ -58,8 +62,9 @@ public interface OrderDAO {
 	 * @return Order identifier or -1 in case the operation failed.
 	 */
 	
-	public long add(Order order);
+	public long add (Order order);
 
+	
 	/**
 	 * Updates an existing order in the database.
 	 * 
@@ -69,9 +74,9 @@ public interface OrderDAO {
 	 * @return True if the operation was made and False if the operation failed.
 	 */
 	
-	
-	public boolean update(Order order);
+	public boolean update (Order order);
 
+	
 	/**
 	 * Deletes a order from the database.
 	 * 
@@ -81,5 +86,5 @@ public interface OrderDAO {
 	 * @return True if the operation was made and False if the operation failed.
 	 */
 	
-	public boolean delete(long id);
+	public boolean delete (long id);
 }
