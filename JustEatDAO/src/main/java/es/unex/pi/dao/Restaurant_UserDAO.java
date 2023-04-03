@@ -1,12 +1,12 @@
 package es.unex.pi.dao;
 
 import java.sql.Connection;
-import java.util.List;
+import java.util.ArrayList;
 
 import es.unex.pi.model.Restaurant_User;
 
 
-public interface ReviewsDAO {
+public interface Restaurant_UserDAO {
 
 	/**
 	 * set the database connection in this DAO.
@@ -14,16 +14,19 @@ public interface ReviewsDAO {
 	 * @param conn
 	 *            database connection.
 	 */
-	public void setConnection(Connection conn);
+	
+	public void setConnection (Connection conn);
 
+	
 	/**
 	 * Gets all the restaurant and the categories related to them from the database.
 	 * 
 	 * @return List of all the restaurant and the categories related to them from the database.
 	 */
 	
-	public List<Restaurant_User> getAll();
+	public ArrayList <Restaurant_User> getAll ();
 
+	
 	/**
 	 *Gets all the Review that are related to a user.
 	 * 
@@ -32,7 +35,9 @@ public interface ReviewsDAO {
 	 * 
 	 * @return List of all the Review related to a user.
 	 */
-	public List<Restaurant_User> getAllByUser(long idu);
+	
+	public ArrayList <Restaurant_User> getAllByUser (long idu);
+	
 	
 	/**
 	 * Gets all the Review that contains an specific restaurant.
@@ -42,7 +47,8 @@ public interface ReviewsDAO {
 	 * 
 	 * @return List of all the Review that contains an specific restaurant
 	 */
-	public List<Restaurant_User> getAllByRestaurant(long idr);
+	
+	public ArrayList <Restaurant_User> getAllByRestaurant (long idr);
 
 	/**
 	 * Gets a Review from the DB using idr and idu.
@@ -56,8 +62,9 @@ public interface ReviewsDAO {
 	 * @return Review with that idr and idu.
 	 */
 	
-	public Restaurant_User get(long idr,long idu);
+	public Restaurant_User get (long idr, long idu);
 
+	
 	/**
 	 * Adds an Review to the database.
 	 * 
@@ -67,8 +74,9 @@ public interface ReviewsDAO {
 	 * @return restaurant identifier or -1 in case the operation failed.
 	 */
 	
-	public boolean add(Restaurant_User Review);
+	public boolean add (Restaurant_User restaurantUser);
 
+	
 	/**
 	 * Updates an existing Review in the database.
 	 * 
@@ -78,8 +86,9 @@ public interface ReviewsDAO {
 	 * @return True if the operation was made and False if the operation failed.
 	 */
 	
-	public boolean update(Restaurant_User Review);
+	public boolean update (Restaurant_User restaurantUser);
 
+	
 	/**
 	 * Deletes an Review from the database.
 	 * 
@@ -92,5 +101,5 @@ public interface ReviewsDAO {
 	 * @return True if the operation was made and False if the operation failed.
 	 */
 	
-	public boolean delete(long idr, long idu);
+	public boolean delete (long idr, long idu);
 }

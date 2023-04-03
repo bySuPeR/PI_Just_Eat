@@ -13,10 +13,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import es.unex.pi.dao.CategoryDAO;
 import es.unex.pi.dao.RestaurantDAO;
-import es.unex.pi.dao.RestaurantCategoriesDAO;
+import es.unex.pi.dao.Restaurant_CategoryDAO;
 import es.unex.pi.dao.JDBCCategoryDAOImpl;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
-import es.unex.pi.dao.JDBCRestaurantCategoriesDAOImpl;
+import es.unex.pi.dao.JDBCRestaurant_CategoryDAOImpl;
 import es.unex.pi.dao.JDBCUserDAOImpl;
 import es.unex.pi.dao.UserDAO;
 import es.unex.pi.model.Category;
@@ -65,7 +65,7 @@ public class ListRestaurantServlet extends HttpServlet {
 		CategoryDAO categoryDAO = new JDBCCategoryDAOImpl();
 		categoryDAO.setConnection(conn);
 		
-		RestaurantCategoriesDAO restaurantsCategoriesDAO = new JDBCRestaurantCategoriesDAOImpl();
+		Restaurant_CategoryDAO restaurantsCategoriesDAO = new JDBCRestaurant_CategoryDAOImpl();
 		restaurantsCategoriesDAO.setConnection(conn);
 		
 		List<Restaurant> restaurantsList = RestaurantDAO.getAll();
