@@ -53,6 +53,8 @@ public class JDBCRestaurant_UserDAOImpl implements Restaurant_UserDAO {
 		String query = "SELECT * FROM Restaurant_User WHERE idu = ?";
 		try {
 			PreparedStatement stmt = this.conn.prepareStatement (query);
+			stmt.clearParameters ();
+			stmt.setLong (1, idu);
 			ResultSet rs = stmt.executeQuery ();
 			restaurantUserList = new ArrayList <Restaurant_User> ();
 			while (rs.next ()) {
