@@ -47,7 +47,7 @@ public class TestUserDAO {
 		assertEquals (user01.getPassword (), "cc123");
 		assertEquals (user01.getName (), "Chema");
 		assertEquals (user01.getSurname (), "Conejero");
-		User user11 = UserDAO.get ("Chema");
+		User user11 = UserDAO.get ("cc@cc.com");
 		assertEquals (user11.getId (), 1);
 		assertEquals (user11.getEmail (), "cc@cc.com");
 		assertEquals (user11.getPassword (), "cc123");
@@ -60,7 +60,7 @@ public class TestUserDAO {
 		assertEquals (user02.getPassword (), "tt123");
 		assertEquals (user02.getName (), "Tote");
 		assertEquals (user02.getSurname (), "Sancho");
-		User user12 = UserDAO.get ("Tote");
+		User user12 = UserDAO.get ("tt@tt.com");
 		assertEquals (user12.getId (), 2);
 		assertEquals (user12.getEmail (), "tt@tt.com");
 		assertEquals (user12.getPassword (), "tt123");
@@ -73,7 +73,7 @@ public class TestUserDAO {
 		assertEquals (user03.getPassword (), "pp123");
 		assertEquals (user03.getName (), "Toño");
 		assertEquals (user03.getSurname (), "Pérez");
-		User user13 = UserDAO.get ("Toño");
+		User user13 = UserDAO.get ("pp@pp.com");
 		assertEquals (user13.getId (), 3);
 		assertEquals (user13.getEmail (), "pp@pp.com");
 		assertEquals (user13.getPassword (), "pp123");
@@ -100,7 +100,7 @@ public class TestUserDAO {
 		assertEquals (user02.getName (), "newUserName");
 		assertEquals (user02.getSurname (), "newUserSurname");
 		
-		User user03 = UserDAO.get ("newUserName");
+		User user03 = UserDAO.get ("newUserEmail");
 		assertEquals (user03.getId (), newID);
 		assertEquals (user03.getEmail (), "newUserEmail");
 		assertEquals (user03.getPassword (), "newUserPassword");
@@ -110,12 +110,12 @@ public class TestUserDAO {
 	
 	@Test
 	public void test3Modify(){
-		User user01 = UserDAO.get ("newUserName");
-		user01.setName ("newUserNameUpdated");
+		User user01 = UserDAO.get ("newUserEmail");
+		user01.setEmail ("newUserEmailUpdated");
 		boolean result = UserDAO.update (user01);
 		assertEquals (true, result);
 		
-		User user02 = UserDAO.get ("newUserNameUpdated");
+		User user02 = UserDAO.get ("newUserEmailUpdated");
 		assertEquals (user01.getId (), user02.getId ());
 		assertEquals (user01.getEmail (), user02.getEmail ());
 		assertEquals (user01.getPassword (), user02.getPassword ());
@@ -125,11 +125,11 @@ public class TestUserDAO {
 	
 	@Test
 	public void test4Delete(){
-		User user01 = UserDAO.get ("newUserNameUpdated");
+		User user01 = UserDAO.get ("newUserEmailUpdated");
 		boolean result = UserDAO.delete (user01.getId ());
 		assertEquals (true, result);
 		
-		User user02 = UserDAO.get ("newUserNameUpdated");
+		User user02 = UserDAO.get ("newUserEmailUpdated");
 		assertEquals (null, user02);
 	}
 }

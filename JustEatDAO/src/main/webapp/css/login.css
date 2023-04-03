@@ -82,3 +82,7 @@
   .question-link:hover, .question-link:focus {
     color: hsl(var(--button-hsl));
   }
+  
+  .error {
+  	color: red;
+  }

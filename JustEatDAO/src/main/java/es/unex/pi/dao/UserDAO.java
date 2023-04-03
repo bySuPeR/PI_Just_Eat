@@ -33,13 +33,13 @@ public interface UserDAO {
 	/**
 	 * Gets an user from the DB using name.
 	 * 
-	 * @param name
-	 *            Name of the user.
+	 * @param email
+	 *            Email of the user.
 	 * 
-	 * @return User object with that name.
+	 * @return User object with that email.
 	 */
 	
-	public User get (String name);
+	public User get (String email);
 
 	
 	/**

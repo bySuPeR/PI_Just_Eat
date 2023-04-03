@@ -2,7 +2,7 @@ package es.unex.pi.controller;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.AbstractMap.SimpleEntry;
+//import java.util.AbstractMap.SimpleEntry;
 import java.util.logging.Logger;
 
 import jakarta.servlet.ServletException;
@@ -19,7 +19,7 @@ import es.unex.pi.dao.JDBCRestaurantDAOImpl;
 import es.unex.pi.dao.JDBCRestaurant_CategoryDAOImpl;
 import es.unex.pi.dao.JDBCUserDAOImpl;
 import es.unex.pi.dao.UserDAO;
-import es.unex.pi.model.Category;
+//import es.unex.pi.model.Category;
 import es.unex.pi.model.Restaurant;
 import es.unex.pi.model.Restaurant_Category;
 import es.unex.pi.model.User;
@@ -44,7 +44,6 @@ public class ListRestaurantServlet extends HttpServlet {
      */
     public ListRestaurantServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

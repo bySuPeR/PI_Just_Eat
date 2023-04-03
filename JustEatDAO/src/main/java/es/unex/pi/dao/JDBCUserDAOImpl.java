@@ -45,18 +45,18 @@ public class JDBCUserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-	public User get(String name) {
+	public User get (String email) {
 		if (conn == null) {
 			return null;
 		}
 		
 		User user = null;
-		String query = "SELECT * FROM User WHERE name = ?";
+		String query = "SELECT * FROM User WHERE email = ?";
 		
 		try {
 			PreparedStatement stmt = this.conn.prepareStatement (query);
 			stmt.clearParameters ();
-			stmt.setString (1, name);
+			stmt.setString (1, email);
 			ResultSet rs = stmt.executeQuery ();
 			if (rs.next ()) {
 				user = new User ();
@@ -65,7 +65,7 @@ public class JDBCUserDAOImpl implements UserDAO {
 				user.setPassword (rs.getString ("password"));
 				user.setName (rs.getString ("name"));
 				user.setSurname (rs.getString ("surname"));
-				logger.info ("Fetching User by name (" + name + "): " + user.getId () + ",  " + user.getEmail () + " " + user.getPassword ());
+				logger.info ("Fetching User by email (" + email + "): " + user.getId () + ",  " + user.getEmail () + " " + user.getPassword ());
 			}
 		}
 		catch (SQLException e) {
