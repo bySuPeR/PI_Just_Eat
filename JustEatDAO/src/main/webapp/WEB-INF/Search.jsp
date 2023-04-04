@@ -11,7 +11,8 @@
     <body>
         <div class = "full-screen-container">
             <div class = "main-page-container">
-            	<a class = "account-link" href = "<c:url value = 'UpdateUserServlet.do'/>">Account</a>
+            	<a class = "pages-link" id = "account-link" href = "<c:url value = 'UpdateUserServlet.do'/>">Account</a>
+                <a class = "pages-link" id = "my-restaurants-link" href = "<c:url value = 'MyRestaurantsServlet.do'/>">My Rests.</a>
                 <div class="foto-container">
                 	<div class = "restaurant-container">
                         <h1>Search for restaurants near your place!</h1>

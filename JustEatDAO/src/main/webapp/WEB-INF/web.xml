@@ -54,4 +54,14 @@
     <servlet-name>DeleteUserServlet</servlet-name>
     <url-pattern>/DeleteUserServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyRestaurantsServlet</display-name>
+    <servlet-name>MyRestaurantsServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.MyRestaurantsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyRestaurantsServlet</servlet-name>
+    <url-pattern>/MyRestaurantsServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

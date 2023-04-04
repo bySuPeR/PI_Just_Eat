@@ -3,19 +3,26 @@
     align-items: center;
 }
 
-.account-link {
+.pages-link {
 	text-decoration: none;
 	background-color: hsl(var(--button-hsl));
 	border-radius: 100px;
 	color: white;
 	padding: 10px;
 	margin-left: 90vw;
-	margin-top: 5vh;
 	position: absolute;
 }
 
-.account-link:hover {
+.pages-link:hover {
 	background-color: hsl(var(--button-hsl), 0.7);
+}
+
+#account-link {
+	margin-top: 5vh;
+}
+
+#my-restaurants-link {
+	margin-top: 15vh;
 }
 
 .foto-container {
