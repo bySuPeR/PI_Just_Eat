@@ -14,8 +14,8 @@
                 <div class = "restaurants-grid">
                 	<c:forEach var = "restaurant" items = "${restaurantList}">
                 		<div class = "single-restaurant">
-                        	<a href="res_details.html"><img src = "images/canteria.jpg" class = "restaurant-photo"></a>
-                        	<h3>Canteria</h3>
+                        	<a href = "RestaurantDetailsServlet.do?id=${restaurant.id}"><img src = "images/canteria.jpg" class = "restaurant-photo"></a>
+                        	<h3>${restaurant.name}</h3>
                     	</div>
                 	</c:forEach>
                 </div>

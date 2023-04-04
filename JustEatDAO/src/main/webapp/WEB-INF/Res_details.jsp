@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang = es>
+    <head>
+        <meta charset = "UTF-8">
+        <title>Just Eat</title>
+        <link rel = "stylesheet" href = "css/general.css">
+        <link rel = "stylesheet" href = "css/res_details.css">
+    </head>
+    <body>
+        <div class = "full-screen-container">
+            <div class = "main-page-container">
+            	<div class = "restaurant-pic">
+            	</div>
+                <input type = "hidden" name = "id" value = "${restaurant.id}">
+				<div class = "restaurant-container">
+					<h1 class = "restaurant-text">${restaurant.name}
+						<span class = "grade-average">${restaurant.gradesAverage}</span>
+					</h1>
+					<h1 class = "restaurant-text">${restaurant.contactEmail}</h1>
+					<h1 class = "restaurant-text">${restaurant.telephone}</h1>
+					<h1 class = "restaurant-text">${restaurant.address}, ${restaurant.city}</h1>
+					<h1 class = "restaurant-text" id = "bike-parking-lot">Has bike parking lot?
+						<span class = "restaurant-text">
+							<c:if test = "${restaurant.bikeFriendly eq 1}">
+								Yes!
+							</c:if>
+							<c:if test = "${restaurant.bikeFriendly eq 0}">
+								Sorry, no :(
+							</c:if>
+						</span>
+					</h1>
+				</div>
+				<c:if test = "${restaurant.idu eq requestScope.currentUser.id}">
+					<a id = "manage-restaurant">Manage restaurant</a>
+				</c:if>
+            </div>
+        </div>
+    </body>
+</html>

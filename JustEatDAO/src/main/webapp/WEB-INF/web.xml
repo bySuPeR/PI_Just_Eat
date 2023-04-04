@@ -64,4 +64,14 @@
     <servlet-name>MyRestaurantsServlet</servlet-name>
     <url-pattern>/MyRestaurantsServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RestaurantDetailsServlet</display-name>
+    <servlet-name>RestaurantDetailsServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.RestaurantDetailsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RestaurantDetailsServlet</servlet-name>
+    <url-pattern>/RestaurantDetailsServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

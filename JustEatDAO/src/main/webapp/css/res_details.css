@@ -1,195 +1,59 @@
 .main-page-container {
     flex-direction: column;
-    align-items: center;
+    align-items: first-baseline;
 }
 
-.foto-restaurante {
-    background: url(burguertown-restaurante.jpg);
+.restaurant-pic {
+    background: url(../images/burguertown-restaurante.jpg);
     background-size:cover;
     background-repeat: no-repeat;
     background-position: center;
-    display: flex;
-    flex-direction: column;
     width: 97vw;
     height: 40vh;
-    margin-top: 1vh;
+    margin: 1vh;
     border-radius: var(--border-radius);
 }
 
-.apartados-restaurante{
-    display: flex;
-    flex-direction: row;
-    margin-left: 50vh;
-
-}
-
 .restaurant-container {
+	--restaurant-container-height: 57vh;
+	position: absolute;
     background-color: sandybrown;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 45vw;
-    height: 57vh;
-    margin-top: 23vh;
+    height: var(--restaurant-container-height);
     border-radius: 100px;
     border-width: 5px;
     border-style: solid;
     border-color:white;
-    transform: translate(0,10vh);
-}
-.order-container {
-    background-color: sandybrown;
+    margin-top: calc(calc(var(--main-page-height) / 2) - calc(var(--restaurant-container-height) / 2));
+    margin-left: 1vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 25vw;
-    height: 17vh;
-    margin-top: 23vh;
-    margin-left: 1vw;
-    border-radius: 100px;
-    border-width: 5px;
-    border-style: solid;
-    border-color:white;
-    transform: translate(0,10vh);
 }
 
-
-.logo-restaurante img{
-    transform: translate(0,-4vh);
-    border-radius: 100px;
-    border-width: 5px;
-    border-style: solid;
-    border-color:white;
-  
-
-
-}
-#titulo{
-    transform: translate(0,-6vh);
-    color: brown;
+.restaurant-text, .grade-average {
+	font-size: 30px;
 }
 
-#tipo{
-    transform: translate(0,-9vh);
-    color: brown;
+.restaurant-text {
+	color: brown;
 }
 
-.puntuacion{
-    display: flex;
-    flex-direction: row;
-    transform: translate(15vw, -20vh);
-}
-
-#valoracion {
-    transform: translate(0.5vw,1.5vh);
+.grade-average {
     color: green;
-}
-
-#titulo_pedido{
-    color: brown;
-}
-
-input[type=button] {
-    background-color: hsl(var(--button-hsl));
-    padding-left: 6vw;
-    padding-right: 6vw;
-    padding-top: 1vh;
-    padding-bottom: 1vh;
-    cursor: pointer;
-    color:white;
-    border-radius: 50px;
-    border-width: 3px;
-    border-style: solid;
-    border-color:white;
-    align-items: center;
-}
-
-input[type=button]:hover, input[type=button]:active {
-    background-color: hsl(var(--button-hsl), 0.7);
-}
-
-.pedido{
-    display: flex;
-    flex-direction: row;
-}
-
-#pedido_minimo{
-    transform: translate(-1.5vw,0);
-    display: flex;
-    flex-direction: column;
-    color: brown;
-}
-
-#gasto_envio{
-    transform: translate(1.5vw,0);
-    display: flex;
-    flex-direction: column;
-    color: brown;
-}
-
-.contacto{
-    display: flex;
-    flex-direction: row;
-}
-
-#email{
-    transform: translate(-7vh,-20vh);
-    display: flex;
-    flex-direction: column;
-    color: brown;
-}
-
-#telefono{
-    transform: translate(-1vh,-20vh);
-    display: flex;
-    flex-direction: column;
-    color: brown;
-}
-
-#direccion{
-    transform: translate(0,-20vh);
-    color: brown;
-}
-
-#bike{
-    transform: translate(0,-20vh);
-    color: brown;
-}
-
-.preferidos{
-    display: flex;
-    flex-direction: row;
-    transform: translate(0,-15vh);
     margin-left: 10vw;
-}
-#cheesburguer{
-    background: url(Cheeseburger.jpg) center;
-    background-size: 14vw 21vh;
-    height: 18vh;
-    width: 14vw;
-  
-}
-#bbqburguer{
-    background: url(bbqburguer.jpg) center;
-    background-size: 14vw 21vh;
-    height: 18vh;
-    width: 14vw;
-}
-#thetown{
-    background: url(thetownburguer.jpg) center;
-    background-size: 14vw 21vh;
-    height: 18vh;
-    width: 14vw;
+    position: absolute;
+    font-size: 35px;
 }
 
-#desc1,#desc2, #desc3{
-    transform: translate(0.5vw,4vh);
-    color: white;
+#bike-parking-lot {
+	font-size: 25px;
 }
 
-#precio1, #precio2, #precio3{
-    transform: translate(-14vw,-0.25vh);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color:brown;
+#manage-restaurant {
+	text-decoration: none;
+	background-color: hsl(var(--button-hsl));
+	border-radius: 100px;
+	color: white;
+	padding: 10px;
 }
