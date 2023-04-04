@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sesion = request.getSession ();
 		if (sesion.getAttribute ("user") != null) {
-			reloadLogin (request, response, "User is logged in already");
+			response.sendRedirect (request.getContextPath () + "/SearchServlet.do");
         }
         else {
         	RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/Login.jsp");
@@ -61,7 +61,7 @@ public class LoginServlet extends HttpServlet {
 			if (password.equals (user.getPassword ())) {
 				HttpSession session = request.getSession ();
 				session.setAttribute ("user", user);
-				response.sendRedirect (request.getContextPath () + "/LoginServlet.do");
+				response.sendRedirect (request.getContextPath () + "/SearchServlet.do");
 			}
 			else {
 				reloadLogin (request, response, "The password is not correct");

@@ -22,7 +22,7 @@
                         <input type = "password" name = "password" id = "password" required>
                     </div>
                     <input type = "submit" class = "login-button" value = "Log in">
-                    <span class = "question-text">New here?<a class = "question-link" href = "register.html">Register now!</a></span>
+                    <span class = "question-text">New here?<a class = "question-link" href = "<c:url value = 'RegisterServlet.do'/>">Register now!</a></span>
                 </form>
                 <p class = error>${requestScope.error}</p>
             </div>

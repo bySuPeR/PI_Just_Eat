@@ -14,4 +14,44 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RegisterServlet</display-name>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.RegisterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/RegisterServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchServlet</display-name>
+    <servlet-name>SearchServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.SearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchServlet</servlet-name>
+    <url-pattern>/SearchServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateUserServlet</display-name>
+    <servlet-name>UpdateUserServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.UpdateUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateUserServlet</servlet-name>
+    <url-pattern>/UpdateUserServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteUserServlet</display-name>
+    <servlet-name>DeleteUserServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.DeleteUserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUserServlet</servlet-name>
+    <url-pattern>/DeleteUserServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

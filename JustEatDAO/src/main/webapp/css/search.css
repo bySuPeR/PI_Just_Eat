@@ -3,8 +3,23 @@
     align-items: center;
 }
 
+.account-link {
+	text-decoration: none;
+	background-color: hsl(var(--button-hsl));
+	border-radius: 100px;
+	color: white;
+	padding: 10px;
+	margin-left: 90vw;
+	margin-top: 5vh;
+	position: absolute;
+}
+
+.account-link:hover {
+	background-color: hsl(var(--button-hsl), 0.7);
+}
+
 .foto-container {
-    background: url(fondobusqueda.jpg);
+    background: url(../images/fondobusqueda.jpg);
     background-size:cover;
     background-repeat: no-repeat;
     display: flex;
@@ -21,8 +36,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 36vw;
-    height: 17vh;
+    width: 50vw;
+    height: 20vh;
     margin-top: 23vh;
     border-radius: 100px;
     border-width: 5px;
@@ -57,7 +72,6 @@ input[type=button] {
     border: none;
     color: white;
     font-size: x-large;
-    align-items: center;
 }
 
 
@@ -81,27 +95,27 @@ input[type=button]:hover, input[type=button]:active {
 }
 
 #burguer-id {
-    background: url(hamburguesa-restaurantes.jpg) center;
+    background: url(../images/hamburguesa-restaurantes.jpg) center;
     background-size: cover;
 }
 
 #pizzas-id {
-    background: url(pizza-restaurantes.jpg) center;
+    background: url(../images/pizza-restaurantes.jpg) center;
     background-size: cover;
 }
 
 #kebab-id {
-    background: url(durum-restaurantes.jpg) center;
+    background: url(../images/durum-restaurantes.jpg) center;
     background-size: cover;
 }
 
 #italiano-id {
-    background: url(italiano.jpg) center;
+    background: url(../images/italiano.jpg) center;
     background-size: cover;
 }
 
 #americano-id {
-    background: url(comidaamericana.jpg) center;
+    background: url(../images/comidaamericana.jpg) center;
     background-size: cover;
 }
 
@@ -125,5 +139,3 @@ input[type=button]:hover, input[type=button]:active {
 .titulo-categorias h4 {
     transform: translate(-8vw,12vh);
 }
-
-
