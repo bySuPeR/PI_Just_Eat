@@ -25,7 +25,7 @@
                     </div>
                     <div class = "input-group">
                     	<label for = "telephone">Telephone</label>
-                    	<input type = "text" name = "telephone" value = "${restaurant.telephone}" required>
+                    	<input type = "tel" name = "telephone" value = "${restaurant.telephone}" required>
                     </div>
                     <div class = "input-group">
                     	<label for = "city">City</label>

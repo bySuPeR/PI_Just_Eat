@@ -19,6 +19,9 @@
                     	</div>
                 	</c:forEach>
                 </div>
+                <div class = "add-restaurant-div">
+                	<a class = "add-restaurant" href = "<c:url value = 'Servlet'/>">Add restaurant</a>
+                </div>
             </div>
         </div>
     </body>
