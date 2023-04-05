@@ -74,4 +74,24 @@
     <servlet-name>RestaurantDetailsServlet</servlet-name>
     <url-pattern>/RestaurantDetailsServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateRestaurantServlet</display-name>
+    <servlet-name>UpdateRestaurantServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.UpdateRestaurantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateRestaurantServlet</servlet-name>
+    <url-pattern>/UpdateRestaurantServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteRestaurantServlet</display-name>
+    <servlet-name>DeleteRestaurantServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.DeleteRestaurantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteRestaurantServlet</servlet-name>
+    <url-pattern>/DeleteRestaurantServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

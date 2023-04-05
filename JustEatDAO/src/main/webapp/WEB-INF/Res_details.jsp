@@ -31,10 +31,10 @@
 							</c:if>
 						</span>
 					</h1>
+					<c:if test = "${restaurant.idu eq requestScope.currentUser.id}">
+						<a id = "manage-restaurant" href = "<c:url value = 'UpdateRestaurantServlet.do?id=${restaurant.id}'/>">Manage restaurant</a>
+					</c:if>
 				</div>
-				<c:if test = "${restaurant.idu eq requestScope.currentUser.id}">
-					<a id = "manage-restaurant">Manage restaurant</a>
-				</c:if>
             </div>
         </div>
     </body>

@@ -36,7 +36,7 @@
     font-weight: lighter;
   }
   
-  .input-group input {
+  .input-group input, textarea {
     font-size: 1.25rem;
     padding: .5em;
     background-color: hsl(var(--input-hsl), .3);
@@ -47,7 +47,7 @@
     font-weight: lighter;
   }
   
-  .input-group input:focus {
+  .input-group input:focus, textarea:focus {
     box-shadow: 0 0 0 1px hsl(var(--button-hsl));
   }
   

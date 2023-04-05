@@ -10,12 +10,9 @@ import java.io.IOException;
 import java.sql.Connection;
 
 import es.unex.pi.model.Restaurant;
-import es.unex.pi.model.Dish;
 import es.unex.pi.model.User;
 import es.unex.pi.dao.RestaurantDAO;
-import es.unex.pi.dao.DishDAO;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
-import es.unex.pi.dao.JDBCDishDAOImpl;
 
 /**
  * Servlet implementation class RestaurantDetailsServlet
@@ -52,5 +49,4 @@ public class RestaurantDetailsServlet extends HttpServlet {
 	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet (request, response);
 	}
-
 }

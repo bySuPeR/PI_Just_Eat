@@ -11,10 +11,18 @@
     <body>
         <div class = "full-screen-container">
             <div class = "main-page-container">
-            	<form action = "DeleteUserServlet.do" action = "post">
-            		<label>Are you sure you want to delete your account?</label>
-            		<button type = "submit">Yes, delete</button>
-            	</form>
+            	<c:if test = "${requestScope.isUser eq true}">
+            		<form action = "DeleteUserServlet.do" action = "post">
+            			<label>Are you sure you want to delete your account?</label>
+            			<button type = "submit">Yes, delete</button>
+            		</form>
+            	</c:if>
+            	<c:if test = "${requestScope.isUser eq false}">
+            		<form action = "DeleteRestaurantServlet.do" action = "post">
+            			<label>Are you sure you want to delete this restaurant?</label>
+            			<button type = "submit">Yes, delete</button>
+            		</form>
+            	</c:if>
             </div>
         </div>
     </body>
