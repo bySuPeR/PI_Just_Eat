@@ -35,6 +35,7 @@ public class UpdateUserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		/*TODO Actualizar los datos del usuario en la Base de Datos*/
+		response.sendRedirect (request.getContextPath () + "/SearchServlet.do");
 	}
 }

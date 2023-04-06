@@ -94,4 +94,14 @@
     <servlet-name>DeleteRestaurantServlet</servlet-name>
     <url-pattern>/DeleteRestaurantServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddRestaurantServlet</display-name>
+    <servlet-name>AddRestaurantServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.AddRestaurantServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddRestaurantServlet</servlet-name>
+    <url-pattern>/AddRestaurantServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -11,12 +11,11 @@
     <body>
         <div class = "full-screen-container">
             <div class = "main-page-container">
-            	<div class = "restaurant-pic">
-            	</div>
+            	<div class = "restaurant-pic"></div>
                 <input type = "hidden" name = "id" value = "${restaurant.id}">
 				<div class = "restaurant-container">
 					<h1 class = "restaurant-text">${restaurant.name}
-						<span class = "grade-average">${restaurant.gradesAverage}</span>
+						<span class = "number-value" id = "grade-average">${restaurant.gradesAverage}</span>
 					</h1>
 					<h1 class = "restaurant-text">${restaurant.contactEmail}</h1>
 					<h1 class = "restaurant-text">${restaurant.telephone}</h1>
@@ -34,6 +33,16 @@
 					<c:if test = "${restaurant.idu eq requestScope.currentUser.id}">
 						<a id = "manage-restaurant" href = "<c:url value = 'UpdateRestaurantServlet.do?id=${restaurant.id}'/>">Manage restaurant</a>
 					</c:if>
+				</div>
+				<div class = "dishes-container">
+					<c:forEach var = "dish" items = "${dishList}">
+						<div class = "individual-dish">
+							<h2>${dish.name}
+								<span class = "number-value">${dish.price}</span>
+							</h2>
+							<h3>${dish.description}</h3>
+						</div>
+					</c:forEach>
 				</div>
             </div>
         </div>

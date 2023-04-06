@@ -1,0 +1,49 @@
+package es.unex.pi.controller;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+import java.sql.Connection;
+import es.unex.pi.dao.CategoryDAO;
+import es.unex.pi.dao.JDBCCategoryDAOImpl;
+
+/**
+ * Servlet implementation class AddRestaurantServlet
+ */
+public class AddRestaurantServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AddRestaurantServlet () {
+        super ();
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Connection conn = (Connection) getServletContext ().getAttribute ("dbConn");
+		CategoryDAO categoryDAO = new JDBCCategoryDAOImpl ();
+		categoryDAO.setConnection (conn);
+		request.setAttribute ("categoryList", categoryDAO.getAll ());
+		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/AddRestaurant.jsp");
+		view.forward (request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*TODO Añadir restaurante a la Base de Datos*/
+		
+		//Por ahora solo devuelve a la página de Mis Restaurantes.
+		response.sendRedirect (request.getContextPath () + "/MyRestaurantsServlet.do");
+	}
+
+}

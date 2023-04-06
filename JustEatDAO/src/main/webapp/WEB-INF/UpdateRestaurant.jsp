@@ -21,7 +21,7 @@
                     </div>
                     <div class = "input-group">
                         <label for = "address">Address</label>
-                        <textarea name = "address">${restaurant.address}</textarea>
+                        <textarea name = "address" required>${restaurant.address}</textarea>
                     </div>
                     <div class = "input-group">
                     	<label for = "telephone">Telephone</label>

@@ -134,7 +134,39 @@ public class JDBCDishDAOImpl implements DishDAO {
 				dish.setIdr (rs.getLong ("idr"));
 				
 				dishes.add (dish);
-				logger.info ("fetching Dishes by text in the name: " + search + ": " + dish.getId () + " " + dish.getName () + " " + dish.getDescription ());				
+				logger.info ("fetching Dishes by text in the name: " + search + ": " + dish.getId () + " " + dish.getName () + " " + dish.getDescription ());
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace ();
+		}
+		return dishes;
+	}
+	
+	@Override
+	public ArrayList <Dish> getAllByRestaurant (long idr) {
+		if (conn == null) {
+			return null;
+		}
+		Dish dish = null;
+		ArrayList <Dish> dishes = null;
+		String query = "SELECT * FROM Dish WHERE idr = ?";
+		try {
+			PreparedStatement stmt = this.conn.prepareStatement (query);
+			stmt.clearParameters ();
+			stmt.setLong (1, idr);
+			ResultSet rs = stmt.executeQuery ();
+			dishes = new ArrayList <Dish> ();
+			while (rs.next ()) {
+				dish = new Dish ();
+				dish.setId (rs.getLong ("id"));
+				dish.setId (rs.getLong ("id"));
+				dish.setName (rs.getString ("name"));
+				dish.setPrice (rs.getInt ("price"));
+				dish.setDescription (rs.getString ("description"));
+				dish.setIdr (rs.getLong ("idr"));
+				dishes.add (dish);
+				logger.info ("Fetching Dishes by restaurant (" + idr + "): " + dish.getName ());
 			}
 		}
 		catch (SQLException e) {

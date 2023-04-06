@@ -62,7 +62,18 @@ public interface DishDAO {
 	
 	public ArrayList <Dish> getAllBySearchName (String search);
 
-
+	
+	/**
+	 * Gets all the dishes from the database that belong to a specific restaurant.
+	 * 
+	 * @param idr: ID from the restaurant
+	 * 
+	 * @return ArrayList of all the dishes that belong to the restaurant.
+	 */
+	
+	public ArrayList <Dish> getAllByRestaurant (long idr);
+	
+	
 	/**
 	 * Adds a dish to the database.
 	 * 

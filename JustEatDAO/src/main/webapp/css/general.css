@@ -29,9 +29,10 @@
 
   .main-page-container {
   	--main-page-height: 97vh;
+  	--main-page-width: 98vw;
     background-color: brown;
     height: var(--main-page-height);
-    width: 98vw;
+    width: var(--main-page-width);
     border-radius: var(--border-radius);
     display: flex;
   }
