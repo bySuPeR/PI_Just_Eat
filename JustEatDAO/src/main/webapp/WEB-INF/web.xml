@@ -104,4 +104,14 @@
     <servlet-name>AddRestaurantServlet</servlet-name>
     <url-pattern>/AddRestaurantServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateDishesServlet</display-name>
+    <servlet-name>UpdateDishesServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.UpdateDishesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateDishesServlet</servlet-name>
+    <url-pattern>/UpdateDishesServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

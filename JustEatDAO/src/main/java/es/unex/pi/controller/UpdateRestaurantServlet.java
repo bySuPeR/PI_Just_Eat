@@ -25,6 +25,7 @@ import java.util.ArrayList;
  */
 public class UpdateRestaurantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private long restaurant = -1;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -43,7 +44,8 @@ public class UpdateRestaurantServlet extends HttpServlet {
 		CategoryDAO categoryDAO = new JDBCCategoryDAOImpl ();
 		
 		restaurantDAO.setConnection (conn);
-		Restaurant currentRestaurant = restaurantDAO.get (Long.parseLong (request.getParameter ("id")));
+		this.restaurant = Long.parseLong (request.getParameter ("id"));
+		Restaurant currentRestaurant = restaurantDAO.get (this.restaurant);
 		request.setAttribute ("restaurant", currentRestaurant);
 		
 		if (currentRestaurant.getBikeFriendly () == 1) {
@@ -59,13 +61,9 @@ public class UpdateRestaurantServlet extends HttpServlet {
 		categoryDAO.setConnection (conn);
 		ArrayList <Category> categoryList = categoryDAO.getAll ();
 		request.setAttribute ("categoryList", categoryList);
-		String catName = "";
 		for (Restaurant_Category res_cat: resCatList) {
-			catName = categoryDAO.get (res_cat.getIdct ()).getName ();
-			System.out.println (catName);
-			request.setAttribute (catName, "checked");
+			request.setAttribute (categoryDAO.get (res_cat.getIdct ()).getName (), "checked");
 		}
-		
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/UpdateRestaurant.jsp");
 		view.forward (request, response);
 	}
@@ -75,5 +73,8 @@ public class UpdateRestaurantServlet extends HttpServlet {
 	 */
 	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*TODO Actualizar los valores en la Base de Datos*/
+		
+		//Por el momento, vuelve a la página de los detalles del restaurante.
+		response.sendRedirect (request.getContextPath () + "/RestaurantDetailsServlet.do?id=" + this.restaurant);
 	}
 }

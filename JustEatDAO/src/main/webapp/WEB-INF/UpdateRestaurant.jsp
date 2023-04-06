@@ -13,7 +13,6 @@
         <div class = "full-screen-container">
             <div class = "login-container">
                 <h1 class = "login-title">Update your restaurant</h1>
-                <input type = "hidden" name = "id" value = "${restaurant.id}">
                 <form class = "form" action = "UpdateRestaurantServlet.do" method = "post">
                     <div class = "input-group">
                         <label for = "name">Name</label>
@@ -55,8 +54,9 @@
 	    	                <input type = "radio" value = "no-bike-friendly-value" name = "bike-friendly" ${requestScope.nobikefriendly}>
                     	</div>
                     </div>
+                    <a id = "manage-dishes-link" href = "<c:url value = 'UpdateDishesServlet.do?id=${restaurant.id}'/>">Manage dishes</a>
                     <button type = "submit" class = "login-button">Update restaurant</button>
-                    <a class = "delete-link" href = "<c:url value = 'DeleteRestaurantServlet.do'/>">Delete restaurant</a>
+                    <a class = "delete-link" href = "<c:url value = 'DeleteRestaurantServlet.do?id=${restaurant.id}'/>">Delete restaurant</a>
                 </form>
                 <p class = error>${requestScope.error}</p>
             </div>

@@ -31,7 +31,7 @@
 						</span>
 					</h1>
 					<c:if test = "${restaurant.idu eq requestScope.currentUser.id}">
-						<a id = "manage-restaurant" href = "<c:url value = 'UpdateRestaurantServlet.do?id=${restaurant.id}'/>">Manage restaurant</a>
+						<a class = "manage-restaurant" href = "<c:url value = 'UpdateRestaurantServlet.do?id=${restaurant.id}'/>">Manage restaurant</a>
 					</c:if>
 				</div>
 				<div class = "dishes-container">
@@ -44,6 +44,7 @@
 						</div>
 					</c:forEach>
 				</div>
+				<a class = "manage-restaurant" id = "back-to-my-restaurants" href = "<c:url value = 'MyRestaurantsServlet.do'/>">Back to My Restaurants</a>
             </div>
         </div>
     </body>
