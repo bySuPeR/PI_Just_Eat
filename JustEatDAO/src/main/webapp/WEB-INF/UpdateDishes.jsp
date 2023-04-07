@@ -14,9 +14,8 @@
         <div class = "full-screen-container">
             <div class = "login-container">
                 <h1 class = "login-title">Manage your dishes</h1>
-                <input type = "hidden" name = "id" value = "${restaurant.id}">
-                <form class = "form" action = "UpdateDishesServlet.do" method = "post">
-                	<c:forEach var = "dish" items = "${dishList}">
+                <c:forEach var = "dish" items = "${dishList}">
+                	<form class = "form" action = "UpdateDishesServlet.do?id=${dish.id}" method = "post">
                 		<div class = "invidivual-dish-input">
                 			<div class = "input-group">
                 				<label for = "name">Name</label>
@@ -31,11 +30,11 @@
                 				<textarea name = "description" required>${dish.description}</textarea>
                 			</div>
                 			<a class = "delete-link" href = "<c:url value = 'DeleteDishServlet.do?id=${dish.id}'/>">Delete dish</a>
+                    		<input type = "submit" class = "login-button" value = "Update dish" id = "update-dish">
                 		</div>
-                	</c:forEach>
-                    <a id = "manage-dishes-link" href = "<c:url value = 'AddDishServlet.do?id=${restaurant.id}'/>">Add new dish</a>
-                    <button type = "submit" class = "login-button">Update dishes</button>
-                </form>
+                	</form>
+                </c:forEach>
+                <a id = "manage-dishes-link" href = "<c:url value = 'AddDishServlet.do?id=${restaurant.id}'/>">Add new dish</a>
                 <p class = error>${requestScope.error}</p>
             </div>
         </div>

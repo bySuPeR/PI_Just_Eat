@@ -54,7 +54,6 @@
     flex-direction: column;
     align-items: center;
     width: 50vw;
-    height: 20vh;
     min-height: 20vh;
     margin-top: 30vh;
     border-radius: 100px;
@@ -83,7 +82,7 @@ input[type=text]:focus {
     border-color: orange;
 }
 
-input[type=button] {
+input[type=submit] {
     background-color: hsl(var(--button-hsl));
     cursor: pointer;
     border: none;
@@ -92,7 +91,7 @@ input[type=button] {
 }
 
 
-input[type=button]:hover, input[type=button]:active {
+input[type=submit]:hover, input[type=button]:active {
     background-color: hsl(var(--button-hsl), 0.7);
 }
 

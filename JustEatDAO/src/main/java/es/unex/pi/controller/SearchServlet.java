@@ -52,5 +52,8 @@ public class SearchServlet extends HttpServlet {
 		 * TODO Buscar restaurante por localidad, nombre o dirección donde se encuentra.
 		 * Existen un método del DAO que devuelve un ArrayList con dicha funcionalidad.
 		 */
+		
+		//Por el momento, solo recarga la página para mostrar las actualizaciones.
+		response.sendRedirect (request.getContextPath () + "/SearchServlet.do");
 	}
 }
