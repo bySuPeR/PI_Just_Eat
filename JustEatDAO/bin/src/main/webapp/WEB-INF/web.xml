@@ -114,4 +114,24 @@
     <servlet-name>UpdateDishesServlet</servlet-name>
     <url-pattern>/UpdateDishesServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteDishServlet</display-name>
+    <servlet-name>DeleteDishServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.DeleteDishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteDishServlet</servlet-name>
+    <url-pattern>/DeleteDishServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddDishServlet</display-name>
+    <servlet-name>AddDishServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.AddDishServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddDishServlet</servlet-name>
+    <url-pattern>/AddDishServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

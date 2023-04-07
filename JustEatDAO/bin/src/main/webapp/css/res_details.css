@@ -72,7 +72,6 @@
 }
 
 .dishes-container {
-	min-width: 30vw;
 	margin-left: calc(var(--main-page-width) / 2);
 	display: grid;
 	grid-template-columns: auto auto auto;

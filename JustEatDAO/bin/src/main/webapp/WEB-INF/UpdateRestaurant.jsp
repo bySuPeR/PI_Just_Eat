@@ -38,7 +38,7 @@
                     	<h2 class = "login-title" id = "bike-parking-question">What kind of food do you serve?</h2>
                     	<c:forEach var = "category" items = "${categoryList}">
                     		<div class = "category-container">
-                    			<label for = "category-checkbox" class = "features-text">${category.name}</label>
+                    			<label for = "${category.name}" class = "features-text">${category.name}</label>
                     			<input type = "checkbox" value = "${category.name}" name = "selectedCategory" ${requestScope[category.name]}>	
                     		</div>
                     	</c:forEach>
