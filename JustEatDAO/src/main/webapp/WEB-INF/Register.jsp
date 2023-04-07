@@ -30,7 +30,8 @@
                         <input type = "password" name = "password" id = "password" required>
                     </div>
                     <button type = "submit" class = "login-button">Register now</button>
-                    <span class = "question-text">Already have an account?<a class = "question-link" href = "<c:url value = 'LoginServlet.do'/>">Log in now!</a></span>
+                     <h5 class="error">${requestScope.error}</h5>
+                    <span class = "question-text">Already have an account?<a class = "question-link" href = "LoginServlet.do">Log in now!</a></span>
                 </form>
             </div>
         </div>
