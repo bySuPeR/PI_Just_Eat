@@ -177,7 +177,7 @@ h2 {
 	font-size: 3vh;
 }
 
-input[type=radio]:hover {
+input[type=radio] {
 	background-color: hsl(var(--button-hsl));
 }
 

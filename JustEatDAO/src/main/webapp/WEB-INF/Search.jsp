@@ -33,19 +33,20 @@
                 		</c:forEach>
                 	</form>
                 </div>
-                <form class = "restaurant-state-radio">
+                <form class = "restaurant-state-radio" action = "StateServlet.do" method = "post">
                 	<div class = "state-entry">
-                		<label class = "state-label" for = "all-restaurants">All restaurants</label>
-                		<input type = "radio" value = "all-restaurants" name = "all-restaurants" ${allrestaurants}>
+                		<label class = "state-label" for = "state-value">All restaurants</label>
+                		<input type = "radio" value = "all-restaurants" name = "state-value" ${allrestaurants}>
                 	</div>
                 	<div class = "state-entry">
-                		<label class = "state-label" for = "take-orders">Take orders</label>
-                		<input type = "radio" value = "take-orders" name = "take-orders" ${takeorders}>
+                		<label class = "state-label" for = "state-value">Take orders</label>
+                		<input type = "radio" value = "take-orders" name = "state-value" ${takeorders}>
                 	</div>
                 	<div class = "state-entry">
-                		<label class = "state-label" for = "radio">No take orders</label>
-                		<input type = radio value = "no-take-orders" name = "no-take-orders">${notakeorders}
+                		<label class = "state-label" for = "state-value">No take orders</label>
+                		<input type = radio value = "no-take-orders" name = "state-value">${notakeorders}
                 	</div>
+                	<input type = "submit" value = "Search" class = "search-state">
                 </form>
                 <div class = "restaurant-grid-container">
                 	<c:forEach var = "restaurant" items = "${restaurantList}">
