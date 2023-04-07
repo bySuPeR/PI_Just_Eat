@@ -57,7 +57,7 @@ public class UpdateDishesServlet extends HttpServlet {
 		 * Existe un atributo privado en esta clase que mantiene el ID del restaurante al que pertenece el plato.
 		 */
 		
-		//Por ahora, solo devuelve a la página de edición del restaurante.
-		response.sendRedirect (request.getContextPath () + "/UpdateRestaurantServlet.do?id=" + this.restaurant);
+		//Por ahora, se recarga la página de los platos.
+		response.sendRedirect (request.getContextPath () + "/UpdateDishesServlet.do?id=" + this.restaurant);
 	}
 }
