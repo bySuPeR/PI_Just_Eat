@@ -8,7 +8,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+
 import es.unex.pi.dao.RestaurantDAO;
+import es.unex.pi.model.Restaurant;
 import es.unex.pi.dao.CategoryDAO;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
 import es.unex.pi.dao.JDBCCategoryDAOImpl;
@@ -48,12 +52,17 @@ public class SearchServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		 * TODO Buscar restaurante por localidad, nombre o dirección donde se encuentra.
-		 * Existen un método del DAO que devuelve un ArrayList con dicha funcionalidad.
-		 */
-		
-		//Por el momento, solo recarga la página para mostrar las actualizaciones.
-		response.sendRedirect (request.getContextPath () + "/SearchServlet.do");
-	}
+		//cargar los resultados de las busquedas (formularios,modificados....)
+				Connection conn = (Connection) getServletContext().getAttribute("dbConn"); //conectar con bd
+				RestaurantDAO rest = new JDBCRestaurantDAOImpl();
+				rest.setConnection(conn);//establecer conexion con la BD
+				String search = request.getParameter("search"); //guardar lo del input
+				CategoryDAO categoryDAO = new JDBCCategoryDAOImpl ();
+				categoryDAO.setConnection (conn);
+		    	request.setAttribute ("categoryList", categoryDAO.getAll ());
+				ArrayList<Restaurant> RestaurantListBD = rest.searchAmongRestaurants(search); //lista de apartamentos de la BD con los parametro busqueda
+				request.setAttribute("restaurantList", RestaurantListBD);
+				RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/Search.jsp");
+				view.forward (request, response);
+			}
 }

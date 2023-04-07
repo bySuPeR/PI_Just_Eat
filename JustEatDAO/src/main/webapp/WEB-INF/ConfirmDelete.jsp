@@ -30,7 +30,7 @@
             			<label>Are you sure you want to delete this dish?</label>
             			<input type = "submit" value = "Yes, delete">
             		</form>
-            		<a href = "<c:url value = 'UpdateDishServlet.do?id=${dish.id}'/>">No, go back</a>
+            		<a href = "<c:url value = 'UpdateDishesServlet.do?id=${dishID}'/>">No, go back</a>
             	</c:if>
             </div>
         </div>

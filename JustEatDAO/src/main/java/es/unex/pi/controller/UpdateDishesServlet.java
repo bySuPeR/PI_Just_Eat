@@ -8,11 +8,20 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import java.sql.Connection;
+import java.util.List;
+
+import es.unex.pi.model.Category;
+import es.unex.pi.model.Dish;
 import es.unex.pi.model.Restaurant;
+import es.unex.pi.model.Restaurant_Category;
+import es.unex.pi.dao.CategoryDAO;
 import es.unex.pi.dao.DishDAO;
+import es.unex.pi.dao.JDBCCategoryDAOImpl;
 import es.unex.pi.dao.JDBCDishDAOImpl;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
+import es.unex.pi.dao.JDBCRestaurant_CategoryDAOImpl;
 import es.unex.pi.dao.RestaurantDAO;
+import es.unex.pi.dao.Restaurant_CategoryDAO;
 
 /**
  * Servlet implementation class UpdateDishesServlet
@@ -20,6 +29,7 @@ import es.unex.pi.dao.RestaurantDAO;
 public class UpdateDishesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private long restaurant = -1;
+	private long dish = -1;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -57,7 +67,16 @@ public class UpdateDishesServlet extends HttpServlet {
 		 * Existe un atributo privado en esta clase que mantiene el ID del restaurante al que pertenece el plato.
 		 */
 		
-		//Por ahora, se recarga la página de los platos.
+		/*TODO Actualizar los valores en la Base de Datos*/
+		Connection conn = (Connection) getServletContext ().getAttribute ("dbConn");
+		this.dish = Long.parseLong (request.getParameter ("id"));
+		DishDAO dishBD = new JDBCDishDAOImpl();
+		dishBD.setConnection (conn);
+		Dish currentDish = dishBD.get (this.dish);
+		currentDish.setName(request.getParameter("name"));
+		currentDish.setPrice(Integer.parseInt(request.getParameter("price")));
+		currentDish.setDescription(request.getParameter("description"));
+		dishBD.update(currentDish);
 		response.sendRedirect (request.getContextPath () + "/UpdateDishesServlet.do?id=" + this.restaurant);
 	}
 }
