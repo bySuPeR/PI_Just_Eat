@@ -18,6 +18,7 @@ import es.unex.pi.dao.JDBCRestaurantDAOImpl;
  */
 public class MyRestaurantsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private long user = -1;
        
     /**
      * @see HttpServlet#HttpServlet()
