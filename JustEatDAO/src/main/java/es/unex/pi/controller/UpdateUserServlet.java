@@ -32,19 +32,21 @@ public class UpdateUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("user");
-		request.setAttribute("user", user); // precargar los datos del usuario
-		RequestDispatcher vista = request.getRequestDispatcher("/WEB-INF/UpdateUser.jsp");
-		vista.forward(request, response); // siempre al final del DOGET con el jsp necesario
+    
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession ();
+		User user = (User) session.getAttribute ("user");
+		request.setAttribute ("user", user); // precargar los datos del usuario que ha iniciado sesión.
+		RequestDispatcher vista = request.getRequestDispatcher ("/WEB-INF/UpdateUser.jsp");
+		vista.forward (request, response); // siempre al final del DOGET con el jsp necesario
 	}
 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = (Connection) getServletContext().getAttribute("dbConn");
 		HttpSession sesion = request.getSession();

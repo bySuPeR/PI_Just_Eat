@@ -12,7 +12,6 @@
         <div class = "full-screen-container">
             <div class = "main-page-container">
             	<div class = "restaurant-pic"></div>
-                <input type = "hidden" name = "id" value = "${restaurant.id}">
 				<div class = "restaurant-container">
 					<h1 class = "restaurant-text">${restaurant.name}
 						<span class = "number-value" id = "grade-average">${restaurant.gradesAverage}</span>

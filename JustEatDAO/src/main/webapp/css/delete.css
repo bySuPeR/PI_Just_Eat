@@ -14,24 +14,37 @@ form {
 	align-items: center;
 }
 
-label, button[type=submit] {
-	margin-top: 5vh;
-}
-
 label {
+	margin-top: 5vh;
 	font-size: 30px;
 }
 
-button[type=submit] {
+input[type=submit], a {
+	position: absolute;
 	background-color: red;
 	color: white;
 	border-radius: 100px;
 	border: none;
 	font-size: 20px;
 	padding: 10px;
+	margin-top: 15vh;
 }
 
-button[type=submit]:hover {
+input[type=submit] {
+	margin-left: 15vw;
+}
+
+a {
+	text-decoration: none;
+	background-color: green;
+	margin-right: 15vw;
+}
+
+a:hover {
+	background-color: hsl(115, 100%, 40%);
+}
+
+input[type=submit]:hover {
 	background-color: hsl(0, 100%, 70%);
 	cursor: pointer;
 }

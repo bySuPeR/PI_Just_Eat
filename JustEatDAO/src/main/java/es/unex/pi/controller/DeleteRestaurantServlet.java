@@ -12,6 +12,7 @@ import java.io.IOException;
  */
 public class DeleteRestaurantServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private long restaurant = -1;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -25,6 +26,7 @@ public class DeleteRestaurantServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute ("delete", 1);
+		this.restaurant = Long.parseLong (request.getParameter ("id"));
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/ConfirmDelete.jsp");
 		view.forward (request, response);
 	}
@@ -34,5 +36,6 @@ public class DeleteRestaurantServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*TODO Elimina el restaurant de la Base de Datos, así como todos sus platos*/
+		//Hay un atributo privado en esta clase que es el ID del restaurante.
 	}
 }

@@ -12,26 +12,25 @@
         <div class = "full-screen-container">
             <div class = "main-page-container">
             	<c:if test = "${requestScope.delete eq 0}">
-            		<input type = "hidden" name = "id" value = "${user.id}">
-            		<form action = "DeleteUserServlet.do" action = "post">
+            		<form action = "DeleteUserServlet.do" method = "post">
             			<label>Are you sure you want to delete your account?</label>
-            			<button type = "submit" href = "<c:url value = 'LoginServlet.do'/>">Yes, delete</button>
-            			<button type = "submit" href = "<c:url value = 'RegisterServlet.do'/>">No, go back</button>
+            			<input type = "submit" value = "Yes, delete">
             		</form>
+            		<a href = "<c:url value = 'UpdateUserServlet.do'/>">No, go back</a>
             	</c:if>
             	<c:if test = "${requestScope.delete eq 1}">
-            		<form action = "DeleteRestaurantServlet.do" action = "post">
+            		<form action = "DeleteRestaurantServlet.do" method = "post">
             			<label>Are you sure you want to delete this restaurant?</label>
-            			<button type = "submit">Yes, delete</button>
-            			<button type = "submit">No, go back</button>
+            			<input type = "submit" value = "Yes, delete">
             		</form>
+            		<a href = "<c:url value = 'UpdateRestaurantServlet.do'/>">No, go back</a>
             	</c:if>
             	<c:if test = "${requestScope.delete eq 2}">
-            		<form action = "DeleteDishServlet.do" action = "post">
+            		<form action = "DeleteDishServlet.do" method = "post">
             			<label>Are you sure you want to delete this dish?</label>
-            			<button type = "submit">Yes, delete</button>
-            			<button type = "submit">No, go back</button>
+            			<input type = "submit" value = "Yes, delete">
             		</form>
+            		<a href = "<c:url value = 'UpdateDishServlet.do'/>">No, go back</a>
             	</c:if>
             </div>
         </div>

@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Logger;
 
 import es.unex.pi.dao.JDBCUserDAOImpl;
 import es.unex.pi.dao.UserDAO;

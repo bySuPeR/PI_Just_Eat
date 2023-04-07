@@ -18,7 +18,6 @@ import es.unex.pi.model.User;
  */
 public class DeleteUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private long user = -1;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,7 +31,6 @@ public class DeleteUserServlet extends HttpServlet {
 	 */
 	protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute ("delete", 0);
-		this.user= Long.parseLong(request.getParameter("id"));
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/ConfirmDelete.jsp");
 		view.forward (request, response);
 	}
@@ -41,7 +39,13 @@ public class DeleteUserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*TODO Eliminar el usuario de la Base de Datos*/
+		
+		/* TODO Eliminar el usuario de la Base de Datos
+		 * Es necesario coger los datos del usuario que está activo en la sesión.
+		 * También todos sus objetos asociados.
+		 * Revisar el foro.
+		 */
+		
 		String option = request.getParameter("Option");
 		if(option.equals("No")){
 			response.sendRedirect(request.getContextPath() + "/UpdateUserServlet.do");
@@ -58,4 +62,3 @@ public class DeleteUserServlet extends HttpServlet {
 		
 	}
 }
-
