@@ -134,4 +134,14 @@
     <servlet-name>AddDishServlet</servlet-name>
     <url-pattern>/AddDishServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>StateServlet</display-name>
+    <servlet-name>StateServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.StateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StateServlet</servlet-name>
+    <url-pattern>/StateServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

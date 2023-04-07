@@ -95,12 +95,13 @@ input[type=submit]:hover, input[type=button]:active {
     background-color: hsl(var(--button-hsl), 0.7);
 }
 
-.titulo-categorias {
+.category-prev-text {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
     color: white;
-    margin-bottom: 10px;
-    padding-right: 20%;
     white-space: nowrap;
-    margin-top: 10vh;
+    margin-top: 15vh;
 }
 
 .categories-list {
@@ -153,4 +154,33 @@ input[type=submit]:hover, input[type=button]:active {
     height: calc(var(--single-restaurant-height)*2/3);
     width: calc(var(--single-restaurant-width)-1vw);
     margin-top: 5px;
+}
+
+h2 {
+	margin-bottom: 1vh;
+}
+
+.state-entry {
+	margin-left: 3vw;
+	margin-right: 3vw;
+}
+
+.restaurant-state-radio {
+	display: flex;
+	align-items: center;
+	margin-top: 10vh;
+	margin-bottom: 1vh;
+}
+
+.state-label {
+	color: white;
+	font-size: 3vh;
+}
+
+input[type=radio] {
+	background-color: hsl(var(--button-hsl));
+}
+
+input[type=radio]:hover {
+	cursor: pointer;
 }
