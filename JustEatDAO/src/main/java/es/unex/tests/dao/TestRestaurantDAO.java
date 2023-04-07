@@ -112,7 +112,7 @@ public class TestRestaurantDAO {
 		ArrayList <Restaurant> restaurantsList = RestaurantDAO.getAll ();
 		assertEquals (restaurantsList.size (), 5);
 		
-		ArrayList <Restaurant> restaurantsNameList = RestaurantDAO.getAllBySearchName ("r");
+		ArrayList <Restaurant> restaurantsNameList = RestaurantDAO.searchAmongRestaurants ("r");
 		assertEquals (restaurantsNameList.size (), 2);
 		
 		ArrayList <Restaurant> restaurantsUserList = RestaurantDAO.getAllByUser (2);
@@ -151,12 +151,12 @@ public class TestRestaurantDAO {
 	
 	@Test
 	public void test3Modify () {
-		Restaurant restaurant01 = RestaurantDAO.getAllBySearchName ("newRestaurantName").iterator ().next ();
+		Restaurant restaurant01 = RestaurantDAO.searchAmongRestaurants ("newRestaurantName").iterator ().next ();
 		restaurant01.setName ("newRestaurantNameUpdated");
 		boolean result = RestaurantDAO.update (restaurant01);
 		assertEquals (true, result);
 		
-		Restaurant restaurant02 = RestaurantDAO.getAllBySearchName ("newRestaurantNameUpdated").iterator ().next ();
+		Restaurant restaurant02 = RestaurantDAO.searchAmongRestaurants ("newRestaurantNameUpdated").iterator ().next ();
 		assertEquals (restaurant01.getId (), restaurant02.getId ());
 		assertEquals ("newRestaurantNameUpdated", restaurant02.getName ());
 		assertEquals (restaurant01.getAddress (), restaurant02.getAddress ());
@@ -173,11 +173,11 @@ public class TestRestaurantDAO {
 	
 	@Test
 	public void test4Delete () {
-		Restaurant restaurant01 = RestaurantDAO.getAllBySearchName ("newRestaurantNameUpdated").iterator ().next ();
+		Restaurant restaurant01 = RestaurantDAO.searchAmongRestaurants ("newRestaurantNameUpdated").iterator ().next ();
 		boolean result = RestaurantDAO.delete (restaurant01.getId ());
 		assertEquals (true, result);
 		
-		ArrayList <Restaurant> restaurantList = RestaurantDAO.getAllBySearchName ("newRestaurantNameUpdated");
+		ArrayList <Restaurant> restaurantList = RestaurantDAO.searchAmongRestaurants ("newRestaurantNameUpdated");
 		assertEquals (restaurantList.size (), 0);
 	}
 }

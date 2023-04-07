@@ -89,7 +89,7 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 		return restaurants;
 	}
 	
-	public ArrayList <Restaurant> getAllBySearchName (String search) {
+	public ArrayList <Restaurant> searchAmongRestaurants (String search) {
 		if (conn == null) {
 			return null;
 		}
@@ -97,12 +97,14 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 		search = "%" + search + "%";
 		Restaurant restaurant = null;
 		ArrayList <Restaurant> restaurants = null;
-		String query = "SELECT * FROM Restaurant WHERE UPPER (name) LIKE ?";
+		String query = "SELECT * FROM Restaurant WHERE (UPPER (name) LIKE ?) OR (UPPER (address) LIKE ?) OR (UPPER (city) LIKE ?)";
 		
 		try {
 			PreparedStatement stmt = this.conn.prepareStatement (query);
 			stmt.clearParameters ();
 			stmt.setString (1, search);
+			stmt.setString (2, search);
+			stmt.setString (3, search);
 			ResultSet rs = stmt.executeQuery ();
 			restaurants = new ArrayList <Restaurant> ();
 			while (rs.next ()) {

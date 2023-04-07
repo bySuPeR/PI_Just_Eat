@@ -39,6 +39,7 @@ public class UpdateDishesServlet extends HttpServlet {
 		restaurantDAO.setConnection (conn);
 		this.restaurant = Long.parseLong (request.getParameter ("id"));
 		Restaurant currentRestaurant = restaurantDAO.get (this.restaurant);
+		request.setAttribute ("restaurant", currentRestaurant);
 		
 		dishDAO.setConnection (conn);
 		request.setAttribute ("dishList", dishDAO.getAllByRestaurant (currentRestaurant.getId ()));
@@ -51,7 +52,10 @@ public class UpdateDishesServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*TODO Actualiza la información de los platos en la Base de Datos*/
+		/*
+		 * TODO Actualiza la información de los platos en la Base de Datos
+		 * Existe un atributo privado en esta clase que mantiene el ID del restaurante al que pertenece el plato.
+		 */
 		
 		//Por ahora, solo devuelve a la página de edición del restaurante.
 		response.sendRedirect (request.getContextPath () + "/UpdateRestaurantServlet.do?id=" + this.restaurant);

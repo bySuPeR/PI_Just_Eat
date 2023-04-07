@@ -25,7 +25,7 @@ public class DeleteUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute ("isUser", true);
+		request.setAttribute ("delete", 0);
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/ConfirmDelete.jsp");
 		view.forward (request, response);
 	}

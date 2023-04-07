@@ -30,10 +30,10 @@
                 				<label for = "description">Description</label>
                 				<textarea name = "description" required>${dish.description}</textarea>
                 			</div>
-                			<a class = "delete-link" href = "<c:url value = 'DeleteDishServlet.do'/>">Delete dish</a>
+                			<a class = "delete-link" href = "<c:url value = 'DeleteDishServlet.do?id=${dish.id}'/>">Delete dish</a>
                 		</div>
                 	</c:forEach>
-                    <a id = "manage-dishes-link" href = "<c:url value = 'AddDishServlet.do'/>">Add new dish</a>
+                    <a id = "manage-dishes-link" href = "<c:url value = 'AddDishServlet.do?id=${restaurant.id}'/>">Add new dish</a>
                     <button type = "submit" class = "login-button">Update dishes</button>
                 </form>
                 <p class = error>${requestScope.error}</p>

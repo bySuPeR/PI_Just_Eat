@@ -38,7 +38,7 @@
     border-radius: var(--border-radius);
 }
 
-.restaurant-container {
+.search-input-container {
     background-color: brown;
     display: flex;
     flex-direction: column;
@@ -139,10 +139,37 @@ input[type=button]:hover, input[type=button]:active {
     white-space: nowrap;
 }
 
-.titulo-categorias h2 {
-    transform: translate(-8vw,13vh);
+.restaurant-grid-container {
+	background-color: var(--restaurant-background-color);
+    border-radius: var(--border-radius);
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    padding-left: 0.1vw;
+    padding-right: 0.1vw;
+    margin-top: 2vh;
 }
 
-.titulo-categorias h4 {
-    transform: translate(-8vw,12vh);
+.single-restaurant {
+	--single-restaurant-height: 25vh;
+	--single-restaurant-width: 17vw;
+    background-color: hsl(var(--input-hsl));
+    border: 1px solid black;
+    border-radius: var(--border-radius);
+    height: var(--single-restaurant-height);
+    width: var(--single-restaurant-width);
+    margin: .5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.single-restaurant:hover {
+    border: 4px solid orange;
+}
+
+.restaurant-photo {
+    border-radius: var(--border-radius);
+    height: calc(var(--single-restaurant-height)*2/3);
+    width: calc(var(--single-restaurant-width)-1vw);
+    margin-top: 5px;
 }

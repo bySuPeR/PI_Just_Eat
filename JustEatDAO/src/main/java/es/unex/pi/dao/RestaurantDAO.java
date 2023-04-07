@@ -40,15 +40,15 @@ public interface RestaurantDAO {
 	
 	
 	/**
-	 * Gets all the restaurants from the database that contain a text in the name.
+	 * Gets all the restaurants whose city, name or address contains the specified string.
 	 * 
 	 * @param search
 	 *            Search string .
 	 * 
-	 * @return List of all the restaurants from the database that contain a text either in the name.
+	 * @return List of all the restaurants from the database that contain a text either in the city, name or address.
 	 */
 	
-	public ArrayList <Restaurant> getAllBySearchName (String search);
+	public ArrayList <Restaurant> searchAmongRestaurants (String search);
 
 
 	/**
