@@ -54,6 +54,17 @@
 	    	                <input type = "radio" value = "no-bike-friendly-value" name = "bike-friendly">
                     	</div>
                     </div>
+                    <div class = "input-group">
+                    	<h2 class = "login-title">Can you take orders?</h2>
+                    	<div class = "available-radio">
+                    		<label for = "available" class = "features-text">Yes</label>
+                    		<input type = "radio" value = "yes-available" name = "available">
+                    	</div>
+                    	<div class = "bike-friendly-radio">
+                    		<label for = "available" class = "features-text">No</label>
+                    		<input type = "radio" value = "no-available" name = "available">
+                    	</div>
+                    </div>
                     <button type = "submit" class = "login-button">Create restaurant</button>
                 </form>
                 <p class = error>${requestScope.error}</p>

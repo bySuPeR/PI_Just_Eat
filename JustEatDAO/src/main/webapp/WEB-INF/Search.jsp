@@ -22,9 +22,9 @@
                         </form>
                     </div>
                 </div>
-                <div class = "titulo-categorias">
-                    <h2>OUR BEST OFFERS</h2>
-                    <h4>Search for your closest restaurant and enjoy at home</h4>
+                <div class = "category-prev-text">
+                    <h2>WHATEVER YOU WANT</h2>
+                    <h4>Get what you want from our best restaurants</h4>
                 </div>
                 <div class = "categories-list">
                 	<form action = "Servlet.do" method = "post">
@@ -33,6 +33,20 @@
                 		</c:forEach>
                 	</form>
                 </div>
+                <form class = "restaurant-state-radio">
+                	<div class = "state-entry">
+                		<label class = "state-label" for = "all-restaurants">All restaurants</label>
+                		<input type = "radio" value = "all-restaurants" name = "all-restaurants" ${allrestaurants}>
+                	</div>
+                	<div class = "state-entry">
+                		<label class = "state-label" for = "take-orders">Take orders</label>
+                		<input type = "radio" value = "take-orders" name = "take-orders" ${takeorders}>
+                	</div>
+                	<div class = "state-entry">
+                		<label class = "state-label" for = "radio">No take orders</label>
+                		<input type = radio value = "no-take-orders" name = "no-take-orders">${notakeorders}
+                	</div>
+                </form>
                 <div class = "restaurant-grid-container">
                 	<c:forEach var = "restaurant" items = "${restaurantList}">
                 		<div class = "single-restaurant">

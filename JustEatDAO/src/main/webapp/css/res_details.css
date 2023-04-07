@@ -1,7 +1,14 @@
+.full-screen-container {
+	height: auto;
+	min-height: 100vh;
+}
+
 .main-page-container {
     flex-direction: column;
     align-items: flex-start;
-    --restaurant-container-height: 57vh;
+    --restaurant-container-height: 53vh;
+    min-height: var(--main-page-height);
+    height: auto;
 }
 
 .restaurant-pic {
@@ -26,20 +33,20 @@
 }
 
 .restaurant-container {
-    width: 45vw;
-    height: var(--restaurant-container-height);
+    min-width: 45vw;
+    min-height: var(--restaurant-container-height);
     margin-left: 1vw;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.number-value {
+.number-value, #take-orders {
 	color: green;
 }
 
 .restaurant-text {
-	font-size: 30px;
+	font-size: 130%;
 }
 
 .restaurant-text {

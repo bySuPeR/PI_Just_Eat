@@ -54,6 +54,17 @@
 	    	                <input type = "radio" value = "no-bike-friendly-value" name = "bike-friendly" ${requestScope.nobikefriendly}>
                     	</div>
                     </div>
+                    <div class = "input-group">
+                    	<h2 class = "login-title">Can you take orders?</h2>
+                    	<div class = "available-radio">
+                    		<label for = "available" class = "features-text">Yes</label>
+                    		<input type = "radio" value = "yes-available" name = "available" ${yesavailable}>
+                    	</div>
+                    	<div class = "bike-friendly-radio">
+                    		<label for = "available" class = "features-text">No</label>
+                    		<input type = "radio" value = "no-available" name = "available" ${noavailable}>
+                    	</div>
+                    </div>
                     <a id = "manage-dishes-link" href = "<c:url value = 'UpdateDishesServlet.do?id=${restaurant.id}'/>">Manage dishes</a>
                     <button type = "submit" class = "login-button">Update restaurant</button>
                     <a class = "delete-link" href = "<c:url value = 'DeleteRestaurantServlet.do?id=${restaurant.id}'/>">Delete restaurant</a>

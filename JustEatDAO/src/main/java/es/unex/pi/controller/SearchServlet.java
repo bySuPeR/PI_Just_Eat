@@ -36,6 +36,7 @@ public class SearchServlet extends HttpServlet {
     	
     	restaurantDAO.setConnection (conn);
     	request.setAttribute ("restaurantList", restaurantDAO.getAll ());
+    	request.setAttribute ("allrestaurants", "checked");
     	
     	categoryDAO.setConnection (conn);
     	request.setAttribute ("categoryList", categoryDAO.getAll ());

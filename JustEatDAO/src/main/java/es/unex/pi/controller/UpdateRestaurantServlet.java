@@ -56,6 +56,13 @@ public class UpdateRestaurantServlet extends HttpServlet {
 			request.setAttribute ("nobikefriendly", "checked");
 		}
 		
+		if (currentRestaurant.getAvailable () == 1) {
+			request.setAttribute ("yesavailable", "checked");
+		}
+		else if (currentRestaurant.getAvailable () == 0) {
+			request.setAttribute ("noavailable", "checked");
+		}
+		
 		resCatDAO.setConnection (conn);
 		ArrayList <Restaurant_Category> resCatList = resCatDAO.getAllByRestaurant (currentRestaurant.getId ());
 		
@@ -91,7 +98,14 @@ public class UpdateRestaurantServlet extends HttpServlet {
 		}else {
 			rest.setBikeFriendly(0);
 		}
-		rest.setAvailable(1);
+		String availability = request.getParameter ("available");
+		if (availability.equals ("yes-available")) {
+			rest.setAvailable (1);
+		}
+		else if (availability.equals ("no-available")) {
+			rest.setAvailable (0);
+		}
+		
 		rest.setGradesAverage(currentRestaurant.getGradesAverage());
 		rest.setMinPrice(currentRestaurant.getMinPrice());
 		rest.setMaxPrice(currentRestaurant.getMaxPrice());

@@ -17,14 +17,11 @@ import es.unex.pi.dao.CategoryDAO;
 import es.unex.pi.dao.JDBCCategoryDAOImpl;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
 import es.unex.pi.dao.JDBCRestaurant_CategoryDAOImpl;
-import es.unex.pi.dao.JDBCRestaurant_UserDAOImpl;
 import es.unex.pi.dao.RestaurantDAO;
 import es.unex.pi.dao.Restaurant_CategoryDAO;
-import es.unex.pi.dao.Restaurant_UserDAO;
 import es.unex.pi.model.Category;
 import es.unex.pi.model.Restaurant;
 import es.unex.pi.model.Restaurant_Category;
-import es.unex.pi.model.Restaurant_User;
 import es.unex.pi.model.User;
 
 /**
@@ -68,7 +65,6 @@ public class AddRestaurantServlet extends HttpServlet {
 		String telephone = request.getParameter("telephone");
 		String city = request.getParameter("city");
 		String contactEmail = request.getParameter("contactEmail");
-		String bikeFriendly = request.getParameter("bike-friendly");
 		Restaurant newRest = new Restaurant();
 		newRest.setName(name);
 		newRest.setAddress(address);
@@ -82,14 +78,21 @@ public class AddRestaurantServlet extends HttpServlet {
 		String option = request.getParameter("bike-friendly");
 		
 		if(option.equals("yes-bike-friendly-value")) {
-			newRest.setBikeFriendly(1);
+			newRest.setBikeFriendly (1);
 			logger.info("1");
 		}else {
-			newRest.setBikeFriendly(0);
+			newRest.setBikeFriendly (0);
 			logger.info("0");
 		}
-		newRest.setAvailable(1);
 		
+		String availability = request.getParameter ("available");
+		if (availability.equals ("yes-available")) {
+			newRest.setAvailable (1);
+		}
+		else if (availability.equals ("no-available")) {
+			newRest.setAvailable (0);
+		}
+				
 		logger.info("Todos los parametros");
 		HttpSession sesion = request.getSession();
 		User user = (User) sesion.getAttribute("user");
