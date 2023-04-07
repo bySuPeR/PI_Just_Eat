@@ -45,12 +45,6 @@ public class DeleteUserServlet extends HttpServlet {
 		 * También todos sus objetos asociados.
 		 * Revisar el foro.
 		 */
-		
-		String option = request.getParameter("Option");
-		if(option.equals("No")){
-			response.sendRedirect(request.getContextPath() + "/UpdateUserServlet.do");
-		}
-		else {
 			HttpSession sesion = request.getSession();
 			User usuarioSesion = (User) sesion.getAttribute("user"); 
 			UserDAO usuarioBD = new JDBCUserDAOImpl();
@@ -58,7 +52,7 @@ public class DeleteUserServlet extends HttpServlet {
 			usuarioBD.setConnection(conn); //debes hacer una conexion por cada DAO!
 			usuarioBD.delete(usuarioSesion.getId());
 			response.sendRedirect (request.getContextPath () + "/LoginServlet.do");
-		}
-		
 	}
+		
 }
+

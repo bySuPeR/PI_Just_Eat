@@ -14,7 +14,6 @@
         <div class = "full-screen-container">
             <div class = "login-container">
                 <h1 class = "login-title">Create your dish</h1>
-                <input type = "hidden" name = "id" value = "${restaurant.id}">
                 <form class = "form" action = "AddDishServlet.do" method = "post">
                 	<div class = "invidivual-dish-input">
                 		<div class = "input-group">
