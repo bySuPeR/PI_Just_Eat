@@ -19,6 +19,7 @@ import es.unex.pi.dao.JDBCRestaurant_CategoryDAOImpl;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Servlet implementation class UpdateRestaurantServlet
@@ -73,8 +74,61 @@ public class UpdateRestaurantServlet extends HttpServlet {
 	 */
 	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*TODO Actualizar los valores en la Base de Datos*/
+		Connection conn = (Connection) getServletContext ().getAttribute ("dbConn");
+		Restaurant rest = new Restaurant();
+		RestaurantDAO restaurantDAO = new JDBCRestaurantDAOImpl ();
+		restaurantDAO.setConnection (conn);
+		Restaurant currentRestaurant = restaurantDAO.get (this.restaurant);
+		rest.setId(restaurant);
+		rest.setName(request.getParameter("name"));
+		rest.setAddress(request.getParameter("address"));
+		rest.setTelephone(request.getParameter("telephone"));
+		rest.setCity(request.getParameter("city"));
+		rest.setContactEmail(request.getParameter("contactEmail"));
+		String option = request.getParameter("bike-friendly");
+		if(option.equals("yes-bike-friendly-value")) {
+			rest.setBikeFriendly(1);
+		}else {
+			rest.setBikeFriendly(0);
+		}
+		rest.setAvailable(1);
+		rest.setGradesAverage(currentRestaurant.getGradesAverage());
+		rest.setMinPrice(currentRestaurant.getMinPrice());
+		rest.setMaxPrice(currentRestaurant.getMaxPrice());
+		rest.setIdu(currentRestaurant.getIdu());
+		
+		if (request.getParameterValues("selectedCategory") != null) {
+			CategoryDAO categoryBD = new JDBCCategoryDAOImpl();
+			categoryBD.setConnection(conn);
+			Restaurant_CategoryDAO categoryRestBD = new JDBCRestaurant_CategoryDAOImpl();
+			categoryRestBD.setConnection(conn);
+			String[] vectorCat = request.getParameterValues("selectedCategory");
+			String catB = "";
+			List<Restaurant_Category> CategoriesDeleted = categoryRestBD.getAllByRestaurant(rest.getId());
+			for(Restaurant_Category restaurantDeleted : CategoriesDeleted) {
+				categoryRestBD.delete(restaurantDeleted.getIdr(), restaurantDeleted.getIdct());
+				
+			}
+			for (int i = 0; i < vectorCat.length; i++) {
+				catB = vectorCat[i];
+				Category categoria = categoryBD.get(catB);
+				Restaurant_Category restCategory = new Restaurant_Category();
+				restCategory.setIdr(rest.getId());
+				restCategory.setIdct(categoria.getId());
+				categoryRestBD.add(restCategory);
+			}
+			RestaurantDAO apartamentoBD = new JDBCRestaurantDAOImpl();
+			apartamentoBD.setConnection(conn);
+			apartamentoBD.update(rest);
+			response.sendRedirect(request.getContextPath() + "/MyRestaurantsServlet.do?id="  + this.restaurant);
+
+		} else {
+			String error = "No se ha elegido una categoría para este restaurante";
+			request.setAttribute("error", error);
+			response.sendRedirect(request.getContextPath() + "/UpdateRestaurantServlet.do?id="  + this.restaurant);
+		}
+		
 		
 		//Por el momento, vuelve a la página de los detalles del restaurante.
-		response.sendRedirect (request.getContextPath () + "/RestaurantDetailsServlet.do?id=" + this.restaurant);
 	}
 }
