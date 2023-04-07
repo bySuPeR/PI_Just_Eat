@@ -13,7 +13,7 @@
             <div class = "main-page-container">
             	<a class = "pages-link" id = "account-link" href = "<c:url value = 'UpdateUserServlet.do'/>">Account</a>
                 <a class = "pages-link" id = "my-restaurants-link" href = "<c:url value = 'MyRestaurantsServlet.do'/>">My Rests.</a>
-                <div class="foto-container">
+                <div class = "pic-container">
                 	<div class = "search-input-container">
                         <h1>Search for our best restaurants!</h1>
                         <form class = "form" action = "SearchServlet.do" method = "post">
@@ -27,11 +27,11 @@
                     <h4>Search for your closest restaurant and enjoy at home</h4>
                 </div>
                 <div class = "categories-list">
-                    <input type = "button" value = "BURGUER" class = "single-category" id = "burguer-id">
-                    <input type = "button" value = "PIZZAS" class = "single-category" id = "pizzas-id">
-                    <input type = "button" value = "KEBAB" class = "single-category" id = "kebab-id">
-                    <input type = "button" value = "ITALIANO" class = "single-category" id = "italiano-id">
-                    <input type = "button" value = "AMERICANO" class = "single-category" id = "americano-id">
+                	<form action = "Servlet.do" method = "post">
+                		<c:forEach var = "category" items = "${categoryList}">
+                			<input type = "button" class = "single-category" value = "${category.name}">
+                		</c:forEach>
+                	</form>
                 </div>
                 <div class = "restaurant-grid-container">
                 	<c:forEach var = "restaurant" items = "${restaurantList}">

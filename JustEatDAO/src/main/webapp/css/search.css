@@ -1,6 +1,15 @@
+.full-screen-container {
+	min-width: 90vw;
+	min-height: 100vh;
+    width: auto;
+    height: auto;
+}
+
 .main-page-container {
     flex-direction: column;
     align-items: center;
+    min-height: var(--main-page-height);
+    height: auto;
 }
 
 .pages-link {
@@ -25,7 +34,7 @@
 	margin-top: 15vh;
 }
 
-.foto-container {
+.pic-container {
     background: url(../images/fondobusqueda.jpg);
     background-size:cover;
     background-repeat: no-repeat;
@@ -33,24 +42,25 @@
     flex-direction: column;
     align-items: center;
     width: 80vw;
-    height: 88vh;
+    height: 40vh;
     margin-top: 5vh;
     border-radius: var(--border-radius);
 }
 
 .search-input-container {
+	position: absolute;
     background-color: brown;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 50vw;
     height: 20vh;
-    margin-top: 23vh;
+    min-height: 20vh;
+    margin-top: 30vh;
     border-radius: 100px;
     border-width: 5px;
     border-style: solid;
     border-color:white;
-    transform: translate(0,10vh);
 }
 
 h1 {
@@ -86,14 +96,19 @@ input[type=button]:hover, input[type=button]:active {
     background-color: hsl(var(--button-hsl), 0.7);
 }
 
+.titulo-categorias {
+    color: white;
+    margin-bottom: 10px;
+    padding-right: 20%;
+    white-space: nowrap;
+    margin-top: 10vh;
+}
+
 .categories-list {
-    width: 60vw;
-    height: 90vh;
+	max-width: 80vw;
     border-radius: var(--border-radius);
-    margin-left: 1.5vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
 }
 
 .single-category {
@@ -101,42 +116,8 @@ input[type=button]:hover, input[type=button]:active {
     width: 10vw;
 }
 
-#burguer-id {
-    background: url(../images/hamburguesa-restaurantes.jpg) center;
-    background-size: cover;
-}
-
-#pizzas-id {
-    background: url(../images/pizza-restaurantes.jpg) center;
-    background-size: cover;
-}
-
-#kebab-id {
-    background: url(../images/durum-restaurantes.jpg) center;
-    background-size: cover;
-}
-
-#italiano-id {
-    background: url(../images/italiano.jpg) center;
-    background-size: cover;
-}
-
-#americano-id {
-    background: url(../images/comidaamericana.jpg) center;
-    background-size: cover;
-}
-
 .single-category:hover {
-    height: 15vh;
-    width: 15vw;
-}
-
-.titulo-categorias {
-    color: white;
-    margin-bottom: 10px;
-    padding-right: 20%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+	opacity: 0.7;
 }
 
 .restaurant-grid-container {
@@ -146,7 +127,8 @@ input[type=button]:hover, input[type=button]:active {
     grid-template-columns: auto auto auto auto;
     padding-left: 0.1vw;
     padding-right: 0.1vw;
-    margin-top: 2vh;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
 }
 
 .single-restaurant {

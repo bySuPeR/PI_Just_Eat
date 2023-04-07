@@ -9,7 +9,9 @@ import java.io.IOException;
 
 import java.sql.Connection;
 import es.unex.pi.dao.RestaurantDAO;
+import es.unex.pi.dao.CategoryDAO;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
+import es.unex.pi.dao.JDBCCategoryDAOImpl;
 
 /**
  * Servlet implementation class SearchServlet
@@ -30,8 +32,14 @@ public class SearchServlet extends HttpServlet {
     protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Connection conn = (Connection) getServletContext ().getAttribute ("dbConn");
     	RestaurantDAO restaurantDAO = new JDBCRestaurantDAOImpl ();
+    	CategoryDAO categoryDAO = new JDBCCategoryDAOImpl ();
+    	
     	restaurantDAO.setConnection (conn);
     	request.setAttribute ("restaurantList", restaurantDAO.getAll ());
+    	
+    	categoryDAO.setConnection (conn);
+    	request.setAttribute ("categoryList", categoryDAO.getAll ());
+    	
     	RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/Search.jsp");
 		view.forward (request, response);
 	}
