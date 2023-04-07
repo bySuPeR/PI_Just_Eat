@@ -30,9 +30,9 @@
                         <input type = "password" name = "password" id = "password" required>
                     </div>
                     <button type = "submit" class = "login-button">Register now</button>
-                     <h5 class="error">${requestScope.error}</h5>
                     <span class = "question-text">Already have an account?<a class = "question-link" href = "LoginServlet.do">Log in now!</a></span>
                 </form>
+                <p class = "error">${requestScope.error}<p>
             </div>
         </div>
     </body>
