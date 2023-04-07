@@ -17,19 +17,19 @@
                 	<div class = "search-input-container">
                         <h1>Search for our best restaurants!</h1>
                         <form class = "form" action = "SearchServlet.do" method = "post">
-                            <input type = "text">
-                            <input type = "button" value = "Search!">
+                            <input type = "text" name = "search">
+                            <input type = "submit" value = "Search">
                         </form>
                     </div>
                 </div>
-                <div class="titulo-categorias">
+                <div class = "titulo-categorias">
                     <h2>OUR BEST OFFERS</h2>
                     <h4>Search for your closest restaurant and enjoy at home</h4>
                 </div>
                 <div class = "categories-list">
                 	<form action = "Servlet.do" method = "post">
                 		<c:forEach var = "category" items = "${categoryList}">
-                			<input type = "button" class = "single-category" value = "${category.name}">
+                			<input type = "submit" class = "single-category" value = "${category.name}">
                 		</c:forEach>
                 	</form>
                 </div>
