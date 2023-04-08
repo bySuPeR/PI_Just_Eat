@@ -154,4 +154,24 @@
     <servlet-name>MyOrdersServlet</servlet-name>
     <url-pattern>/MyOrdersServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MakeOrderServlet</display-name>
+    <servlet-name>MakeOrderServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.MakeOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MakeOrderServlet</servlet-name>
+    <url-pattern>/MakeOrderServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddOrderServlet</display-name>
+    <servlet-name>AddOrderServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.AddOrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddOrderServlet</servlet-name>
+    <url-pattern>/AddOrderServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -64,6 +64,17 @@ public interface RestaurantDAO {
 	
 	
 	/**
+	 * Gets the restaurant by searching with its name.
+	 * In case there are more than one restaurant with the same name,
+	 * it will return the first one that it finds.
+	 * @param name: The restaurant name that needs to be looked for.
+	 * @return Restaurant: The Restaurant with the specified name.
+	 */
+	
+	public Restaurant getByName (String name);
+	
+	
+	/**
 	 * Adds a restaurant to the database.
 	 * 
 	 * @param restaurant

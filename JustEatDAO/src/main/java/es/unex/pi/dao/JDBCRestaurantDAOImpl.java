@@ -171,7 +171,41 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 		}
 		return restaurants;
 	}
-
+	
+	@Override
+	public Restaurant getByName (String name) {
+		if (this.conn == null) {
+			return null;
+		}
+		Restaurant restaurant = null;
+		String query = "SELECT * FROM Restaurant WHERE name = ?";
+		try {
+			PreparedStatement stmt = this.conn.prepareStatement (query);
+			stmt.clearParameters ();
+			stmt.setString (1, name);
+			ResultSet rs = stmt.executeQuery ();
+			if (rs.next ()) {
+				restaurant = new Restaurant ();
+				restaurant.setId (rs.getLong ("id"));
+				restaurant.setName (rs.getString ("name"));
+				restaurant.setAddress (rs.getString ("address"));
+				restaurant.setTelephone (rs.getString ("telephone"));
+				restaurant.setGradesAverage (rs.getDouble ("gradesAverage"));
+				restaurant.setCity (rs.getString ("city"));
+				restaurant.setMinPrice (rs.getInt ("minPrice"));
+				restaurant.setContactEmail (rs.getString ("contactEmail"));
+				restaurant.setMaxPrice (rs.getInt ("maxPrice"));
+				restaurant.setBikeFriendly (rs.getInt ("bikeFriendly"));
+				restaurant.setAvailable (rs.getInt ("available"));
+				restaurant.setIdu (rs.getLong ("idu"));
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace ();
+		}
+		return restaurant;
+	}
+	
 	@Override
 	public long add (Restaurant restaurant) {
 		long id = -1;

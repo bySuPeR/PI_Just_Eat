@@ -55,8 +55,6 @@
 				<c:if test = "${restaurant.idu ne requestScope.currentUser.id}">
 					<a class = "manage-restaurant" id = "back-to-my-restaurants" href = "<c:url value = 'SearchServlet.do'/>">Back</a>
 				</c:if>
-				<a class = "order-buttons" href = "<c:url value = 'MakeOrderServlet.do'/>" id = "make-order-button">Make order</a>
-				<a class = "order-buttons" href = "<c:url value = 'MyOrdersServlet.do'/>">My orders</a>
             </div>
         </div>
     </body>

@@ -5,8 +5,7 @@
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 30px;
-    width: 80%;
-    max-width: 600px;
+    width: 40%;
     border-radius: 20px;
 }
   
@@ -66,15 +65,12 @@
     background-color: hsl(var(--button-hsl), 0.5);
 }
 
-.question-text, .delete-link, #manage-dishes-link {
+.question-text, .question-link, .delete-link, #manage-dishes-link, #make-order-button {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 5px;
-}
-
-.question-link, .delete-link, #manage-dishes-link {
-  	text-decoration: none;
+    text-decoration: none;
 }
 
 .question-link {
@@ -91,4 +87,11 @@
   
 .delete-link:hover {
   	color: hsl(0, 100%, 70%);
+}
+
+#restaurant-select {
+	border-radius: 10%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }

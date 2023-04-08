@@ -34,6 +34,10 @@
 	margin-top: 15vh;
 }
 
+#my-orders-link {
+	margin-top: 25vh;
+}
+
 .pic-container {
     background: url(../images/fondobusqueda.jpg);
     background-size:cover;

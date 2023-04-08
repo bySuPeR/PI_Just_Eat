@@ -21,6 +21,7 @@
                 		<input type = "submit" class = "login-button" value = "Check it out">
                 	</form>
                 </c:forEach>
+                <a class = "login-button" id = "make-order-button" href = "<c:url value = 'MakeOrderServlet.do'/>">Make order</a>
                 <a class = "delete-link" href = "<c:url value = "SearchServlet.do"/>">Go back to main page</a>
             </div>
         </div>
