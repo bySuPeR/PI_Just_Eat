@@ -131,9 +131,9 @@ public class UpdateRestaurantServlet extends HttpServlet {
 				restCategory.setIdct(categoria.getId());
 				categoryRestBD.add(restCategory);
 			}
-			RestaurantDAO apartamentoBD = new JDBCRestaurantDAOImpl();
-			apartamentoBD.setConnection(conn);
-			apartamentoBD.update(rest);
+			RestaurantDAO restaurantBD = new JDBCRestaurantDAOImpl();
+			restaurantBD.setConnection(conn);
+			restaurantBD.update(rest);
 			response.sendRedirect(request.getContextPath() + "/MyRestaurantsServlet.do?id="  + this.restaurant);
 
 		} else {
