@@ -184,13 +184,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>AddOrderServlet</display-name>
-    <servlet-name>AddOrderServlet</servlet-name>
-    <servlet-class>es.unex.pi.controller.AddOrderServlet</servlet-class>
+    <display-name>LoadReviewsServlet</display-name>
+    <servlet-name>LoadReviewsServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.LoadReviewsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AddOrderServlet</servlet-name>
-    <url-pattern>/AddOrderServlet.do</url-pattern>
+    <servlet-name>LoadReviewsServlet</servlet-name>
+    <url-pattern>/LoadReviewsServlet.do</url-pattern>
   </servlet-mapping>
       <filter>
     <display-name>RestaurantFilter</display-name>

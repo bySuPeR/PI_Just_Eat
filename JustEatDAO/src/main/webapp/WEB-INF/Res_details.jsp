@@ -49,12 +49,15 @@
 						</div>
 					</c:forEach>
 				</div>
-				<c:if test = "${restaurant.idu eq requestScope.currentUser.id}">
+				<c:if test = "${restaurant.idu eq currentUser.id}">
 					<a class = "manage-restaurant" id = "back-to-my-restaurants" href = "<c:url value = 'MyRestaurantsServlet.do'/>">My Restaurants</a>
+					<a class = "manage-restaurant" id = "manage-reviews" href = "<c:url value = 'LoadReviewsServlet.do?id=${restaurant.id}'/>">Check reviews</a>
 				</c:if>
-				<c:if test = "${restaurant.idu ne requestScope.currentUser.id}">
+				<c:if test = "${restaurant.idu ne currentUser.id}">
 					<a class = "manage-restaurant" id = "back-to-my-restaurants" href = "<c:url value = 'SearchServlet.do'/>">Back</a>
+					<a class = "manage-restaurant" id = "manage-reviews" href = "<c:url value = 'LoadReviewsServlet.do?id=${restaurant.id}'/>">Rate this restaurant</a>
 				</c:if>
+				<a class = "manage-restaurant" id = "make-order-button" href = "<c:url value = 'MakeOrderServlet.do?id=${restaurant.id}'/>">Make order</a>
             </div>
         </div>
     </body>
