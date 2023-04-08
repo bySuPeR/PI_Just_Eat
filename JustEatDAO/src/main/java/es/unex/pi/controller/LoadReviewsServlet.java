@@ -9,6 +9,7 @@ import java.io.IOException;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import es.unex.pi.model.Restaurant;
 import es.unex.pi.model.Restaurant_User;
@@ -42,6 +43,9 @@ public class LoadReviewsServlet extends HttpServlet {
 		Restaurant_UserDAO restaurantUserDAO = new JDBCRestaurant_UserDAOImpl ();
 		UserDAO userDAO = new JDBCUserDAOImpl ();
 		
+		User currentUser = (User) request.getSession ().getAttribute ("user");
+		request.setAttribute ("currentUser", currentUser);
+		
 		restaurantDAO.setConnection (conn);
 		long resID = Long.parseLong (request.getParameter ("id"));
 		Restaurant currentRestaurant = restaurantDAO.get (resID);
@@ -52,12 +56,11 @@ public class LoadReviewsServlet extends HttpServlet {
 		request.setAttribute ("reviewList", restaurantUserList);
 		
 		userDAO.setConnection (conn);
+		HashMap <Long, User> map = new HashMap <Long, User> ();
 		for (Restaurant_User ru: restaurantUserList) {
-			request.setAttribute ("user", userDAO.get (ru.getIdu ()));
+			map.put (ru.getIdu (), userDAO.get (ru.getIdu ()));
+			request.setAttribute ("userReview", map.get (ru.getIdu ()));
 		}
-		
-		User currentUser = (User) request.getSession ().getAttribute ("user");
-		request.setAttribute ("currentUser", currentUser);
 		
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/LoadReviews.jsp");
 		view.forward (request, response);
@@ -70,5 +73,6 @@ public class LoadReviewsServlet extends HttpServlet {
 		/*TODO Coger con el getParameter el ID del restaurante y el ID del usuario es que el está en sesión*/
 		
 		//Devolver a la página de reviews para ver que se ha añadido.
+		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?id=" + request.getParameter ("id"));
 	}
 }

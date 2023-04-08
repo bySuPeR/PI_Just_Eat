@@ -192,7 +192,7 @@
     <servlet-name>LoadReviewsServlet</servlet-name>
     <url-pattern>/LoadReviewsServlet.do</url-pattern>
   </servlet-mapping>
-      <filter>
+  <filter>
     <display-name>RestaurantFilter</display-name>
     <filter-name>RestaurantFilter</filter-name>
     <filter-class>es.unex.pi.filter.RestaurantFilter</filter-class>
@@ -201,7 +201,7 @@
     <filter-name>RestaurantFilter</filter-name>
     <url-pattern>/RestaurantFilter</url-pattern>
   </filter-mapping>
-    <filter>
+  <filter>
     <display-name>DishFilter</display-name>
     <filter-name>DishFilter</filter-name>
     <filter-class>es.unex.pi.filter.DishFilter</filter-class>
@@ -209,5 +209,15 @@
   <filter-mapping>
     <filter-name>DishFilter</filter-name>
     <url-pattern>/DishFilter</url-pattern>
-  </filter-mapping> 
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateReviewServlet</display-name>
+    <servlet-name>UpdateReviewServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.UpdateReviewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateReviewServlet</servlet-name>
+    <url-pattern>/UpdateReviewServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>
