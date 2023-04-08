@@ -21,7 +21,6 @@
                 		<h2>${dish.price}€</h2>
                 	</div>
                 </c:forEach>
-                <a class = "login-button" href = "<c:url value = "NewOrderServlet.do"/>">Make new orders</a>
                 <a class = "delete-link" href = "<c:url value = "MyOrdersServlet.do"/>">Go back to My Orders</a>
             </div>
         </div>

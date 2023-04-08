@@ -68,7 +68,7 @@
 	background-color: hsl(var(--button-hsl));
 	border-radius: 100px;
 	color: white;
-	padding: 10px;
+	padding: .5%;
 	width: 15vw;
 	text-align: center;
 	cursor: pointer;
@@ -96,10 +96,17 @@
 	border-radius: 100px;
 }
 
-#back-to-my-restaurants {
+#manage-reviews, #back-to-my-restaurants {
 	position: absolute;
 	margin-top: 90vh;
+}
+
+#back-to-my-restaurants {
 	margin-left: 1vw;
+}
+
+#manage-reviews {
+	margin-left: 40vw;
 }
 
 .order-buttons {
@@ -109,5 +116,6 @@
 }
 
 #make-order-button {
-	margin-top: 80vh;
+	margin-left: 82vw;
+	margin-top: 48vh;
 }

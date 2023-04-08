@@ -32,11 +32,11 @@ public class MakeOrderServlet extends HttpServlet {
 	protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = (Connection) getServletContext ().getAttribute ("dbConn");
 		RestaurantDAO restaurantDAO = new JDBCRestaurantDAOImpl ();
+		DishDAO dishDAO = new JDBCDishDAOImpl ();
 		restaurantDAO.setConnection (conn);
+		dishDAO.setConnection (conn);
 		
-		request.setAttribute ("show", false);
-		request.setAttribute ("restaurantList", restaurantDAO.getAll ());
-		
+		request.setAttribute ("dishList", dishDAO.getAllByRestaurant (Long.parseLong (request.getParameter ("id"))));
 		RequestDispatcher vista = request.getRequestDispatcher("/WEB-INF/NewOrder.jsp");
 		vista.forward(request, response);
 	}
@@ -45,22 +45,9 @@ public class MakeOrderServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Connection conn = (Connection) getServletContext ().getAttribute ("dbConn");
-		RestaurantDAO restaurantDAO = new JDBCRestaurantDAOImpl ();
-		DishDAO dishDAO = new JDBCDishDAOImpl ();
-		restaurantDAO.setConnection (conn);
-		dishDAO.setConnection (conn);
+		/*Añadir el pedido a la Base de Datos*/
 		
-		String restaurantOption = request.getParameter ("restaurant-option");
-		
-		if (!restaurantOption.equals ("Select...")) {
-			request.setAttribute ("show", true);
-			request.setAttribute ("dishList", dishDAO.getAllByRestaurant (restaurantDAO.getByName (restaurantOption).getId ()));
-			RequestDispatcher vista = request.getRequestDispatcher("/WEB-INF/NewOrder.jsp");
-			vista.forward(request, response);
-		}
-		else {
-			response.sendRedirect (request.getContextPath () + "/MakeOrderServlet.do");
-		}
+		//Devuelve a la pantalla de los pedidos para ver que se ha añadido.
+		response.sendRedirect (request.getContextPath () + "/MyOrdersServlet.do");
 	}
 }
