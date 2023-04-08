@@ -42,8 +42,8 @@ public interface OrderDAO {
 	 */
 	
 	public Order get (long idu, int totalPrice);
-
-
+	
+	
 	/**
 	 * Gets all the orderes from the database.
 	 * 
@@ -51,6 +51,15 @@ public interface OrderDAO {
 	 */
 	
 	public ArrayList <Order> getAll ();
+	
+	
+	/**
+	 * Gets all the the orders that are made by the specified user.
+	 * @param idu: the user ID
+	 * @return ArrayList of all the orders that are made by the user.
+	 */
+	
+	public ArrayList <Order> getAllByUser (long idu);
 	
 
 	/**

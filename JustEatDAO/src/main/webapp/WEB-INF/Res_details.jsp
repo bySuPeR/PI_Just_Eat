@@ -43,18 +43,20 @@
 					<c:forEach var = "dish" items = "${dishList}">
 						<div class = "individual-dish">
 							<h2>${dish.name}
-								<span class = "number-value">${dish.price}</span>
+								<span class = "number-value">${dish.price}€</span>
 							</h2>
 							<h3>${dish.description}</h3>
 						</div>
 					</c:forEach>
 				</div>
 				<c:if test = "${restaurant.idu eq requestScope.currentUser.id}">
-					<a class = "manage-restaurant" id = "back-to-my-restaurants" href = "<c:url value = 'MyRestaurantsServlet.do'/>">Back to My Restaurants</a>
+					<a class = "manage-restaurant" id = "back-to-my-restaurants" href = "<c:url value = 'MyRestaurantsServlet.do'/>">My Restaurants</a>
 				</c:if>
 				<c:if test = "${restaurant.idu ne requestScope.currentUser.id}">
 					<a class = "manage-restaurant" id = "back-to-my-restaurants" href = "<c:url value = 'SearchServlet.do'/>">Back</a>
 				</c:if>
+				<a class = "order-buttons" href = "<c:url value = 'MakeOrderServlet.do'/>" id = "make-order-button">Make order</a>
+				<a class = "order-buttons" href = "<c:url value = 'MyOrdersServlet.do'/>">My orders</a>
             </div>
         </div>
     </body>

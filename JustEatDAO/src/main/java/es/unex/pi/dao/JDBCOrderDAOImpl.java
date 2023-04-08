@@ -72,6 +72,7 @@ public class JDBCOrderDAOImpl implements OrderDAO {
 		return order;
 	}
 	
+	@Override
 	public ArrayList <Order> getAll () {
 		if (conn == null) {
 			return null;
@@ -93,6 +94,35 @@ public class JDBCOrderDAOImpl implements OrderDAO {
 				
 				orders.add (order);
 				logger.info ("fetching Orders: " + order.getId () + ", " + order.getIdu () + ", " + order.getTotalPrice ());
+			}
+		}
+		catch (SQLException e) {
+			e.printStackTrace ();
+		}
+		return orders;
+	}
+	
+	@Override
+	public ArrayList <Order> getAllByUser (long idu) {
+		if (conn == null) {
+			return null;
+		}
+		Order order = null;
+		ArrayList <Order> orders = null;
+		String query = "SELECT * FROM 'Order' WHERE idu = ?";
+		try {
+			PreparedStatement stmt = this.conn.prepareStatement (query);
+			stmt.clearParameters ();
+			stmt.setLong (1, idu);
+			ResultSet rs = stmt.executeQuery ();
+			orders = new ArrayList <Order> ();
+			while (rs.next ()) {
+				order = new Order ();
+				order.setId (rs.getLong ("id"));
+				order.setIdu (rs.getLong ("idu"));
+				order.setTotalPrice (rs.getInt ("totalPrice"));
+				orders.add (order);
+				logger.info ("Fetching Orders by User (" + idu + "): " + order.getId ());
 			}
 		}
 		catch (SQLException e) {
