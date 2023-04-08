@@ -63,7 +63,7 @@
 	font-size: 25px;
 }
 
-.manage-restaurant {
+.manage-restaurant, .order-buttons {
 	text-decoration: none;
 	background-color: hsl(var(--button-hsl));
 	border-radius: 100px;
@@ -74,7 +74,7 @@
 	cursor: pointer;
 }
 
-.manage-restaurant:hover {
+.manage-restaurant:hover, .order-buttons:hover {
 	opacity: 0.7;
 }
 
@@ -100,4 +100,14 @@
 	position: absolute;
 	margin-top: 90vh;
 	margin-left: 1vw;
+}
+
+.order-buttons {
+	position: absolute;
+	margin-left: 82vw;
+	margin-top: 90vh;
+}
+
+#make-order-button {
+	margin-top: 80vh;
 }

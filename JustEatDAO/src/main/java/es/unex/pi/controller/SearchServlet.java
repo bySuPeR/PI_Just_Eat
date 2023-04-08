@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.List;
 
 import es.unex.pi.dao.RestaurantDAO;
 import es.unex.pi.model.Restaurant;

@@ -144,4 +144,14 @@
     <servlet-name>StateServlet</servlet-name>
     <url-pattern>/StateServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyOrdersServlet</display-name>
+    <servlet-name>MyOrdersServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.MyOrdersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyOrdersServlet</servlet-name>
+    <url-pattern>/MyOrdersServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>
