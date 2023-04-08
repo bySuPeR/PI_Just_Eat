@@ -15,7 +15,7 @@
             <div class = "login-container">
                 <h1 class = "login-title">Manage your dishes</h1>
                 <c:forEach var = "dish" items = "${dishList}">
-                	<form class = "form" action = "UpdateDishesServlet.do?id=${dish.id}" method = "post">
+                	<form class = "form" action = "UpdateDishesServlet.do?P=${dish.id}" method = "post">
                 		<div class = "invidivual-dish-input">
                 			<div class = "input-group">
                 				<label for = "name">Name</label>

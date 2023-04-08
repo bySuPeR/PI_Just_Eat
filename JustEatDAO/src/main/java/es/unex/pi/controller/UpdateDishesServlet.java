@@ -69,7 +69,7 @@ public class UpdateDishesServlet extends HttpServlet {
 		
 		/*TODO Actualizar los valores en la Base de Datos*/
 		Connection conn = (Connection) getServletContext ().getAttribute ("dbConn");
-		this.dish = Long.parseLong (request.getParameter ("id"));
+		this.dish = Long.parseLong (request.getParameter ("P"));
 		DishDAO dishBD = new JDBCDishDAOImpl();
 		dishBD.setConnection (conn);
 		Dish currentDish = dishBD.get (this.dish);
