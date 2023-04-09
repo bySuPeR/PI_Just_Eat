@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import es.unex.pi.model.User;
 import es.unex.pi.model.Order_Dish;
+import es.unex.pi.model.Restaurant;
 import es.unex.pi.model.Dish;
 import es.unex.pi.dao.OrderDAO;
 import es.unex.pi.dao.Order_DishDAO;
@@ -66,13 +67,22 @@ public class MyOrdersServlet extends HttpServlet {
 		orderDishDAO.setConnection (conn);
 		dishDAO.setConnection (conn);
 		restaurantDAO.setConnection (conn);
+		Dish dish = new Dish();
+		long idRestaurant=-1;
+		String restaurant="";
+		Restaurant rest = new Restaurant(); 
 		
 		ArrayList <Order_Dish> orderDishList = orderDishDAO.getAllByOrder (Long.parseLong (request.getParameter ("id")));
 		ArrayList <Dish> dishList = new ArrayList <Dish> ();
 		for (Order_Dish od: orderDishList) {
-			dishList.add (dishDAO.get (od.getIddi ()));
+			dish = dishDAO.get (od.getIddi ());
+			dishList.add (dish);
+			idRestaurant=dish.getIdr();
+			rest = restaurantDAO.get(idRestaurant);
+			restaurant=rest.getName();
 		}
 		request.setAttribute ("dishList", dishList);
+		request.setAttribute ("restaurant", restaurant);
 		
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/CheckOrder.jsp");
 		view.forward (request, response);

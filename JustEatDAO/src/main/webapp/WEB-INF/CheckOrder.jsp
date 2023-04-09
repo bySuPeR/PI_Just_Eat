@@ -14,13 +14,14 @@
         <div class = "full-screen-container">
             <div class = "login-container">
                 <h1 class = "login-title">This is what you asked</h1>
+                <h2>${restaurant}</h1>
+                <div class = "order-container">
                 <c:forEach var = "dish" items = "${dishList}">
-                	<div class = "order-container">
-                		<h3>${dish.name}</h3>
-                		<h3>${dish.description}</h3>
-                		<h2>${dish.price}€</h2>
-                	</div>
+                	
+                		<h3>${dish.name} ${dish.price}€</h3>
+                	
                 </c:forEach>
+                </div>
                 <a class = "login-button" href = "<c:url value = "NewOrderServlet.do"/>">Make new orders</a>
                 <a class = "delete-link" href = "<c:url value = "MyOrdersServlet.do"/>">Go back to My Orders</a>
             </div>
