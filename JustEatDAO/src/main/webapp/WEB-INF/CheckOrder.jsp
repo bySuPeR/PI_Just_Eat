@@ -14,7 +14,7 @@
         <div class = "full-screen-container">
             <div class = "login-container">
                 <h1 class = "login-title">This is what you asked</h1>
-                <h2>${restaurant}</h1>
+                <h2>${restaurant}</h2>
                 <div class = "order-container">
                 <c:forEach var = "dish" items = "${dishList}">
                 	
