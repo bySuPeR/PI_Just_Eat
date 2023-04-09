@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import es.unex.pi.util.Triplet;
+
 import es.unex.pi.model.Restaurant;
 import es.unex.pi.model.Restaurant_User;
 import es.unex.pi.model.User;
@@ -53,10 +55,11 @@ public class LoadReviewsServlet extends HttpServlet {
 		restaurantUserDAO.setConnection (conn);
 		userDAO.setConnection (conn);
 		ArrayList <Restaurant_User> restaurantUserList = restaurantUserDAO.getAllByRestaurant (resID);
-		request.setAttribute ("reviewList", restaurantUserList);
+		ArrayList <Triplet <User, Restaurant_User, Restaurant>> triplet = new ArrayList <Triplet <User, Restaurant_User, Restaurant>> ();
 		for (Restaurant_User ru: restaurantUserList) {
-			request.setAttribute ("userName", userDAO.get (ru.getIdu ()).getName ());
+			triplet.add (new Triplet<User, Restaurant_User, Restaurant> (userDAO.get (ru.getIdu ()), ru, restaurantDAO.get (ru.getIdr ())));
 		}
+		request.setAttribute ("reviewList", triplet);
 		
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/LoadReviews.jsp");
 		view.forward (request, response);
