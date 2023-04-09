@@ -20,7 +20,7 @@
                 		</h1>
                 		<h2>${singleReview.second.review}</h2>
                 		<c:if test = "${currentUser.id eq singleReview.second.idu}">
-                			<a class = "delete-link" id = "update-review" href = "<c:url value = 'UpdateReviewServlet.do?id=${singleReview.third.id}'/>">Update review</a>
+                			<a class = "delete-link" id = "update-review" href = "<c:url value = 'UpdateReviewServlet.do?idR=${singleReview.third.id}&idU=${currentUser.id}'/>">Update review</a>
                 		</c:if>
                 	</div>
                 </c:forEach>

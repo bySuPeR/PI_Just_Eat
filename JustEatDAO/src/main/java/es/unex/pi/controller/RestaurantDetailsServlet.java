@@ -43,9 +43,10 @@ public class RestaurantDetailsServlet extends HttpServlet {
 		User currentUser = (User) request.getSession ().getAttribute ("user");
 		request.setAttribute ("currentUser", currentUser);
 		
+		
+		
 		dishDAO.setConnection (conn);
 		request.setAttribute ("dishList", dishDAO.getAllByRestaurant (currentRestaurant.getId ()));
-		
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/Res_details.jsp");
 		view.forward (request, response);
 	}

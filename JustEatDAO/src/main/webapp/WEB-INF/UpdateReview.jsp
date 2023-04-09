@@ -13,7 +13,7 @@
         <div class = "full-screen-container">
             <div class = "login-container">
                 <h1 class = "login-title">Update your review</h1>
-                <form class = "form" action = "UpdateReviewServlet.do?id=${comment.idr}" method = "post">
+                <form class = "form" action = "UpdateReviewServlet.do?idR=${comment.idr}&idU=${user.id}" method = "post">
                 	<div class = "input-group">
                 		<label for = "review">Review</label>
                         <input type = "text" name = "review" value = "${comment.review}" required>
@@ -24,7 +24,7 @@
                 	</div>
                 	<input type = "submit" class = "login-button" value = "Update review">
                 </form>
-                <a class = "delete-link" href = "<c:url value = 'DeleteReviewServlet.do?id=${restaurant.id}'/>">Delete review</a>
+                <a class = "delete-link" href = "<c:url value = 'DeleteReviewServlet.do?idR=${restaurant.id}&idU=${user.id}'/>">Delete review</a>
                 <a class = "delete-link" href = "<c:url value = 'LoadReviewsServlet.do?id=${restaurant.id}'/>">Go back</a>
             </div>
         </div>

@@ -5,14 +5,25 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import java.sql.Connection;
+import java.util.List;
 
+import es.unex.pi.model.Category;
+import es.unex.pi.model.Restaurant;
+import es.unex.pi.model.Restaurant_Category;
+import es.unex.pi.model.Restaurant_User;
 import es.unex.pi.model.User;
 import es.unex.pi.dao.RestaurantDAO;
+import es.unex.pi.dao.Restaurant_CategoryDAO;
 import es.unex.pi.dao.Restaurant_UserDAO;
+import es.unex.pi.dao.CategoryDAO;
+import es.unex.pi.dao.JDBCCategoryDAOImpl;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
+import es.unex.pi.dao.JDBCRestaurant_CategoryDAOImpl;
 import es.unex.pi.dao.JDBCRestaurant_UserDAOImpl;
 
 /**
@@ -20,7 +31,7 @@ import es.unex.pi.dao.JDBCRestaurant_UserDAOImpl;
  */
 public class UpdateReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private long currentRestaurantID = -1;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,12 +49,12 @@ public class UpdateReviewServlet extends HttpServlet {
 		restaurantDAO.setConnection (conn);
 		restaurantUserDAO.setConnection (conn);
 		
-		long currentRestaurantID = Long.parseLong (request.getParameter ("id"));
+		currentRestaurantID = Long.parseLong (request.getParameter ("idR"));
 		request.setAttribute ("restaurant", restaurantDAO.get (currentRestaurantID));
 		User currentUser = (User) request.getSession ().getAttribute ("user");
 		
 		request.setAttribute ("comment", restaurantUserDAO.get (currentRestaurantID, currentUser.getId ()));
-		
+		request.setAttribute ("user", currentUser);
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/UpdateReview.jsp");
 		view.forward (request, response);
 	}
@@ -55,8 +66,22 @@ public class UpdateReviewServlet extends HttpServlet {
 		/* Actualiza la review. En la URL está el ID del restaurante al que pertenece la review
 		 * y el usuario que la hace es el que tiene la sesión.
 		 */
+		Connection conn = (Connection) getServletContext ().getAttribute ("dbConn");
+		Restaurant_UserDAO reviewBD = new JDBCRestaurant_UserDAOImpl();
+		reviewBD.setConnection(conn);
+		HttpSession sesion = request.getSession();
+		User SessionUser = (User) sesion.getAttribute("user"); 
+		Restaurant_User reviewUpdated =reviewBD.get(currentRestaurantID, SessionUser.getId());
+		String reviewText = request.getParameter("review");
+		double grade = Double.parseDouble(request.getParameter("grade"));
+		reviewUpdated.setReview(reviewText);
+		reviewUpdated.setGrade(grade);
+		reviewBD.update(reviewUpdated);
 		
-		//Tras actualizar, vuelve a cargar las reviews del restaurante.
-		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?id=" + request.getParameter ("id"));
+		
+		//Por el momento, vuelve a la página de los detalles del restaurante.
+	
+	//Tras actualizar, vuelve a cargar las reviews del restaurante.
+		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?id=" + request.getParameter ("idR"));
 	}
 }

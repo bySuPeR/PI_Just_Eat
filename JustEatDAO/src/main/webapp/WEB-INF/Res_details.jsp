@@ -36,7 +36,7 @@
 						<h1 class = "restaurant-text">Sorry, no orders now</h1>
 					</c:if>
 					<c:if test = "${restaurant.idu eq requestScope.currentUser.id}">
-						<a class = "manage-restaurant" href = "<c:url value = 'UpdateRestaurantServlet.do?id=${restaurant.id}'/>">Manage restaurant</a>
+						<a class = "manage-restaurant" href = "<c:url value = 'UpdateRestaurantServlet.do?idR=${restaurant.id}&idU=${currentUser.id}'/>">Manage restaurant</a>
 					</c:if>
 				</div>
 				<div class = "dishes-container">
