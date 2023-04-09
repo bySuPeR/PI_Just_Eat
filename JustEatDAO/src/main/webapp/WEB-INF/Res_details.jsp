@@ -22,6 +22,7 @@
 					<c:forEach var = "category" items = "${categoryList}">
 						<span class = "restaurant-text">${category.name} </span>
 					</c:forEach>
+					<h4 class = "restaurant-text">Prices: (min: ${restaurant.minPrice}€, max: ${restaurant.maxPrice}€)</h4>
 					<h1 class = "restaurant-text" id = "bike-parking-lot">Has bike parking lot?
 						<span class = "restaurant-text">
 							<c:if test = "${restaurant.bikeFriendly eq 1}">

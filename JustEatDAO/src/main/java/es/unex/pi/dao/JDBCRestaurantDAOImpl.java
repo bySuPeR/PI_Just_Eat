@@ -301,8 +301,8 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 				stmt.setInt (9, restaurant.getBikeFriendly ());
 				stmt.setInt (10, restaurant.getAvailable ());
 				stmt.setLong (11, restaurant.getIdu ());
-				stmt.setLong (12, restaurant.getId ());
 				stmt.setString (12, restaurant.getRestaurantPic ());
+				stmt.setLong (13, restaurant.getId ());
 				updatedRows = stmt.executeUpdate ();
 				if (updatedRows == 1) {
 					done = true;

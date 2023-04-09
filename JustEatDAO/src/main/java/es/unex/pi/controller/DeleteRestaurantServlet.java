@@ -5,16 +5,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
 
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
-import es.unex.pi.dao.JDBCUserDAOImpl;
 import es.unex.pi.dao.RestaurantDAO;
-import es.unex.pi.dao.UserDAO;
-import es.unex.pi.model.User;
 
 /**
  * Servlet implementation class DeleteRestaurantServlet
@@ -45,14 +41,13 @@ public class DeleteRestaurantServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*TODO Elimina el restaurant de la Base de Datos, así como todos sus platos*/
+		/*Elimina el restaurant de la Base de Datos, así como todos sus platos*/
 		//Hay un atributo privado en esta clase que es el ID del restaurante.
-	HttpSession sesion = request.getSession();
-	RestaurantDAO restBD = new JDBCRestaurantDAOImpl();
-	Connection conn = (Connection)getServletContext().getAttribute("dbConn");
-	restBD.setConnection(conn); //debes hacer una conexion por cada DAO!
-	restBD.delete(restaurant);
-	response.sendRedirect (request.getContextPath () + "/MyRestaurantsServlet.do");
-}
+		RestaurantDAO restBD = new JDBCRestaurantDAOImpl();
+		Connection conn = (Connection)getServletContext().getAttribute("dbConn");
+		restBD.setConnection(conn); //debes hacer una conexion por cada DAO!
+		restBD.delete(restaurant);
+		response.sendRedirect (request.getContextPath () + "/MyRestaurantsServlet.do");
+	}
 
 }

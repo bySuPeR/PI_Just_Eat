@@ -8,20 +8,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import java.sql.Connection;
-import java.util.List;
 
-import es.unex.pi.model.Category;
 import es.unex.pi.model.Dish;
 import es.unex.pi.model.Restaurant;
-import es.unex.pi.model.Restaurant_Category;
-import es.unex.pi.dao.CategoryDAO;
 import es.unex.pi.dao.DishDAO;
-import es.unex.pi.dao.JDBCCategoryDAOImpl;
 import es.unex.pi.dao.JDBCDishDAOImpl;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
-import es.unex.pi.dao.JDBCRestaurant_CategoryDAOImpl;
 import es.unex.pi.dao.RestaurantDAO;
-import es.unex.pi.dao.Restaurant_CategoryDAO;
 
 /**
  * Servlet implementation class UpdateDishesServlet
@@ -47,7 +40,7 @@ public class UpdateDishesServlet extends HttpServlet {
 		DishDAO dishDAO = new JDBCDishDAOImpl ();
 		
 		restaurantDAO.setConnection (conn);
-		this.restaurant = Long.parseLong (request.getParameter ("id"));
+		this.restaurant = Long.parseLong (request.getParameter ("idR"));
 		Restaurant currentRestaurant = restaurantDAO.get (this.restaurant);
 		request.setAttribute ("restaurant", currentRestaurant);
 		
@@ -63,20 +56,33 @@ public class UpdateDishesServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
-		 * TODO Actualiza la información de los platos en la Base de Datos
+		 * Actualiza la información de los platos en la Base de Datos
 		 * Existe un atributo privado en esta clase que mantiene el ID del restaurante al que pertenece el plato.
 		 */
 		
-		/*TODO Actualizar los valores en la Base de Datos*/
+		/*Actualizar los valores en la Base de Datos*/
 		Connection conn = (Connection) getServletContext ().getAttribute ("dbConn");
 		this.dish = Long.parseLong (request.getParameter ("P"));
 		DishDAO dishBD = new JDBCDishDAOImpl();
+		RestaurantDAO resDAO = new JDBCRestaurantDAOImpl ();
 		dishBD.setConnection (conn);
+		resDAO.setConnection (conn);
 		Dish currentDish = dishBD.get (this.dish);
+		currentDish.setDishPic (currentDish.getDishPic ());
 		currentDish.setName(request.getParameter("name"));
 		currentDish.setPrice(Integer.parseInt(request.getParameter("price")));
 		currentDish.setDescription(request.getParameter("description"));
+		
+		Restaurant res = resDAO.get (restaurant);
+		if (res.getMinPrice () > currentDish.getPrice ()) {
+			res.setMinPrice (currentDish.getPrice ());
+		}
+		if (res.getMaxPrice () < currentDish.getPrice ()) {
+			res.setMaxPrice (currentDish.getPrice ());
+		}
+		resDAO.update (res);
+		
 		dishBD.update(currentDish);
-		response.sendRedirect (request.getContextPath () + "/UpdateDishesServlet.do?id=" + this.restaurant);
+		response.sendRedirect (request.getContextPath () + "/UpdateDishesServlet.do?idR=" + this.restaurant);
 	}
 }

@@ -71,9 +71,10 @@ public class AddRestaurantServlet extends HttpServlet {
 		newRest.setTelephone(telephone);
 		newRest.setCity(city);
 		newRest.setContactEmail(contactEmail);
-		newRest.setGradesAverage(0.0);
-		newRest.setMinPrice(0);
-		newRest.setMaxPrice(100);
+		newRest.setGradesAverage (0.0);
+		newRest.setMinPrice (0);
+		newRest.setMaxPrice (0);
+		newRest.setRestaurantPic ("default.png");
 		
 		String option = request.getParameter("bike-friendly");
 		

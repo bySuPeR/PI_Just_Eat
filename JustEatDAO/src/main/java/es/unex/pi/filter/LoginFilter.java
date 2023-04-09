@@ -1,7 +1,6 @@
 package es.unex.pi.filter;
 
 import java.io.IOException;
-import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
 import jakarta.servlet.ServletException;
@@ -21,7 +20,6 @@ import jakarta.servlet.http.HttpSession;
 
 public class LoginFilter  implements jakarta.servlet.Filter {
 
-	private FilterConfig fc;
 
 	public void init(FilterConfig fc) {
 

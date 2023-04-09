@@ -55,10 +55,9 @@
 
 .restaurant-text {
 	font-size: 130%;
-}
-
-.restaurant-text {
 	color: brown;
+	margin-bottom: 0;
+	margin-top: 1vh;
 }
 
 #grade-average {

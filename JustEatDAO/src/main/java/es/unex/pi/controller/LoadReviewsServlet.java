@@ -55,14 +55,27 @@ public class LoadReviewsServlet extends HttpServlet {
 		Restaurant currentRestaurant = restaurantDAO.get (resID);
 		request.setAttribute ("restaurant", currentRestaurant);
 		
+		Triplet <User, Restaurant_User, Restaurant> avoid = null;
+		Triplet <User, Restaurant_User, Restaurant> singleComment = null;
 		restaurantUserDAO.setConnection (conn);
 		userDAO.setConnection (conn);
 		ArrayList <Restaurant_User> restaurantUserList = restaurantUserDAO.getAllByRestaurant (resID);
 		ArrayList <Triplet <User, Restaurant_User, Restaurant>> triplet = new ArrayList <Triplet <User, Restaurant_User, Restaurant>> ();
 		for (Restaurant_User ru: restaurantUserList) {
-			triplet.add (new Triplet<User, Restaurant_User, Restaurant> (userDAO.get (ru.getIdu ()), ru, restaurantDAO.get (ru.getIdr ())));
+			singleComment = new Triplet <User, Restaurant_User, Restaurant> (userDAO.get (ru.getIdu ()), ru, restaurantDAO.get (ru.getIdr ()));
+			if (ru.getIdu () == currentUser.getId ()) {
+				avoid = singleComment;
+			}
+			triplet.add (singleComment);
 		}
 		request.setAttribute ("reviewList", triplet);
+		
+		if (triplet.contains (avoid)) {
+			request.setAttribute ("addreview", false);
+		}
+		else {
+			request.setAttribute ("addreview", true);
+		}
 		
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/LoadReviews.jsp");
 		view.forward (request, response);
@@ -85,9 +98,27 @@ public class LoadReviewsServlet extends HttpServlet {
 		double grade = Double.parseDouble(request.getParameter("grade"));
 		newReview.setReview(reviewText);
 		newReview.setGrade(grade);
-		reviewBD.add(newReview);
+		reviewBD.add (newReview);
+		
+		RestaurantDAO resDAO = new JDBCRestaurantDAOImpl ();
+		resDAO.setConnection (conn);
+		Restaurant r = resDAO.get (resID);
+		ArrayList <Restaurant_User> reviews = reviewBD.getAllByRestaurant (resID);
+		double comments = 0.0;
+		for (Restaurant_User ru: reviews) {
+			comments += ru.getGrade ();
+		}
+		r.setGradesAverage (truncate (comments / reviews.size (), 1)); //Truncar con una cifra decimal
+		resDAO.update (r);
 		
 		//Devolver a la página de reviews para ver que se ha añadido.
 		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?id=" + request.getParameter ("id"));
+	}
+	
+	private double truncate (double number, int places) {
+		number = number * Math.pow (10, places);
+		number = Math.floor (number);
+		number = number / Math.pow (10, places);
+		return number;
 	}
 }

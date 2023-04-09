@@ -4,9 +4,6 @@ package es.unex.pi.filter;
 import java.io.IOException;
 import java.sql.Connection;
 
-import es.unex.pi.dao.RestaurantDAO;
-import es.unex.pi.dao.JDBCRestaurantDAOImpl;
-import es.unex.pi.model.Restaurant;
 import es.unex.pi.model.User;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -43,9 +40,7 @@ public class OrderFilter implements jakarta.servlet.Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		Connection conn = (Connection) filtro.getServletContext().getAttribute("dbConn");
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		long id = Long.parseLong(req.getParameter("id"));

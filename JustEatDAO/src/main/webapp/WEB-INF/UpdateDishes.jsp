@@ -34,7 +34,7 @@
                 		</div>
                 	</form>
                 </c:forEach>
-                <a id = "manage-dishes-link" href = "<c:url value = 'AddDishServlet.do?id=${restaurant.id}'/>">Add new dish</a>
+                <a id = "manage-dishes-link" href = "<c:url value = 'AddDishServlet.do?idR=${restaurant.id}'/>">Add new dish</a>
                 <p class = error>${requestScope.error}</p>
             </div>
         </div>

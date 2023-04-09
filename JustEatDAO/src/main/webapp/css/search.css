@@ -112,12 +112,15 @@ input[type=submit]:hover, input[type=button]:active {
 	max-width: 80vw;
     border-radius: var(--border-radius);
     display: grid;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: auto auto auto auto auto auto auto;
 }
 
 .single-category {
     height: 10vh;
     width: 10vw;
+    margin: 0;
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
 
 .single-category:hover {

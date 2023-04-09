@@ -14,6 +14,8 @@ import java.util.List;
 
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
 import es.unex.pi.dao.RestaurantDAO;
+import es.unex.pi.dao.JDBCCategoryDAOImpl;
+import es.unex.pi.dao.CategoryDAO;
 import es.unex.pi.model.Restaurant;
 
 import es.unex.pi.util.RestaurantComparator;
@@ -41,7 +43,8 @@ public class StateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = (Connection) getServletContext ().getAttribute("dbConn"); //conectar con bd
-		RestaurantDAO restBD = new JDBCRestaurantDAOImpl (); //objeto tipo Hosting con implementacion 
+		RestaurantDAO restBD = new JDBCRestaurantDAOImpl (); //objeto tipo Hosting con implementacion
+		CategoryDAO catDAO = new JDBCCategoryDAOImpl ();
 		
 		restBD.setConnection (conn);//establecer conexion con la BD
 		List <Restaurant> restaurantListBD = restBD.getAll ();
@@ -75,11 +78,13 @@ public class StateServlet extends HttpServlet {
 			Comparator <Restaurant> resComparator = new RestaurantComparator ();
 			restaurantList = restBD.getAll ();
 			Collections.sort (restaurantList, resComparator);
+			request.setAttribute ("reviews", "checked");
+			request.setAttribute ("restaurantList", restaurantList);
 		}
-		request.setAttribute ("reviews", "checked");
-		request.setAttribute ("restaurantList", restaurantList);
 		
 		//Recarga la página para ver los resultados.
+		catDAO.setConnection (conn);
+		request.setAttribute ("categoryList", catDAO.getAll ());
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/Search.jsp");
 		view.forward (request, response);
 	}

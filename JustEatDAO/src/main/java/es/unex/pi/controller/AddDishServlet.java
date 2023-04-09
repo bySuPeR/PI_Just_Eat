@@ -5,24 +5,16 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Connection;
 
-import es.unex.pi.dao.CategoryDAO;
 import es.unex.pi.dao.DishDAO;
-import es.unex.pi.dao.JDBCCategoryDAOImpl;
 import es.unex.pi.dao.JDBCDishDAOImpl;
-import es.unex.pi.dao.JDBCRestaurantDAOImpl;
-import es.unex.pi.dao.JDBCRestaurant_CategoryDAOImpl;
 import es.unex.pi.dao.RestaurantDAO;
-import es.unex.pi.dao.Restaurant_CategoryDAO;
-import es.unex.pi.model.Category;
+import es.unex.pi.dao.JDBCRestaurantDAOImpl;
 import es.unex.pi.model.Dish;
 import es.unex.pi.model.Restaurant;
-import es.unex.pi.model.Restaurant_Category;
-import es.unex.pi.model.User;
 
 /**
  * Servlet implementation class AddDishServlet
@@ -53,6 +45,7 @@ public class AddDishServlet extends HttpServlet {
 	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = (Connection) getServletContext().getAttribute("dbConn");
 		DishDAO dishBD = new JDBCDishDAOImpl(); // base de datos
+		RestaurantDAO resDAO = new JDBCRestaurantDAOImpl ();
 		dishBD.setConnection(conn);
 		
 		String name = request.getParameter("name");
@@ -63,13 +56,20 @@ public class AddDishServlet extends HttpServlet {
 		dish.setName(name);
 		dish.setPrice(price);
 		dish.setDescription(description);
-		HttpSession sesion = request.getSession();
 		dish.setIdr(restaurant);
+		dish.setDishPic ("default.jpg");
 		dishBD.add(dish);
 		
-		response.sendRedirect(request.getContextPath() + "/UpdateDishesServlet.do?id=" + restaurant);
+		Restaurant res = resDAO.get (restaurant);
+		if (res.getMinPrice () > dish.getPrice ()) {
+			res.setMinPrice (dish.getPrice ());
+		}
+		if (res.getMaxPrice () < dish.getPrice ()) {
+			res.setMaxPrice (dish.getPrice ());
+		}
+		resDAO.update (res);
 		
+		response.sendRedirect(request.getContextPath() + "/UpdateDishesServlet.do?idR=" + restaurant);
 	}
-
 }
 

@@ -10,20 +10,14 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import java.sql.Connection;
-import java.util.List;
+import java.util.ArrayList;
 
-import es.unex.pi.model.Category;
 import es.unex.pi.model.Restaurant;
-import es.unex.pi.model.Restaurant_Category;
 import es.unex.pi.model.Restaurant_User;
 import es.unex.pi.model.User;
 import es.unex.pi.dao.RestaurantDAO;
-import es.unex.pi.dao.Restaurant_CategoryDAO;
 import es.unex.pi.dao.Restaurant_UserDAO;
-import es.unex.pi.dao.CategoryDAO;
-import es.unex.pi.dao.JDBCCategoryDAOImpl;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
-import es.unex.pi.dao.JDBCRestaurant_CategoryDAOImpl;
 import es.unex.pi.dao.JDBCRestaurant_UserDAOImpl;
 
 /**
@@ -78,10 +72,27 @@ public class UpdateReviewServlet extends HttpServlet {
 		reviewUpdated.setGrade(grade);
 		reviewBD.update(reviewUpdated);
 		
+		RestaurantDAO resDAO = new JDBCRestaurantDAOImpl ();
+		resDAO.setConnection (conn);
+		Restaurant r = resDAO.get (currentRestaurantID);
+		ArrayList <Restaurant_User> reviews = reviewBD.getAllByRestaurant (currentRestaurantID);
+		double comments = 0.0;
+		for (Restaurant_User ru: reviews) {
+			comments += ru.getGrade ();
+		}
+		r.setGradesAverage (truncate (comments / reviews.size (), 1));
+		resDAO.update (r);
 		
 		//Por el momento, vuelve a la página de los detalles del restaurante.
 	
 	//Tras actualizar, vuelve a cargar las reviews del restaurante.
 		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?id=" + request.getParameter ("idR"));
+	}
+	
+	private double truncate (double number, int places) {
+		number = number * Math.pow (10, places);
+		number = Math.floor (number);
+		number = number / Math.pow (10, places);
+		return number;
 	}
 }

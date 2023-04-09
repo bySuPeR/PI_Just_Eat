@@ -19,14 +19,14 @@
             		<a href = "<c:url value = 'UpdateUserServlet.do'/>">No, go back</a>
             	</c:if>
             	<c:if test = "${requestScope.delete eq 1}">
-            		<form action = "DeleteRestaurantServlet.do" method = "post">
+            		<form action = "DeleteRestaurantServlet.do?idR=${resID}" method = "post">
             			<label>Are you sure you want to delete this restaurant?</label>
             			<input type = "submit" value = "Yes, delete">
             		</form>
             		<a href = "<c:url value = 'UpdateRestaurantServlet.do?id=${resID}'/>">No, go back</a>
             	</c:if>
             	<c:if test = "${requestScope.delete eq 2}">
-            		<form action = "DeleteDishServlet.do" method = "post">
+            		<form action = "DeleteDishServlet.do?id=${dishID}" method = "post">
             			<label>Are you sure you want to delete this dish?</label>
             			<input type = "submit" value = "Yes, delete">
             		</form>

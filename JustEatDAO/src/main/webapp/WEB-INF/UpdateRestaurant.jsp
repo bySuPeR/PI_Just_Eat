@@ -65,9 +65,9 @@
                     		<input type = "radio" value = "no-available" name = "available" ${noavailable}>
                     	</div>
                     </div>
-                    <a id = "manage-dishes-link" href = "<c:url value = 'UpdateDishesServlet.do?id=${restaurant.id}'/>">Manage dishes</a>
+                    <a id = "manage-dishes-link" href = "<c:url value = 'UpdateDishesServlet.do?idR=${restaurant.id}'/>">Manage dishes</a>
                     <button type = "submit" class = "login-button">Update restaurant</button>
-                    <a class = "delete-link" href = "<c:url value = 'DeleteRestaurantServlet.do?id=${restaurant.id}'/>">Delete restaurant</a>
+                    <a class = "delete-link" href = "<c:url value = 'DeleteRestaurantServlet.do?idR=${restaurant.id}'/>">Delete restaurant</a>
                 </form>
                 <p class = error>${requestScope.error}</p>
             </div>

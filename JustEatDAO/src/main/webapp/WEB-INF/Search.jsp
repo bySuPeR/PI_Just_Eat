@@ -28,11 +28,11 @@
                     <h4>Get what you want from our best restaurants</h4>
                 </div>
                 <div class = "categories-list">
-                	<form action = "Servlet.do" method = "post">
-                		<c:forEach var = "category" items = "${categoryList}">
-                			<input type = "submit" class = "single-category" value = "${category.name}">
-                		</c:forEach>
-                	</form>
+                	<c:forEach var = "category" items = "${categoryList}">
+                		<form action = "CategoryServlet.do?idC=${category.id}" method = "post">
+                				<input type = "submit" class = "single-category" value = "${category.name}">
+	                	</form>
+                	</c:forEach>
                 </div>
                 <form class = "restaurant-state-radio" action = "StateServlet.do" method = "post">
                 	<div class = "state-entry">

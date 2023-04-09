@@ -12,7 +12,6 @@ import java.sql.Connection;
 
 import es.unex.pi.dao.JDBCRestaurant_UserDAOImpl;
 import es.unex.pi.dao.Restaurant_UserDAO;
-import es.unex.pi.model.Restaurant_User;
 import es.unex.pi.model.User;
 
 /**

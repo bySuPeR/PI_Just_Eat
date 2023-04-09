@@ -10,9 +10,12 @@ import java.io.IOException;
 import es.unex.pi.model.Restaurant;
 import es.unex.pi.model.Category;
 import es.unex.pi.model.Restaurant_Category;
+import es.unex.pi.model.Dish;
 import es.unex.pi.dao.RestaurantDAO;
 import es.unex.pi.dao.CategoryDAO;
 import es.unex.pi.dao.Restaurant_CategoryDAO;
+import es.unex.pi.dao.DishDAO;
+import es.unex.pi.dao.JDBCDishDAOImpl;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
 import es.unex.pi.dao.JDBCCategoryDAOImpl;
 import es.unex.pi.dao.JDBCRestaurant_CategoryDAOImpl;
@@ -45,7 +48,7 @@ public class UpdateRestaurantServlet extends HttpServlet {
 		CategoryDAO categoryDAO = new JDBCCategoryDAOImpl ();
 		
 		restaurantDAO.setConnection (conn);
-		this.restaurant = Long.parseLong (request.getParameter ("id"));
+		this.restaurant = Long.parseLong (request.getParameter ("idR"));
 		Restaurant currentRestaurant = restaurantDAO.get (this.restaurant);
 		request.setAttribute ("restaurant", currentRestaurant);
 		
@@ -80,10 +83,11 @@ public class UpdateRestaurantServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*TODO Actualizar los valores en la Base de Datos*/
+		/*Actualizar los valores en la Base de Datos*/
 		Connection conn = (Connection) getServletContext ().getAttribute ("dbConn");
 		Restaurant rest = new Restaurant();
 		RestaurantDAO restaurantDAO = new JDBCRestaurantDAOImpl ();
+		DishDAO dishDAO = new JDBCDishDAOImpl ();
 		restaurantDAO.setConnection (conn);
 		Restaurant currentRestaurant = restaurantDAO.get (this.restaurant);
 		rest.setId(restaurant);
@@ -94,9 +98,9 @@ public class UpdateRestaurantServlet extends HttpServlet {
 		rest.setContactEmail(request.getParameter("contactEmail"));
 		String option = request.getParameter("bike-friendly");
 		if(option.equals("yes-bike-friendly-value")) {
-			rest.setBikeFriendly(1);
+			rest.setBikeFriendly (1);
 		}else {
-			rest.setBikeFriendly(0);
+			rest.setBikeFriendly (0);
 		}
 		String availability = request.getParameter ("available");
 		if (availability.equals ("yes-available")) {
@@ -106,10 +110,22 @@ public class UpdateRestaurantServlet extends HttpServlet {
 			rest.setAvailable (0);
 		}
 		
-		rest.setGradesAverage(currentRestaurant.getGradesAverage());
-		rest.setMinPrice(currentRestaurant.getMinPrice());
-		rest.setMaxPrice(currentRestaurant.getMaxPrice());
-		rest.setIdu(currentRestaurant.getIdu());
+		dishDAO.setConnection (conn);
+		ArrayList <Dish> dishList = dishDAO.getAllByRestaurant (this.restaurant);
+		int minPrice = Integer.MAX_VALUE;
+		int maxPrice = 0;
+		for (Dish d: dishList) {
+			if (d.getPrice () > maxPrice) {
+				maxPrice = d.getPrice ();
+			}
+			if (d.getPrice () < minPrice) {
+				minPrice = d.getPrice ();
+			}
+		}
+		rest.setMinPrice (minPrice);
+		rest.setMaxPrice (maxPrice);
+
+		rest.setIdu (currentRestaurant.getIdu ());
 		
 		if (request.getParameterValues("selectedCategory") != null) {
 			CategoryDAO categoryBD = new JDBCCategoryDAOImpl();
@@ -132,6 +148,7 @@ public class UpdateRestaurantServlet extends HttpServlet {
 				categoryRestBD.add(restCategory);
 			}
 			RestaurantDAO restaurantBD = new JDBCRestaurantDAOImpl();
+			
 			restaurantBD.setConnection(conn);
 			restaurantBD.update(rest);
 			response.sendRedirect(request.getContextPath() + "/MyRestaurantsServlet.do?id="  + this.restaurant);
@@ -141,8 +158,6 @@ public class UpdateRestaurantServlet extends HttpServlet {
 			request.setAttribute("error", error);
 			response.sendRedirect(request.getContextPath() + "/UpdateRestaurantServlet.do?id="  + this.restaurant);
 		}
-		
-		
 		//Por el momento, vuelve a la página de los detalles del restaurante.
 	}
 }

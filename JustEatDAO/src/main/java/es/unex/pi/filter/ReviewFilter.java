@@ -2,7 +2,6 @@ package es.unex.pi.filter;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.ArrayList;
 
 import es.unex.pi.dao.Restaurant_UserDAO;
 import es.unex.pi.dao.JDBCRestaurant_UserDAOImpl;
