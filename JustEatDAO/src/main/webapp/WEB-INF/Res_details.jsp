@@ -19,6 +19,9 @@
 					<h1 class = "restaurant-text">${restaurant.contactEmail}</h1>
 					<h1 class = "restaurant-text">${restaurant.telephone}</h1>
 					<h1 class = "restaurant-text">${restaurant.address}, ${restaurant.city}</h1>
+					<c:forEach var = "category" items = "${categoryList}">
+						<span class = "restaurant-text">${category.name} </span>
+					</c:forEach>
 					<h1 class = "restaurant-text" id = "bike-parking-lot">Has bike parking lot?
 						<span class = "restaurant-text">
 							<c:if test = "${restaurant.bikeFriendly eq 1}">
