@@ -17,7 +17,7 @@
                 <c:forEach var = "order" items = "${orderList}" varStatus="status">
    					<c:set var="nombreIndex" value="${status.index + 1}" />
    					<c:set var="nombreConcatenado" value="Pedido ${nombreIndex}" />
-                	<form action = "MyOrdersServlet.do?id=${order.id}" method = "post"
+                	<form action = "MyOrdersServlet.do?Or=${order.id}" method = "post"
                 			class = "invidivual-dish-input" id = "order-form">
                 		<h1>${nombreConcatenado}</h1>
                 		<h2>${order.totalPrice}€</h2>

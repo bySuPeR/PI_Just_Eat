@@ -90,7 +90,11 @@ public class AddOrderServlet extends HttpServlet {
 			newOrder.setId(idOrder);
 			orderBD.update(newOrder);
 		
-			response.sendRedirect (request.getContextPath () + "/MyOrdersServlet.do");
+		  	HttpSession session = request.getSession ();
+	    	User currentUser = (User) session.getAttribute ("user");
+	    	request.setAttribute ("user", currentUser);
+			
+			response.sendRedirect (request.getContextPath () + "/MyOrdersServlet.do?id=" + currentUser.getId());
 		}
 		else {
 			String error = "No se ha escogido ningún plato para este pedido";

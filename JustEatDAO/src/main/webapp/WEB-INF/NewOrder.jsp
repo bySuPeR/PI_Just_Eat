@@ -19,7 +19,7 @@
                 			<c:forEach var = "dish" items = "${dishList}">
                 				<div class = "category-container">
                 					<label for = "${dish.name}" class = "features-text">${dish.name}, ${dish.price}</label>
-                					<input type = "checkbox" value = "${dish.name}" name = "selectedDish">
+                					<input type = "checkbox" value = "${dish.id}" name = "selectedDish">
                 				</div>
                 			</c:forEach>
                 		</div>

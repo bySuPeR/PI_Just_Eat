@@ -50,6 +50,8 @@ public class MyOrdersServlet extends HttpServlet {
 		orderDAO.setConnection (conn);
 		request.setAttribute ("orderList", orderDAO.getAllByUser (currentUser.getId ()));
 		
+    	request.setAttribute ("user", currentUser);
+		
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/MyOrders.jsp");
 		view.forward (request, response);
 	}
@@ -72,7 +74,7 @@ public class MyOrdersServlet extends HttpServlet {
 		String restaurant="";
 		Restaurant rest = new Restaurant(); 
 		
-		ArrayList <Order_Dish> orderDishList = orderDishDAO.getAllByOrder (Long.parseLong (request.getParameter ("id")));
+		ArrayList <Order_Dish> orderDishList = orderDishDAO.getAllByOrder (Long.parseLong (request.getParameter ("Or")));
 		ArrayList <Dish> dishList = new ArrayList <Dish> ();
 		for (Order_Dish od: orderDishList) {
 			dish = dishDAO.get (od.getIddi ());

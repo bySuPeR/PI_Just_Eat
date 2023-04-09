@@ -5,6 +5,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import java.sql.Connection;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 
 import es.unex.pi.dao.RestaurantDAO;
 import es.unex.pi.model.Restaurant;
+import es.unex.pi.model.User;
 import es.unex.pi.dao.CategoryDAO;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
 import es.unex.pi.dao.JDBCCategoryDAOImpl;
@@ -43,6 +46,10 @@ public class SearchServlet extends HttpServlet {
     	
     	categoryDAO.setConnection (conn);
     	request.setAttribute ("categoryList", categoryDAO.getAll ());
+    	
+    	HttpSession session = request.getSession ();
+    	User currentUser = (User) session.getAttribute ("user");
+    	request.setAttribute ("user", currentUser);
     	
     	RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/Search.jsp");
 		view.forward (request, response);
