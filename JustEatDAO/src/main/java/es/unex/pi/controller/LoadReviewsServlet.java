@@ -5,6 +5,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import java.sql.Connection;
@@ -27,6 +29,7 @@ import es.unex.pi.dao.JDBCUserDAOImpl;
  */
 public class LoadReviewsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private long resID = -1;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,7 +51,7 @@ public class LoadReviewsServlet extends HttpServlet {
 		request.setAttribute ("currentUser", currentUser);
 		
 		restaurantDAO.setConnection (conn);
-		long resID = Long.parseLong (request.getParameter ("id"));
+		resID = Long.parseLong (request.getParameter ("id"));
 		Restaurant currentRestaurant = restaurantDAO.get (resID);
 		request.setAttribute ("restaurant", currentRestaurant);
 		
@@ -70,6 +73,19 @@ public class LoadReviewsServlet extends HttpServlet {
 	 */
 	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*TODO Coger con el getParameter el ID del restaurante y el ID del usuario es que el está en sesión*/
+		Connection conn = (Connection) getServletContext ().getAttribute ("dbConn");
+		Restaurant_UserDAO reviewBD = new JDBCRestaurant_UserDAOImpl();
+		reviewBD.setConnection(conn);
+		Restaurant_User newReview = new Restaurant_User();
+		newReview.setIdr(resID);
+		HttpSession sesion = request.getSession();
+		User SessionUser = (User) sesion.getAttribute("user"); 
+		newReview.setIdu(SessionUser.getId());
+		String reviewText = request.getParameter("review");
+		double grade = Double.parseDouble(request.getParameter("grade"));
+		newReview.setReview(reviewText);
+		newReview.setGrade(grade);
+		reviewBD.add(newReview);
 		
 		//Devolver a la página de reviews para ver que se ha añadido.
 		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?id=" + request.getParameter ("id"));
