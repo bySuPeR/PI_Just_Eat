@@ -7,6 +7,7 @@ public class Dish {
 	private int price;
 	private String description;
 	private long idr;
+	private String dishPic;
 
 	public long getId () {
 		return id;
@@ -46,5 +47,13 @@ public class Dish {
 
 	public void setIdr (long idr) {
 		this.idr = idr;
+	}
+	
+	public String getDishPic () {
+		return this.dishPic;
+	}
+	
+	public void setDishPic (String dishPic) {
+		this.dishPic = dishPic;
 	}
 }

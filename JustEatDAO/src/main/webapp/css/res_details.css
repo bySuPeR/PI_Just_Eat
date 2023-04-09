@@ -12,7 +12,6 @@
 }
 
 .restaurant-pic {
-    background: url(../images/burguertown-restaurante.jpg);
     background-size:cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -25,11 +24,20 @@
 .restaurant-container, .dishes-container {
 	position: absolute;
 	background-color: sandybrown;
-	border-radius: 100px;
+	border-radius: 10px;
 	border-width: 5px;
 	border-style: solid;
     border-color: white;
     margin-top: calc(calc(var(--main-page-height) / 2) - calc(var(--restaurant-container-height) / 2));
+}
+
+#dishPic {
+	margin: 0;
+	margin-top: .5vh;
+	margin-left: .5vw;
+	margin-right: .5vw;
+	max-width: 13vw;
+	border-radius: 10px;
 }
 
 .restaurant-container {
@@ -79,7 +87,7 @@
 }
 
 .dishes-container {
-	margin-left: calc(var(--main-page-width) / 2);
+	margin-left: calc(calc(var(--main-page-width) / 2) - 1vw);
 	display: grid;
 	grid-template-columns: auto auto auto;
 	justify-content: center;
@@ -93,7 +101,9 @@
 	background-color: hsl(var(--input-hsl));
 	padding-left: 2vw;
 	padding-right: 2vw;
-	border-radius: 100px;
+	border-radius: 10px;
+	max-width: 15vw;
+	height: auto;
 }
 
 #manage-reviews, #back-to-my-restaurants {

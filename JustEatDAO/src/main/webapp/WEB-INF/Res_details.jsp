@@ -11,7 +11,7 @@
     <body>
         <div class = "full-screen-container">
             <div class = "main-page-container">
-            	<div class = "restaurant-pic"></div>
+            	<img src = "images/${restaurant.restaurantPic}" class = "restaurant-pic">
 				<div class = "restaurant-container">
 					<h1 class = "restaurant-text">${restaurant.name}
 						<span class = "number-value" id = "grade-average">${restaurant.gradesAverage}</span>
@@ -45,6 +45,7 @@
 				<div class = "dishes-container">
 					<c:forEach var = "dish" items = "${dishList}">
 						<div class = "individual-dish">
+							<img src = "images/${dish.dishPic}" id = "dishPic">
 							<h2>${dish.name}
 								<span class = "number-value">${dish.price}€</span>
 							</h2>

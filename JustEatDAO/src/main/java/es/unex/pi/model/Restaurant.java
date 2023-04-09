@@ -14,6 +14,7 @@ public class Restaurant {
 	private int bikeFriendly;
 	private int available;
 	private long idu;
+	private String restaurantPic;
 	
 	public String getName () {
 		return name;
@@ -105,7 +106,16 @@ public class Restaurant {
 	public long getIdu () {
 		return idu;
 	}
+	
 	public void setIdu (long idu) {
 		this.idu = idu;
+	}
+	
+	public String getRestaurantPic () {
+		return this.restaurantPic;
+	}
+	
+	public void setRestaurantPic (String restaurantPic) {
+		this.restaurantPic = restaurantPic;
 	}
 }

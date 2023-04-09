@@ -36,6 +36,7 @@ public class JDBCDishDAOImpl implements DishDAO {
 				dish.setPrice (rs.getInt ("price"));
 				dish.setDescription (rs.getString ("description"));
 				dish.setIdr (rs.getLong ("idr"));
+				dish.setDishPic (rs.getString ("dishPic"));
 				logger.info ("fetching Dish by id: " + id + " -> " + dish.getId () + " " + dish.getName () + " " + dish.getDescription ());
 			}
 		}
@@ -66,6 +67,7 @@ public class JDBCDishDAOImpl implements DishDAO {
 				dish.setPrice (rs.getInt ("price"));
 				dish.setDescription (rs.getString ("description"));
 				dish.setIdr (rs.getLong ("idr"));
+				dish.setDishPic (rs.getString ("dishPic"));
 				logger.info("fetching Dish by name: " + dish.getId () + " " + dish.getName () + " " + dish.getDescription ());
 			}
 		}
@@ -96,7 +98,7 @@ public class JDBCDishDAOImpl implements DishDAO {
 				dish.setPrice (rs.getInt ("price"));
 				dish.setDescription (rs.getString ("description"));
 				dish.setIdr (rs.getLong ("idr"));
-				
+				dish.setDishPic (rs.getString ("dishPic"));
 				dishes.add(dish);
 				logger.info("fetching Dishes: " + dish.getId () + " " + dish.getName () + " " + dish.getDescription ());								
 			}
@@ -132,7 +134,7 @@ public class JDBCDishDAOImpl implements DishDAO {
 				dish.setPrice (rs.getInt ("price"));
 				dish.setDescription (rs.getString ("description"));
 				dish.setIdr (rs.getLong ("idr"));
-				
+				dish.setDishPic (rs.getString ("dishPic"));
 				dishes.add (dish);
 				logger.info ("fetching Dishes by text in the name: " + search + ": " + dish.getId () + " " + dish.getName () + " " + dish.getDescription ());
 			}
@@ -165,6 +167,7 @@ public class JDBCDishDAOImpl implements DishDAO {
 				dish.setPrice (rs.getInt ("price"));
 				dish.setDescription (rs.getString ("description"));
 				dish.setIdr (rs.getLong ("idr"));
+				dish.setDishPic (rs.getString ("dishPic"));
 				dishes.add (dish);
 				logger.info ("Fetching Dishes by restaurant (" + idr + "): " + dish.getName ());
 			}
@@ -194,7 +197,7 @@ public class JDBCDishDAOImpl implements DishDAO {
 				e.printStackTrace ();
 			}
 			
-			String query2 = "INSERT INTO Dish (name, price, description, idr) VALUES (?, ?, ?, ?)";
+			String query2 = "INSERT INTO Dish (name, price, description, idr, dishPic) VALUES (?, ?, ?, ?, ?)";
 			try {
 				stmt = this.conn.prepareStatement (query2);
 				stmt.clearParameters ();
@@ -202,6 +205,7 @@ public class JDBCDishDAOImpl implements DishDAO {
 				stmt.setInt (2, dish.getPrice ());
 				stmt.setString (3, dish.getDescription ());
 				stmt.setLong (4, dish.getIdr ());
+				stmt.setString (5, dish.getDishPic ());
 				updatedRows = stmt.executeUpdate ();				
 			}
 			catch (SQLException e) {
@@ -232,7 +236,7 @@ public class JDBCDishDAOImpl implements DishDAO {
 		int updatedRows = -1;
 		if (conn != null) {
 			PreparedStatement stmt = null;
-			String query = "UPDATE Dish SET name = ?, price = ?, description = ?, idr = ? WHERE id = ?";
+			String query = "UPDATE Dish SET name = ?, price = ?, description = ?, idr = ?, dishPic = ? WHERE id = ?";
 			try {
 				stmt = this.conn.prepareStatement (query);
 				stmt.clearParameters ();
