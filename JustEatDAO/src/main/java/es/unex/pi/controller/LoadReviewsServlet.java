@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import es.unex.pi.model.Restaurant;
 import es.unex.pi.model.Restaurant_User;
@@ -52,14 +51,11 @@ public class LoadReviewsServlet extends HttpServlet {
 		request.setAttribute ("restaurant", currentRestaurant);
 		
 		restaurantUserDAO.setConnection (conn);
+		userDAO.setConnection (conn);
 		ArrayList <Restaurant_User> restaurantUserList = restaurantUserDAO.getAllByRestaurant (resID);
 		request.setAttribute ("reviewList", restaurantUserList);
-		
-		userDAO.setConnection (conn);
-		HashMap <Long, User> map = new HashMap <Long, User> ();
 		for (Restaurant_User ru: restaurantUserList) {
-			map.put (ru.getIdu (), userDAO.get (ru.getIdu ()));
-			request.setAttribute ("userReview", map.get (ru.getIdu ()));
+			request.setAttribute ("userName", userDAO.get (ru.getIdu ()).getName ());
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/LoadReviews.jsp");

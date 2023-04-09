@@ -7,6 +7,8 @@ public class Restaurant_User {
 	private String review;
 	private Double grade;
 	
+	private User user;
+	
 	public long getIdr () {
 		return idr;
 	}
