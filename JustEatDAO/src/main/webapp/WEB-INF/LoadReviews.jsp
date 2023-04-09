@@ -15,14 +15,17 @@
                 <h1 class = "login-title">Welcome</h1>
                 <c:forEach var = "singleReview" items = "${reviewList}">
                 	<div class = "single-comment">
-                		<h1 class = "restaurant-text">${user.name}
-                			<span class = "number-value">${singleReview.grade}</span>
+                		<h1 class = "restaurant-text">${singleReview.first.name}
+                			<span class = "number-value">${singleReview.second.grade}</span>
                 		</h1>
-                		<h2>${singleReview.review}</h2>
+                		<h2>${singleReview.second.review}</h2>
+                		<c:if test = "${currentUser.id eq singleReview.second.idu}">
+                			<a class = "delete-link" id = "update-review" href = "<c:url value = 'UpdateReviewServlet.do?id=${singleReview.third.id}'/>">Update review</a>
+                		</c:if>
                 	</div>
                 </c:forEach>
                 <c:if test = "${currentUser.id ne restaurant.idu}">
-                	<form class = "form" action = "LoadReviewServlet.do?id=${restaurant.id}" method = "post">
+                	<form class = "form" action = "LoadReviewsServlet.do?id=${restaurant.id}" method = "post">
                 		<div class = "input-group">
                 			<label for = "review">Review</label>
                         	<input type = "text" name = "review" required>

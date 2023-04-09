@@ -32,6 +32,13 @@
             		</form>
             		<a href = "<c:url value = 'UpdateDishesServlet.do?id=${dishID}'/>">No, go back</a>
             	</c:if>
+            	<c:if test = "${requestScope.delete eq 3}">
+            		<form action = "DeleteReviewServlet.do?id=${resID}" method = "post">
+            			<label>Are you sure you want to delete this review?</label>
+            			<input type = "submit" value = "Yes, delete">
+            		</form>
+            		<a href = "<c:url value = 'UpdateReviewServlet.do?id=${resID}'/>">No, go back</a>
+            	</c:if>
             </div>
         </div>
     </body>

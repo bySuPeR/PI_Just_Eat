@@ -1,4 +1,9 @@
 @charset "UTF-8";
+
+.full-screen-container {
+	width: auto;
+}
+
 .login-container {
     --color: hsl(var(--background-orange-hsl));
     background-color: var(--color);
@@ -65,7 +70,7 @@
     cursor: pointer;
 }
 
-.login-button {
+.login-button:hover {
 	background-color: hsl(var(--button-hsl), 0.5);
 }
 
@@ -98,4 +103,12 @@
 
 input[type=range] {
 	cursor: pointer;
+}
+
+#update-review {
+	color: blue;
+}
+
+#update-review:hover {
+	color: hsl(240, 100%, 70%);
 }

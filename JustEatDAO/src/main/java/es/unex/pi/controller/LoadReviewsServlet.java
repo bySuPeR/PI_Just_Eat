@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import es.unex.pi.util.Triplet;
+
 import es.unex.pi.model.Restaurant;
 import es.unex.pi.model.Restaurant_User;
 import es.unex.pi.model.User;
@@ -42,22 +44,22 @@ public class LoadReviewsServlet extends HttpServlet {
 		Restaurant_UserDAO restaurantUserDAO = new JDBCRestaurant_UserDAOImpl ();
 		UserDAO userDAO = new JDBCUserDAOImpl ();
 		
+		User currentUser = (User) request.getSession ().getAttribute ("user");
+		request.setAttribute ("currentUser", currentUser);
+		
 		restaurantDAO.setConnection (conn);
 		long resID = Long.parseLong (request.getParameter ("id"));
 		Restaurant currentRestaurant = restaurantDAO.get (resID);
 		request.setAttribute ("restaurant", currentRestaurant);
 		
 		restaurantUserDAO.setConnection (conn);
-		ArrayList <Restaurant_User> restaurantUserList = restaurantUserDAO.getAllByRestaurant (resID);
-		request.setAttribute ("reviewList", restaurantUserList);
-		
 		userDAO.setConnection (conn);
+		ArrayList <Restaurant_User> restaurantUserList = restaurantUserDAO.getAllByRestaurant (resID);
+		ArrayList <Triplet <User, Restaurant_User, Restaurant>> triplet = new ArrayList <Triplet <User, Restaurant_User, Restaurant>> ();
 		for (Restaurant_User ru: restaurantUserList) {
-			request.setAttribute ("user", userDAO.get (ru.getIdu ()));
+			triplet.add (new Triplet<User, Restaurant_User, Restaurant> (userDAO.get (ru.getIdu ()), ru, restaurantDAO.get (ru.getIdr ())));
 		}
-		
-		User currentUser = (User) request.getSession ().getAttribute ("user");
-		request.setAttribute ("currentUser", currentUser);
+		request.setAttribute ("reviewList", triplet);
 		
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/LoadReviews.jsp");
 		view.forward (request, response);
@@ -70,5 +72,6 @@ public class LoadReviewsServlet extends HttpServlet {
 		/*TODO Coger con el getParameter el ID del restaurante y el ID del usuario es que el está en sesión*/
 		
 		//Devolver a la página de reviews para ver que se ha añadido.
+		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?id=" + request.getParameter ("id"));
 	}
 }
