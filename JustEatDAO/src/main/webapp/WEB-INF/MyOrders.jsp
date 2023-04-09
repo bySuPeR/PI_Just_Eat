@@ -14,9 +14,12 @@
         <div class = "full-screen-container">
             <div class = "login-container">
                 <h1 class = "login-title">Your orders</h1>
-                <c:forEach var = "order" items = "${orderList}">
+                <c:forEach var = "order" items = "${orderList}" varStatus="status">
+   					<c:set var="nombreIndex" value="${status.index + 1}" />
+   					<c:set var="nombreConcatenado" value="Pedido ${nombreIndex}" />
                 	<form action = "MyOrdersServlet.do?id=${order.id}" method = "post"
                 			class = "invidivual-dish-input" id = "order-form">
+                		<h1>${nombreConcatenado}</h1>
                 		<h2>${order.totalPrice}€</h2>
                 		<input type = "submit" class = "login-button" value = "Check it out">
                 	</form>
