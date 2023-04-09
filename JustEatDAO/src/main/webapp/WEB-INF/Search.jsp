@@ -45,7 +45,11 @@
                 	</div>
                 	<div class = "state-entry">
                 		<label class = "state-label" for = "state-value">No take orders</label>
-                		<input type = radio value = "no-take-orders" name = "state-value">${notakeorders}
+                		<input type = radio value = "no-take-orders" name = "state-value" ${notakeorders}>
+                	</div>
+                	<div class = "state-entry">
+                		<label class = "state-label" for = "state-value">Sort on reviews</label>
+                		<input type = "radio" value = "reviews" name = "state-value" ${reviews}>
                 	</div>
                 	<input type = "submit" value = "Search" class = "search-state">
                 </form>
