@@ -30,6 +30,7 @@
                         <input type = "password" name = "password" id = "password" value = "${user.password}" required>
                     </div>
                     <button type = "submit" class = "login-button">Update account</button>
+                    <a class = "delete-link" href = "<c:url value = 'LogOutServlet.do'/>">Log Out</a>
                     <a class = "delete-link" href = "<c:url value = 'DeleteUserServlet.do'/>">Delete account</a>
                 </form>
                 <p class = error>${requestScope.error}</p>

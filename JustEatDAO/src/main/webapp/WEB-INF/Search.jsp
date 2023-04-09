@@ -13,7 +13,7 @@
             <div class = "main-page-container">
             	<a class = "pages-link" id = "account-link" href = "<c:url value = 'UpdateUserServlet.do'/>">Account</a>
                 <a class = "pages-link" id = "my-restaurants-link" href = "<c:url value = 'MyRestaurantsServlet.do'/>">My Rests.</a>
-                <a class = "pages-link" id = "my-orders-link" href = "<c:url value = 'MyOrdersServlet.do'/>">My orders</a>
+                <a class = "pages-link" id = "my-orders-link" href = "<c:url value = 'MyOrdersServlet.do?id=${user.id}'/>">My orders</a>
                 <div class = "pic-container">
                 	<div class = "search-input-container">
                         <h1>Search for our best restaurants!</h1>

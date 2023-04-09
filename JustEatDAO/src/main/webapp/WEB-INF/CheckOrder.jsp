@@ -21,7 +21,8 @@
                 		<h3>${dish.name} ${dish.price}€</h3>
                 	
                 </c:forEach>
-                <a class = "delete-link" href = "<c:url value = "MyOrdersServlet.do"/>">Go back to My Orders</a>
+                </div>
+                <a class = "delete-link" href = "<c:url value = "MyOrdersServlet.do?id=${user.id}"/>">Go back to My Orders</a>
             </div>
         </div>
     </body>
