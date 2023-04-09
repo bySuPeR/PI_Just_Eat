@@ -229,6 +229,8 @@
   <servlet-mapping>
     <servlet-name>DeleteReviewServlet</servlet-name>
     <url-pattern>/DeleteReviewServlet.do</url-pattern>
+  </servlet-mapping>
+   <servlet>
     <display-name>LogOutServlet</display-name>
     <servlet-name>LogOutServlet</servlet-name>
     <servlet-class>es.unex.pi.controller.LogOutServlet</servlet-class>
