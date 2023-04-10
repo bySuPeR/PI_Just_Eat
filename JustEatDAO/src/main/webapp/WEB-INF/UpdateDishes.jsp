@@ -29,6 +29,11 @@
                 				<label for = "description">Description</label>
                 				<textarea name = "description" required>${dish.description}</textarea>
                 			</div>
+                			<div class = "input-group">	
+  								<label for="image">Take a picture: </label>
+  								<input type="file" id="image" name="image">
+  								<a class = "delete-link" href = "<c:url value = 'DeleteDishPictureServlet.do?P=${dish.id}'/>">Delete Picture</a>
+                    		</div>
                 			<a class = "delete-link" href = "<c:url value = 'DeleteDishServlet.do?id=${dish.id}'/>">Delete dish</a>
                     		<input type = "submit" class = "login-button" value = "Update dish" id = "update-dish">
                 		</div>

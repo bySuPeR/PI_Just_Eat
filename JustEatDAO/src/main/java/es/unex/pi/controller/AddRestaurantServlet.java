@@ -6,9 +6,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 
+import java.io.File;
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -23,6 +25,10 @@ import es.unex.pi.model.Category;
 import es.unex.pi.model.Restaurant;
 import es.unex.pi.model.Restaurant_Category;
 import es.unex.pi.model.User;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 /**
  * Servlet implementation class AddRestaurantServlet
@@ -74,7 +80,13 @@ public class AddRestaurantServlet extends HttpServlet {
 		newRest.setGradesAverage (0.0);
 		newRest.setMinPrice (0);
 		newRest.setMaxPrice (0);
-		newRest.setRestaurantPic ("default.png");
+		
+		String restaurantPic = request.getParameter("image");
+		if(!restaurantPic.equals("")&& restaurantPic != null) {
+			newRest.setRestaurantPic(restaurantPic);
+		}else {
+			newRest.setRestaurantPic ("default.png");
+		}
 		
 		String option = request.getParameter("bike-friendly");
 		

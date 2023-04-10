@@ -47,14 +47,15 @@ public class RestaurantFilter implements jakarta.servlet.Filter{
 		Connection conn = (Connection) filtro.getServletContext().getAttribute("dbConn");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		long id = Long.parseLong(req.getParameter("idR"));
+		long idR = Long.parseLong(req.getParameter("idR"));
+		long idU = Long.parseLong(req.getParameter("idU"));
 		HttpSession sesion = req.getSession(true);
 		RestaurantDAO restaurantBD = new JDBCRestaurantDAOImpl();
 		restaurantBD.setConnection(conn);
 
 		User user = (User) sesion.getAttribute("user");
-		Restaurant rest = restaurantBD.get(id);
-		if (user.getId() == rest.getIdu() && user != null) {
+		Restaurant rest = restaurantBD.get(idR);
+		if (user.getId() == rest.getIdu() && user != null && user.getId()== idU) {
 			chain.doFilter(request, response);
 		} else {
 			res.sendError(403);
