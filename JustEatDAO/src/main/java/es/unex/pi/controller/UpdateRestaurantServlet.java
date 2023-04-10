@@ -135,6 +135,9 @@ public class UpdateRestaurantServlet extends HttpServlet {
 				minPrice = d.getPrice ();
 			}
 		}
+		if (minPrice == Integer.MAX_VALUE) {
+			minPrice = 0;
+		}
 		rest.setMinPrice (minPrice);
 		rest.setMaxPrice (maxPrice);
 		rest.setGradesAverage(currentRestaurant.getGradesAverage());

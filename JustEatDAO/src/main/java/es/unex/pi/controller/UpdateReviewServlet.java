@@ -86,7 +86,7 @@ public class UpdateReviewServlet extends HttpServlet {
 		//Por el momento, vuelve a la página de los detalles del restaurante.
 	
 	//Tras actualizar, vuelve a cargar las reviews del restaurante.
-		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?id=" + request.getParameter ("idR"));
+		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?idR=" + request.getParameter ("idR"));
 	}
 	
 	private double truncate (double number, int places) {

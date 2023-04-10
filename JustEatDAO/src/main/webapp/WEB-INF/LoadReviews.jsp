@@ -25,7 +25,7 @@
                 	</div>
                 </c:forEach>
                 <c:if test = "${(currentUser.id ne restaurant.idu) and (addreview eq true)}">
-                	<form class = "form" action = "LoadReviewsServlet.do?id=${restaurant.id}" method = "post">
+                	<form class = "form" action = "LoadReviewsServlet.do?idR=${restaurant.id}" method = "post">
                 		<div class = "input-group">
                 			<label for = "review">Review</label>
                         	<input type = "text" name = "review" required>
@@ -33,7 +33,6 @@
                 		<div class = "input-group">
                 			<label for = "grade">Grade</label>
                         	<input type = "range" name = "grade" min = "1.0" max = "5.0" step = "0.1"  value = "5.0">
-                        	<output for = "grade" id = "valor-rango">5.0</output>
                 		</div>
                 		<input type = "submit" class = "login-button" value = "Add review">
                 	</form>

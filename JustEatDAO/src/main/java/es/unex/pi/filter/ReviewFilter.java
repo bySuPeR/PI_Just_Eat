@@ -41,8 +41,7 @@ public class ReviewFilter implements jakarta.servlet.Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		Connection conn = (Connection) filtro.getServletContext().getAttribute("dbConn");
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
@@ -58,7 +57,7 @@ public class ReviewFilter implements jakarta.servlet.Filter {
 		if( user.getId() == userid && user!=null && RestUser!=null) {
 			chain.doFilter(request, response);
 		} else {
-			res.sendError(403);
+			res.sendError (403);
 		}
 		
 	}

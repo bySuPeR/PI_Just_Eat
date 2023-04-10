@@ -51,7 +51,7 @@ public class LoadReviewsServlet extends HttpServlet {
 		request.setAttribute ("currentUser", currentUser);
 		
 		restaurantDAO.setConnection (conn);
-		resID = Long.parseLong (request.getParameter ("id"));
+		resID = Long.parseLong (request.getParameter ("idR"));
 		Restaurant currentRestaurant = restaurantDAO.get (resID);
 		request.setAttribute ("restaurant", currentRestaurant);
 		
@@ -112,7 +112,7 @@ public class LoadReviewsServlet extends HttpServlet {
 		resDAO.update (r);
 		
 		//Devolver a la página de reviews para ver que se ha añadido.
-		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?id=" + request.getParameter ("id"));
+		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?idR=" + request.getParameter ("idR"));
 	}
 	
 	private double truncate (double number, int places) {

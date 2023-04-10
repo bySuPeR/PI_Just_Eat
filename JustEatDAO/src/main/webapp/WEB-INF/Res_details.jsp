@@ -64,14 +64,8 @@
 						</div>
 					</c:forEach>
 				</div>
-				<c:if test = "${restaurant.idu eq currentUser.id}">
-					<a class = "manage-restaurant" id = "back-to-my-restaurants" href = "<c:url value = 'MyRestaurantsServlet.do'/>">My Restaurants</a>
-					<a class = "manage-restaurant" id = "manage-reviews" href = "<c:url value = 'LoadReviewsServlet.do?id=${restaurant.id}'/>">Check reviews</a>
-				</c:if>
-				<c:if test = "${restaurant.idu ne currentUser.id}">
-					<a class = "manage-restaurant" id = "back-to-my-restaurants" href = "<c:url value = 'SearchServlet.do'/>">Back</a>
-					<a class = "manage-restaurant" id = "manage-reviews" href = "<c:url value = 'LoadReviewsServlet.do?id=${restaurant.id}'/>">Rate this restaurant</a>
-				</c:if>
+				<a class = "manage-restaurant" id = "back-to-my-restaurants" href = "<c:url value = 'SearchServlet.do'/>">Back</a>
+				<a class = "manage-restaurant" id = "manage-reviews" href = "<c:url value = 'LoadReviewsServlet.do?idR=${restaurant.id}'/>">Rate this restaurant</a>
 				<a class = "manage-restaurant" id = "make-order-button" href = "<c:url value = 'MakeOrderServlet.do?id=${restaurant.id}'/>">Make order</a>
             	<h1 id = "related-title">You could also be interested in:</h1>
 				<form class = "restaurant-state-radio" action = "RelatedRestaurantsServlet.do?idR=${restaurant.id}" method = "post">

@@ -34,6 +34,8 @@ public class DeleteReviewServlet extends HttpServlet {
 		request.setAttribute ("delete", 3);
 		currentRestaurantID = Long.parseLong (request.getParameter ("idR"));
 		request.setAttribute ("resID", currentRestaurantID);
+		User currentUser = (User) request.getSession ().getAttribute ("user");
+		request.setAttribute ("user", currentUser);
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/ConfirmDelete.jsp");
 		view.forward (request, response);
 	}
@@ -51,6 +53,6 @@ public class DeleteReviewServlet extends HttpServlet {
 		request.setAttribute("user",SessionUser );
 		reviewBD.delete(currentRestaurantID, SessionUser.getId());
 		//Al hacerlo, vuelve a cargar la página de reviews del restaurante para ver que se ha actualizado.
-		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?id=" + request.getParameter ("id"));
+		response.sendRedirect (request.getContextPath () + "/LoadReviewsServlet.do?idR=" + request.getParameter ("idR"));
 	}
 }

@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.sql.Connection;
 
 import es.unex.pi.dao.DishDAO;
+import es.unex.pi.dao.RestaurantDAO;
 import es.unex.pi.dao.JDBCDishDAOImpl;
+import es.unex.pi.dao.JDBCRestaurantDAOImpl;
 
 /**
  * Servlet implementation class DeleteDishServlet
@@ -30,9 +32,17 @@ public class DeleteDishServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Connection conn = (Connection) getServletContext ().getAttribute ("dbConn");
+		RestaurantDAO resDAO = new JDBCRestaurantDAOImpl();
+		DishDAO dishDAO = new JDBCDishDAOImpl ();
+		resDAO.setConnection (conn);
+		dishDAO.setConnection (conn);
+		
 		request.setAttribute ("delete", 2);
 		this.dish = Long.parseLong (request.getParameter ("id"));
 		request.setAttribute("dishID", this.dish);
+		request.setAttribute ("resID", dishDAO.get (dish).getIdr ());
+		
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/ConfirmDelete.jsp");
 		view.forward (request, response);
 	}

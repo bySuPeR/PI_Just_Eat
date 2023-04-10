@@ -30,10 +30,10 @@
             			<label>Are you sure you want to delete this dish?</label>
             			<input type = "submit" value = "Yes, delete">
             		</form>
-            		<a href = "<c:url value = 'UpdateDishesServlet.do?id=${dishID}'/>">No, go back</a>
+            		<a href = "<c:url value = 'UpdateDishesServlet.do?idR=${resID}&idU=${user.id}'/>">No, go back</a>
             	</c:if>
             	<c:if test = "${requestScope.delete eq 3}">
-            		<form action = "DeleteReviewServlet.do?id=${resID}" method = "post">
+            		<form action = "DeleteReviewServlet.do?idR=${resID}&&idU=${user.id}" method = "post">
             			<label>Are you sure you want to delete this review?</label>
             			<input type = "submit" value = "Yes, delete">
             		</form>

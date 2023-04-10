@@ -51,7 +51,7 @@ public class DeleteUserServlet extends HttpServlet {
 			Connection conn = (Connection)getServletContext().getAttribute("dbConn");
 			usuarioBD.setConnection(conn); //debes hacer una conexion por cada DAO!
 			usuarioBD.delete(usuarioSesion.getId());
-			response.sendRedirect (request.getContextPath () + "/LoginServlet.do");
+			response.sendRedirect (request.getContextPath () + "/LogOutServlet.do");
 	}
 		
 }
