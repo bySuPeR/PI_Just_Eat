@@ -68,10 +68,19 @@ public class UpdateDishesServlet extends HttpServlet {
 		dishBD.setConnection (conn);
 		resDAO.setConnection (conn);
 		Dish currentDish = dishBD.get (this.dish);
-		currentDish.setDishPic (currentDish.getDishPic ());
 		currentDish.setName(request.getParameter("name"));
 		currentDish.setPrice(Integer.parseInt(request.getParameter("price")));
 		currentDish.setDescription(request.getParameter("description"));
+		
+		
+		String dishPic = request.getParameter("image");
+		if(!dishPic.equals("")&& dishPic != null) {
+			currentDish.setDishPic(dishPic);
+		}else {
+			currentDish.setDishPic ("default.png");
+		}
+		
+		
 		
 		Restaurant res = resDAO.get (restaurant);
 		if (res.getMinPrice () > currentDish.getPrice ()) {

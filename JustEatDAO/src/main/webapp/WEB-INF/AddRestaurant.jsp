@@ -34,6 +34,10 @@
                         <label for = "contactEmail">Email</label>
                         <input type = "email" name = "contactEmail" id = "email" required>
                     </div>
+                    <div class = "input-group">	
+  						<label for="image">Take a picture: </label>
+  						<input type="file" id="image" name="image">
+                    </div>
                     <div class = "input-group">
                     	<h2 class = "login-title" id = "bike-parking-question">What kind of food do you serve?</h2>
                     	<c:forEach var = "category" items = "${categoryList}">

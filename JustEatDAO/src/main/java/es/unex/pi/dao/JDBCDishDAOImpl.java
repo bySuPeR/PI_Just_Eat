@@ -244,9 +244,10 @@ public class JDBCDishDAOImpl implements DishDAO {
 				stmt.setInt(2, dish.getPrice ());
 				stmt.setString (3, dish.getDescription ());
 				stmt.setLong (4, dish.getIdr ());
-				stmt.setLong (5, dish.getId ());
+				stmt.setString (5, dish.getDishPic());
+				stmt.setLong (6, dish.getId ());
 				updatedRows = stmt.executeUpdate ();				
-				logger.info ("Updating Dish: " + dish.getId () + " " + dish.getName () + " " + dish.getDescription ());
+				logger.info ("Updating Dish: " + dish.getId () + " " + dish.getName () + " " + dish.getDescription () + " "+ dish.getDishPic());
 				if (updatedRows == 1) {
 					done = true;
 				}

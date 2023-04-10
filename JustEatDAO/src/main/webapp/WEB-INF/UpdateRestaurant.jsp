@@ -34,6 +34,12 @@
                         <label for = "contactEmail">Email</label>
                         <input type = "email" name = "contactEmail" id = "email" value = "${restaurant.contactEmail}" required>
                     </div>
+                    <div class = "input-group">	
+  						<label for="image">Take a picture: </label>
+  						<input type="file" id="image" name="image">
+  						<a class = "delete-link" href = "<c:url value = 'DeleteRestaurantPictureServlet.do?idR=${restaurant.id}&idU=${currentUser.id}'/>">Delete Picture</a>
+                    </div>
+                    
                     <div class = "input-group">
                     	<h2 class = "login-title" id = "bike-parking-question">What kind of food do you serve?</h2>
                     	<c:forEach var = "category" items = "${categoryList}">
@@ -67,7 +73,7 @@
                     </div>
                     <a id = "manage-dishes-link" href = "<c:url value = 'UpdateDishesServlet.do?idR=${restaurant.id}'/>">Manage dishes</a>
                     <button type = "submit" class = "login-button">Update restaurant</button>
-                    <a class = "delete-link" href = "<c:url value = 'DeleteRestaurantServlet.do?idR=${restaurant.id}'/>">Delete restaurant</a>
+                    <a class = "delete-link" href = "<c:url value = 'DeleteRestaurantServlet.do?idR=${restaurant.id}&idU=${currentUser.id}'/>">Delete restaurant</a>
                 </form>
                 <p class = error>${requestScope.error}</p>
             </div>

@@ -34,7 +34,7 @@ public class AddDishServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.restaurant = Long.parseLong (request.getParameter ("id"));
+		this.restaurant = Long.parseLong (request.getParameter ("idR"));
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/AddDish.jsp");
 		view.forward (request, response);
 	}
@@ -46,6 +46,7 @@ public class AddDishServlet extends HttpServlet {
 		Connection conn = (Connection) getServletContext().getAttribute("dbConn");
 		DishDAO dishBD = new JDBCDishDAOImpl(); // base de datos
 		RestaurantDAO resDAO = new JDBCRestaurantDAOImpl ();
+		resDAO.setConnection(conn);
 		dishBD.setConnection(conn);
 		
 		String name = request.getParameter("name");
@@ -57,7 +58,19 @@ public class AddDishServlet extends HttpServlet {
 		dish.setPrice(price);
 		dish.setDescription(description);
 		dish.setIdr(restaurant);
-		dish.setDishPic ("default.jpg");
+		
+		
+
+		String dishPic = request.getParameter("image");
+		if(!dishPic.equals("")&& dishPic != null) {
+			dish.setDishPic(dishPic);
+		}else {
+			dish.setDishPic ("default.png");
+		}
+		
+		
+		
+		
 		dishBD.add(dish);
 		
 		Restaurant res = resDAO.get (restaurant);

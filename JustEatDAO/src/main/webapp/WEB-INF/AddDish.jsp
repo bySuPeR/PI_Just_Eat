@@ -28,6 +28,10 @@
                 			<label for = "description">Description</label>
                 			<textarea name = "description" required></textarea>
                 		</div>
+                		<div class = "input-group">	
+  							<label for="image">Take a picture: </label>
+  							<input type="file" id="image" name="image">
+                    	</div>
                 	</div>
                 	<button type = "submit" class = "login-button">Add dish</button>
                 </form>

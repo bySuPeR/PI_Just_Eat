@@ -11,6 +11,7 @@ import java.sql.Connection;
 
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
 import es.unex.pi.dao.RestaurantDAO;
+import es.unex.pi.model.User;
 
 /**
  * Servlet implementation class DeleteRestaurantServlet
@@ -31,7 +32,7 @@ public class DeleteRestaurantServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute ("delete", 1);
-		this.restaurant = Long.parseLong (request.getParameter ("id"));
+		this.restaurant = Long.parseLong (request.getParameter ("idR"));
 		request.setAttribute("resID", this.restaurant);
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/ConfirmDelete.jsp");
 		view.forward (request, response);

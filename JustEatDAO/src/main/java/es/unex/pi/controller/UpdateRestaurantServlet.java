@@ -10,6 +10,7 @@ import java.io.IOException;
 import es.unex.pi.model.Restaurant;
 import es.unex.pi.model.Category;
 import es.unex.pi.model.Restaurant_Category;
+import es.unex.pi.model.User;
 import es.unex.pi.model.Dish;
 import es.unex.pi.dao.RestaurantDAO;
 import es.unex.pi.dao.CategoryDAO;
@@ -51,6 +52,9 @@ public class UpdateRestaurantServlet extends HttpServlet {
 		this.restaurant = Long.parseLong (request.getParameter ("idR"));
 		Restaurant currentRestaurant = restaurantDAO.get (this.restaurant);
 		request.setAttribute ("restaurant", currentRestaurant);
+		
+		User currentUser = (User) request.getSession ().getAttribute ("user");
+		request.setAttribute ("currentUser", currentUser);
 		
 		if (currentRestaurant.getBikeFriendly () == 1) {
 			request.setAttribute ("yesbikefriendly", "checked");
@@ -96,6 +100,15 @@ public class UpdateRestaurantServlet extends HttpServlet {
 		rest.setTelephone(request.getParameter("telephone"));
 		rest.setCity(request.getParameter("city"));
 		rest.setContactEmail(request.getParameter("contactEmail"));
+		
+		String restaurantPic = request.getParameter("image");
+		if(!restaurantPic.equals("")&& restaurantPic != null) {
+			rest.setRestaurantPic(restaurantPic);
+		}else {
+			rest.setRestaurantPic ("default.png");
+		}
+		
+		
 		String option = request.getParameter("bike-friendly");
 		if(option.equals("yes-bike-friendly-value")) {
 			rest.setBikeFriendly (1);
@@ -124,6 +137,7 @@ public class UpdateRestaurantServlet extends HttpServlet {
 		}
 		rest.setMinPrice (minPrice);
 		rest.setMaxPrice (maxPrice);
+		rest.setGradesAverage(currentRestaurant.getGradesAverage());
 
 		rest.setIdu (currentRestaurant.getIdu ());
 		

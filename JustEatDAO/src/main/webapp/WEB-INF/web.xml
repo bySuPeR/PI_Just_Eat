@@ -259,4 +259,23 @@
     <servlet-name>RelatedRestaurantsServlet</servlet-name>
     <url-pattern>/RelatedRestaurantsServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <display-name>DeleteRestaurantPictureServlet</display-name>
+    <servlet-name>DeleteRestaurantPictureServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.DeleteRestaurantPictureServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteRestaurantPictureServlet</servlet-name>
+    <url-pattern>/DeleteRestaurantPictureServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteDishPictureServlet</display-name>
+    <servlet-name>DeleteDishPictureServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.DeleteDishPictureServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteDishPictureServlet</servlet-name>
+    <url-pattern>/DeleteDishPictureServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>
