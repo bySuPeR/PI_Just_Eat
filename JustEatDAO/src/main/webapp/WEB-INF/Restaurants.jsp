@@ -22,6 +22,7 @@
                 <div class = "add-restaurant-div">
                 	<a class = "add-restaurant" href = "<c:url value = 'AddRestaurantServlet.do'/>">Add restaurant</a>
                 </div>
+                <a class = "delete-link" href = "<c:url value = "SearchServlet.do"/>">Go back to main page</a>
             </div>
         </div>
     </body>

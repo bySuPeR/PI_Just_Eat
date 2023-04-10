@@ -70,6 +70,7 @@
                     	</div>
                     </div>
                     <button type = "submit" class = "login-button">Create restaurant</button>
+                    <a class = "delete-link" href = "<c:url value = "MyRestaurantsServlet.do"/>">Go back to my restaurants page</a>
                 </form>
                 <p class = error>${requestScope.error}</p>
             </div>

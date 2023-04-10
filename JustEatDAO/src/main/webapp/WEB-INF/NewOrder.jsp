@@ -24,6 +24,7 @@
                 			</c:forEach>
                 		</div>
                 		<input class = "login-button" type = "submit" value = "Make order">
+                		<a class = "delete-link" href = "<c:url value = "RestaurantDetailsServlet.do?id=${resID}"/>">Go back to restaurant page</a>
                 	</form>
                 <p class = error>${requestScope.error}</p>
             </div>

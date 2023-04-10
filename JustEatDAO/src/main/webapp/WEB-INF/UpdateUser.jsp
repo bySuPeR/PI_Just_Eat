@@ -32,6 +32,7 @@
                     <button type = "submit" class = "login-button">Update account</button>
                     <a class = "delete-link" href = "<c:url value = 'LogOutServlet.do'/>">Log Out</a>
                     <a class = "delete-link" href = "<c:url value = 'DeleteUserServlet.do'/>">Delete account</a>
+                    <a class = "delete-link" href = "<c:url value = "SearchServlet.do"/>">Go back to main page</a>
                 </form>
                 <p class = error>${requestScope.error}</p>
             </div>

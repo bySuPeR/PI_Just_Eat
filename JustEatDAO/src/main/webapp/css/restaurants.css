@@ -67,3 +67,20 @@
 .add-restaurant-div:hover {
 	opacity: 0.7;
 }
+
+.delete-link {
+  	color: white;
+}
+  
+.delete-link:hover {
+  	color: hsl(0, 100%, 70%);
+}
+
+.delete-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+}
+

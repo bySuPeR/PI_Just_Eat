@@ -40,6 +40,7 @@
                 	</form>
                 </c:forEach>
                 <a id = "manage-dishes-link" href = "<c:url value = 'AddDishServlet.do?idR=${restaurant.id}'/>">Add new dish</a>
+                <a class = "delete-link" href = "<c:url value = "UpdateRestaurantServlet.do?idR=${restaurant.id}&idU=${user.id}"/>">Go back to update restaurante page</a>
                 <p class = error>${requestScope.error}</p>
             </div>
         </div>

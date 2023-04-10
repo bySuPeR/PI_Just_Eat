@@ -74,6 +74,7 @@
                     <a id = "manage-dishes-link" href = "<c:url value = 'UpdateDishesServlet.do?idR=${restaurant.id}&idU=${currentUser.id}'/>">Manage dishes</a>
                     <button type = "submit" class = "login-button">Update restaurant</button>
                     <a class = "delete-link" href = "<c:url value = 'DeleteRestaurantServlet.do?idR=${restaurant.id}&idU=${currentUser.id}'/>">Delete restaurant</a>
+                    <a class = "delete-link" href = "<c:url value = "RestaurantDetailsServlet.do?id=${restaurant.id}"/>">Go back to restaurant page</a>
                 </form>
                 <p class = error>${requestScope.error}</p>
             </div>

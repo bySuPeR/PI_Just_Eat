@@ -28,6 +28,7 @@ import es.unex.pi.dao.JDBCOrder_DishDAOImpl;
  */
 public class MakeOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private long idRestaurant=-1;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,8 +46,9 @@ public class MakeOrderServlet extends HttpServlet {
 		DishDAO dishDAO = new JDBCDishDAOImpl ();
 		restaurantDAO.setConnection (conn);
 		dishDAO.setConnection (conn);
-		
-		request.setAttribute ("dishList", dishDAO.getAllByRestaurant (Long.parseLong (request.getParameter ("id"))));
+		idRestaurant = Long.parseLong (request.getParameter ("id"));
+		request.setAttribute ("dishList", dishDAO.getAllByRestaurant (idRestaurant));
+		request.setAttribute ("resID", idRestaurant);
 		RequestDispatcher vista = request.getRequestDispatcher("/WEB-INF/NewOrder.jsp");
 		vista.forward(request, response);
 	}
@@ -94,6 +96,7 @@ public class MakeOrderServlet extends HttpServlet {
 		  	HttpSession session = request.getSession ();
 	    	User currentUser = (User) session.getAttribute ("user");
 	    	request.setAttribute ("user", currentUser);
+	    	
 			
 			response.sendRedirect (request.getContextPath () + "/MyOrdersServlet.do?id=" + currentUser.getId());
 		}
