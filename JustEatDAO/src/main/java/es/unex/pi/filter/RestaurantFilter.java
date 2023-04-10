@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 
-@WebFilter(urlPatterns = { "/UpdateRestaurantServlet.do", "/DeleteRestaurantServlet.do", "/UpdateDishesServlet.do?idR" })
+@WebFilter(urlPatterns = { "/UpdateRestaurantServlet.do", "/DeleteRestaurantServlet.do", "/UpdateDishesServlet.do" })
 
 public class RestaurantFilter implements jakarta.servlet.Filter{
 	private FilterConfig filtro;

@@ -5,6 +5,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -45,6 +46,9 @@ public class UpdateDishesServlet extends HttpServlet {
 		this.restaurant = Long.parseLong (request.getParameter ("idR"));
 		Restaurant currentRestaurant = restaurantDAO.get (this.restaurant);
 		request.setAttribute ("restaurant", currentRestaurant);
+		HttpSession session = request.getSession ();
+		User currentUser = (User) session.getAttribute ("user");
+		request.setAttribute ("user", currentUser);
 		
 		dishDAO.setConnection (conn);
 		request.setAttribute ("dishList", dishDAO.getAllByRestaurant (currentRestaurant.getId ()));

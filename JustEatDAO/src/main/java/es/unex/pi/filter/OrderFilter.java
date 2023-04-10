@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = { "/MyOrdersServlet.do?id" })
+@WebFilter(urlPatterns = { "/MyOrdersServlet.do" })
 
 public class OrderFilter implements jakarta.servlet.Filter {
 
