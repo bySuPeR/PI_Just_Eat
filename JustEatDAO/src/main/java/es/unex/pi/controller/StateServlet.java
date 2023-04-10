@@ -5,6 +5,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -15,9 +17,12 @@ import java.util.List;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
 import es.unex.pi.dao.RestaurantDAO;
 import es.unex.pi.dao.JDBCCategoryDAOImpl;
+import es.unex.pi.dao.JDBCFavoritoDAOImpl;
 import es.unex.pi.dao.CategoryDAO;
+import es.unex.pi.dao.FavoritoDAO;
+import es.unex.pi.model.Favorito;
 import es.unex.pi.model.Restaurant;
-
+import es.unex.pi.model.User;
 import es.unex.pi.util.RestaurantComparator;
 
 /**
@@ -79,6 +84,25 @@ public class StateServlet extends HttpServlet {
 			restaurantList = restBD.getAll ();
 			Collections.sort (restaurantList, resComparator);
 			request.setAttribute ("reviews", "checked");
+			request.setAttribute ("restaurantList", restaurantList);
+		}
+		if (searchType.equals ("myfavorites")) {
+			Favorito fav = new Favorito();
+			FavoritoDAO favBD = new JDBCFavoritoDAOImpl();
+			favBD.setConnection(conn);
+			HttpSession session = request.getSession ();
+	    	User currentUser = (User) session.getAttribute ("user");
+	    	List <Favorito> favList = favBD.getAllByUser(currentUser.getId());
+	    	Restaurant restIter = new Restaurant();
+	    	
+	    	for(Favorito favIter : favList) {
+	    		restIter = restBD.get(favIter.getidRestaurant());
+	    		restaurantList.add(restIter);
+	    	}
+	    	
+	    	
+			
+			request.setAttribute ("myfavorites", "checked");
 			request.setAttribute ("restaurantList", restaurantList);
 		}
 		

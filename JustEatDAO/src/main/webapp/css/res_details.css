@@ -11,6 +11,11 @@
     height: auto;
 }
 
+#like{
+	 height: 8vh;
+	 width: 5vw;
+}
+
 .restaurant-pic {
     background-size:cover;
     background-repeat: no-repeat;
@@ -79,6 +84,7 @@
 	width: 15vw;
 	text-align: center;
 	cursor: pointer;
+	margin-top: 2vh;
 }
 
 .manage-restaurant:hover, .order-buttons:hover {

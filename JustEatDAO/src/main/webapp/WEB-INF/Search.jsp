@@ -51,6 +51,10 @@
                 		<label class = "state-label" for = "state-value">Sort on reviews</label>
                 		<input type = "radio" value = "reviews" name = "state-value" ${reviews}>
                 	</div>
+                	<div class = "state-entry">
+                		<label class = "state-label" for = "state-value">My Favorites</label>
+                		<input type = "radio" value = "myfavorites" name = "state-value" ${myfavorites}>
+                	</div>
                 	<input type = "submit" value = "Search" class = "search-state">
                 </form>
                 <div class = "restaurant-grid-container">

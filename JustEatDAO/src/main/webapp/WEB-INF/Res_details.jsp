@@ -12,7 +12,7 @@
         <div class = "full-screen-container">
             <div class = "main-page-container">
             	<img src = "images/${restaurant.restaurantPic}" class = "restaurant-pic">
-				<div class = "restaurant-container">
+				<div class = "restaurant-container">	
 					<h1 class = "restaurant-text">${restaurant.name}
 						<span class = "number-value" id = "grade-average">${restaurant.gradesAverage}</span>
 					</h1>
@@ -39,9 +39,24 @@
 					<c:if test = "${restaurant.available eq 0}">
 						<h1 class = "restaurant-text">Sorry, no orders now</h1>
 					</c:if>
+					
+					
+					
+			<form method="post" action="?">
+				<c:choose>
+          			<c:when test="${requestScope.like eq 'emptyH'}">
+          				<button><img src="images/notlike.png" id= "like"  style="background-color: transparent;"></button>
+          			</c:when>
+          			<c:otherwise>
+          				<button><img src="images/like.png " id= "like" style="background-color: transparent;"></button>
+          			</c:otherwise>
+          		</c:choose>
+			</form>						
+					
 					<c:if test = "${restaurant.idu eq requestScope.currentUser.id}">
 						<a class = "manage-restaurant" href = "<c:url value = 'UpdateRestaurantServlet.do?idR=${restaurant.id}&idU=${currentUser.id}'/>">Manage restaurant</a>
 					</c:if>
+					
 				</div>
 				<div class = "dishes-container">
 					<c:forEach var = "dish" items = "${dishList}">
