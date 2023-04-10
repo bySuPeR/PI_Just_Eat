@@ -249,4 +249,14 @@
     <servlet-name>CategoryServlet</servlet-name>
     <url-pattern>/CategoryServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RelatedRestaurantsServlet</display-name>
+    <servlet-name>RelatedRestaurantsServlet</servlet-name>
+    <servlet-class>es.unex.pi.controller.RelatedRestaurantsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RelatedRestaurantsServlet</servlet-name>
+    <url-pattern>/RelatedRestaurantsServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

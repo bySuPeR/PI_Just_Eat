@@ -39,24 +39,19 @@
 					<c:if test = "${restaurant.available eq 0}">
 						<h1 class = "restaurant-text">Sorry, no orders now</h1>
 					</c:if>
-					
-					
-					
-			<form method="post" action="?">
-				<c:choose>
-          			<c:when test="${requestScope.like eq 'emptyH'}">
-          				<button><img src="images/notlike.png" id= "like"  style="background-color: transparent;"></button>
-          			</c:when>
-          			<c:otherwise>
-          				<button><img src="images/like.png " id= "like" style="background-color: transparent;"></button>
-          			</c:otherwise>
-          		</c:choose>
-			</form>						
-					
+					<form method = "post" action = "?">
+						<c:choose>
+          					<c:when test = "${requestScope.like eq 'emptyH'}">
+          						<button><img src = "images/notlike.png" id = "like"></button>
+          					</c:when>
+          					<c:otherwise>
+          						<button><img src = "images/like.png " id = "like"></button>
+          					</c:otherwise>
+          				</c:choose>
+					</form>							
 					<c:if test = "${restaurant.idu eq requestScope.currentUser.id}">
 						<a class = "manage-restaurant" href = "<c:url value = 'UpdateRestaurantServlet.do?idR=${restaurant.id}&idU=${currentUser.id}'/>">Manage restaurant</a>
 					</c:if>
-					
 				</div>
 				<div class = "dishes-container">
 					<c:forEach var = "dish" items = "${dishList}">
@@ -78,6 +73,34 @@
 					<a class = "manage-restaurant" id = "manage-reviews" href = "<c:url value = 'LoadReviewsServlet.do?id=${restaurant.id}'/>">Rate this restaurant</a>
 				</c:if>
 				<a class = "manage-restaurant" id = "make-order-button" href = "<c:url value = 'MakeOrderServlet.do?id=${restaurant.id}'/>">Make order</a>
+            	<h1 id = "related-title">You could also be interested in:</h1>
+				<form class = "restaurant-state-radio" action = "RelatedRestaurantsServlet.do?idR=${restaurant.id}" method = "post">
+	                <div class = "state-entry">
+            	    	<label class = "state-label" for = "state-value">Category</label>
+        	        	<input type = "radio" value = "category-related" name = "state-value" ${categoryrelated}>
+    	            </div>
+	                <div class = "state-entry">
+                		<label class = "state-label" for = "state-value">Location</label>
+            	    	<input type = "radio" value = "location-related" name = "state-value" ${locationrelated}>
+        	        </div>
+    	            <div class = "state-entry">
+	                	<label class = "state-label" for = "state-value">Price</label>
+                		<input type = radio value = "price-related" name = "state-value" ${pricerelated}>
+            	    </div>
+        	        <div class = "state-entry">
+    	            	<label class = "state-label" for = "state-value">Grade</label>
+	                	<input type = "radio" value = "grade-related" name = "state-value" ${graderelated}>
+            	    </div>
+           	    	<input type = "submit" value = "Search" class = "search-state" id = "related-search">
+				</form>
+            	<div class = "restaurant-grid-container">
+            		<c:forEach var = "restaurant" items = "${relatedRestaurants}">
+            			<div class = "single-restaurant">
+                        	<a href = "RestaurantDetailsServlet.do?id=${restaurant.id}"><img src = "images/${restaurant.restaurantPic}" class = "restaurant-photo"></a>
+                        	<h3>${restaurant.name}</h3>
+                    	</div>
+            		</c:forEach>
+            	</div>
             </div>
         </div>
     </body>

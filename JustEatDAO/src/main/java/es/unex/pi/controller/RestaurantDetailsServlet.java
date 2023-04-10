@@ -11,6 +11,7 @@ import java.io.IOException;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import es.unex.pi.model.Restaurant;
 import es.unex.pi.model.User;
@@ -51,8 +52,10 @@ public class RestaurantDetailsServlet extends HttpServlet {
 		DishDAO dishDAO = new JDBCDishDAOImpl ();
 		CategoryDAO categoryDAO = new JDBCCategoryDAOImpl ();
 		Restaurant_CategoryDAO restaurantCategoryDAO = new JDBCRestaurant_CategoryDAOImpl ();
-		
 		restaurantDAO.setConnection (conn);
+		restaurantCategoryDAO.setConnection (conn);
+		categoryDAO.setConnection (conn);
+		
 		currentRestaurant = restaurantDAO.get (Long.parseLong (request.getParameter ("id")));
 		request.setAttribute ("restaurant", currentRestaurant);
 		User currentUser = (User) request.getSession ().getAttribute ("user");
@@ -61,23 +64,13 @@ public class RestaurantDetailsServlet extends HttpServlet {
 		FavoritoDAO favoritoBD = new JDBCFavoritoDAOImpl();
 		favoritoBD.setConnection(conn);
 		Favorito fav = favoritoBD.get(currentRestaurant.getId(),currentUser.getId());
-		if(fav==null) {
-			request.setAttribute("like", "emptyH");
+		if(fav == null) {
+			request.setAttribute ("like", "emptyH");
 		}
-		
-		
-		restaurantCategoryDAO.setConnection (conn);
-		ArrayList <Category> categoryList = new ArrayList <Category> ();
-		ArrayList <Restaurant_Category> restaurantCategoryList = restaurantCategoryDAO.getAllByRestaurant (currentRestaurant.getId ());
-		categoryDAO.setConnection (conn);
-		for (Restaurant_Category rc: restaurantCategoryList) {
-			Category c = categoryDAO.get (rc.getIdct ());
-			categoryList.add (c);
-		}
-		request.setAttribute ("categoryList", categoryList);
 		
 		dishDAO.setConnection (conn);
 		request.setAttribute ("dishList", dishDAO.getAllByRestaurant (currentRestaurant.getId ()));
+		
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/Res_details.jsp");
 		view.forward (request, response);
 	}
@@ -86,7 +79,6 @@ public class RestaurantDetailsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/**/
 		Connection conn = (Connection) getServletContext().getAttribute("dbConn"); // conectar con bd
 		FavoritoDAO favoritoBD = new JDBCFavoritoDAOImpl();
 		favoritoBD.setConnection(conn);
