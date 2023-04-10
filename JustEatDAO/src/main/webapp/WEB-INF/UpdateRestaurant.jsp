@@ -13,7 +13,7 @@
         <div class = "full-screen-container">
             <div class = "login-container">
                 <h1 class = "login-title">Update your restaurant</h1>
-                <form class = "form" action = "UpdateRestaurantServlet.do" method = "post">
+                <form class = "form" action = "UpdateRestaurantServlet.do?idR=${restaurant.id}&idU=${currentUser.id}" method = "post">
                     <div class = "input-group">
                         <label for = "name">Name</label>
                         <input type = "text" name = "name" value = "${restaurant.name}" required>
@@ -71,7 +71,7 @@
                     		<input type = "radio" value = "no-available" name = "available" ${noavailable}>
                     	</div>
                     </div>
-                    <a id = "manage-dishes-link" href = "<c:url value = 'UpdateDishesServlet.do?idR=${restaurant.id}'/>">Manage dishes</a>
+                    <a id = "manage-dishes-link" href = "<c:url value = 'UpdateDishesServlet.do?idR=${restaurant.id}&idU=${currentUser.id}'/>">Manage dishes</a>
                     <button type = "submit" class = "login-button">Update restaurant</button>
                     <a class = "delete-link" href = "<c:url value = 'DeleteRestaurantServlet.do?idR=${restaurant.id}&idU=${currentUser.id}'/>">Delete restaurant</a>
                 </form>

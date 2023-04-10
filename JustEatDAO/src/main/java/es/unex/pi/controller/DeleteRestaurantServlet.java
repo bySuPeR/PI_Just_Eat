@@ -11,7 +11,6 @@ import java.sql.Connection;
 
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
 import es.unex.pi.dao.RestaurantDAO;
-import es.unex.pi.model.User;
 
 /**
  * Servlet implementation class DeleteRestaurantServlet

@@ -11,7 +11,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter(urlPatterns = {"/AddDishServlet.do", "/AddRestaurantServlet.do","/CategoryServlet.do","/DeleteDishPictureServlet.do","/DeleteRestaurantPictureServlet.do","/DeleteDishServlet.do", "/DeleteRestaurantServlet.do", "/DeleteUserServlet.do","/DeleteReviewServlet.do","/ListRestaurantServlet.do", "/LoadReviewsServlet.do","/LogOutServlet.do", "/MakeOrderServlet.do","/MyRestaurantsServlet.do", "/MyOrdersServlet.do", "/MyRestaurantsServlet.do", "/RestaurantDetailsServlet.do", "/SearchServlet.do", "/StateServlet.do","/UpdateDishesServlet.do", "/UpdateRestaurantServlet.do", "/UpdateReviewServlet.do","/UpdateUserServlet.do" })
+@WebFilter(urlPatterns = {"/AddDishServlet.do", "/AddRestaurantServlet.do","/CategoryServlet.do","/DeleteDishPictureServlet.do",
+		"/DeleteRestaurantPictureServlet.do","/DeleteDishServlet.do", "/DeleteRestaurantServlet.do", "/DeleteUserServlet.do",
+		"/DeleteReviewServlet.do","/ListRestaurantServlet.do", "/LoadReviewsServlet.do","/LogOutServlet.do", 
+		"/MakeOrderServlet.do","/MyRestaurantsServlet.do", "/MyOrdersServlet.do", "/MyRestaurantsServlet.do", "/RelatedRestaurantsServlet.do",
+		"/RestaurantDetailsServlet.do", "/SearchServlet.do", "/StateServlet.do","/UpdateDishesServlet.do", 
+		"/UpdateRestaurantServlet.do", "/UpdateReviewServlet.do","/UpdateUserServlet.do" })
 																	
 
 public class LoginFilter  implements jakarta.servlet.Filter {

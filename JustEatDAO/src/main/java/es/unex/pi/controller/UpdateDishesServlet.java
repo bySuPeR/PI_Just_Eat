@@ -5,12 +5,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 import java.sql.Connection;
 
 import es.unex.pi.model.Dish;
 import es.unex.pi.model.Restaurant;
+import es.unex.pi.model.User;
 import es.unex.pi.dao.DishDAO;
 import es.unex.pi.dao.JDBCDishDAOImpl;
 import es.unex.pi.dao.JDBCRestaurantDAOImpl;
@@ -90,8 +93,9 @@ public class UpdateDishesServlet extends HttpServlet {
 			res.setMaxPrice (currentDish.getPrice ());
 		}
 		resDAO.update (res);
+		User currentUser = (User) request.getSession ().getAttribute ("user");
 		
 		dishBD.update(currentDish);
-		response.sendRedirect (request.getContextPath () + "/UpdateDishesServlet.do?idR=" + this.restaurant);
+		response.sendRedirect (request.getContextPath () + "/UpdateDishesServlet.do?idR=" + this.restaurant + "&idU=" + currentUser.getId());
 	}
 }
