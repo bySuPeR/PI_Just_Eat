@@ -55,14 +55,28 @@
                 		<label class = "state-label" for = "state-value">My Favorites</label>
                 		<input type = "radio" value = "myfavorites" name = "state-value" ${myfavorites}>
                 	</div>
+                	<div class = "state-entry">
+                		<label class = "state-label" for = "state-value">Michelin stars</label>
+                		<input type = "radio" value = "michelin-stars" name = "state-value" ${michelinstars}>
+                	</div>
                 	<input type = "submit" value = "Search" class = "search-state">
                 </form>
                 <div class = "restaurant-grid-container">
                 	<c:forEach var = "restaurant" items = "${restaurantList}">
-                		<div class = "single-restaurant">
-                        	<a href = "RestaurantDetailsServlet.do?id=${restaurant.id}"><img src = "images/${restaurant.restaurantPic}" class = "restaurant-photo"></a>
-                        	<h3>${restaurant.name}</h3>
-                    	</div>
+                		<c:choose>
+                			<c:when test = "${restaurant.michelin eq 1}">
+                				<div class = "single-restaurant" id = "michelin">
+                        			<a href = "RestaurantDetailsServlet.do?id=${restaurant.id}"><img src = "images/${restaurant.restaurantPic}" class = "restaurant-photo"></a>
+                        			<h3>${restaurant.name}</h3>
+                    			</div>
+                			</c:when>
+                			<c:otherwise>
+                				<div class = "single-restaurant">
+                        			<a href = "RestaurantDetailsServlet.do?id=${restaurant.id}"><img src = "images/${restaurant.restaurantPic}" class = "restaurant-photo"></a>
+                        			<h3>${restaurant.name}</h3>
+                    			</div>
+                			</c:otherwise>
+                		</c:choose>
                 	</c:forEach>
                 </div>
             </div>

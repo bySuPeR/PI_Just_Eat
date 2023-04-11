@@ -15,6 +15,15 @@ public class Restaurant {
 	private int available;
 	private long idu;
 	private String restaurantPic;
+	private int michelin;
+	
+	public void setMichelin (int newMichelin) {
+		this.michelin = newMichelin;
+	}
+	
+	public int getMichelin () {
+		return this.michelin;
+	}
 	
 	public String getName () {
 		return name;

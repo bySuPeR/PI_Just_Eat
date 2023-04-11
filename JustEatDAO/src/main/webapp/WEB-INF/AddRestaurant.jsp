@@ -69,6 +69,13 @@
                     		<input type = "radio" value = "no-available" name = "available">
                     	</div>
                     </div>
+                    <div class = "input-group">
+                    	<h2 class = "login-title">Do you have Michelin stars?</h2>
+                    	<select name = "michelin-starts">
+                    		<option value = "yes-michelin">Yes</option>
+                    		<option value = "no-michelin">No</option>
+                    	</select>
+                    </div>
                     <button type = "submit" class = "login-button">Create restaurant</button>
                 </form>
                 <p class = error>${requestScope.error}</p>

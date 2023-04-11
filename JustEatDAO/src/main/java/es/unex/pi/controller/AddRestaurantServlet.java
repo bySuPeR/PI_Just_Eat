@@ -105,7 +105,15 @@ public class AddRestaurantServlet extends HttpServlet {
 		else if (availability.equals ("no-available")) {
 			newRest.setAvailable (0);
 		}
-				
+		
+		String michStr = request.getParameter ("michelin-starts");
+		if (michStr.equals ("yes-michelin")) {
+			newRest.setMichelin (1);
+		}
+		else if (michStr.equals ("no-michelin")) {
+			newRest.setMichelin (0);
+		}
+		
 		logger.info("Todos los parametros");
 		HttpSession sesion = request.getSession();
 		User user = (User) sesion.getAttribute("user");

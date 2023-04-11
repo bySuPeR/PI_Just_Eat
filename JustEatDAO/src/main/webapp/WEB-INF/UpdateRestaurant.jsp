@@ -71,6 +71,13 @@
                     		<input type = "radio" value = "no-available" name = "available" ${noavailable}>
                     	</div>
                     </div>
+                    <div class = "input-group">
+                    	<h2 class = "login-title">Do you have Michelin stars?</h2>
+                    	<select name = "michelin-starts">
+                    		<option value = "yes-michelin" ${michelinyes}>Yes</option>
+                    		<option value = "no-michelin" ${michelinno}>No</option>
+                    	</select>
+                    </div>
                     <a id = "manage-dishes-link" href = "<c:url value = 'UpdateDishesServlet.do?idR=${restaurant.id}&idU=${currentUser.id}'/>">Manage dishes</a>
                     <button type = "submit" class = "login-button">Update restaurant</button>
                     <a class = "delete-link" href = "<c:url value = 'DeleteRestaurantServlet.do?idR=${restaurant.id}&idU=${currentUser.id}'/>">Delete restaurant</a>

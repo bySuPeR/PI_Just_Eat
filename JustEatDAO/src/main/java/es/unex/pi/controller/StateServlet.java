@@ -106,6 +106,16 @@ public class StateServlet extends HttpServlet {
 			request.setAttribute ("restaurantList", restaurantList);
 		}
 		
+		if (searchType.equals ("michelin-stars")) {
+			for (Restaurant restIter : restaurantListBD ) {
+				if(restIter.getMichelin () == 1) {
+					restaurantList.add (restIter);
+				}
+			}
+			request.setAttribute("michelinstars", "checked");
+			request.setAttribute("restaurantList", restaurantList);
+		}
+		
 		//Recarga la página para ver los resultados.
 		catDAO.setConnection (conn);
 		request.setAttribute ("categoryList", catDAO.getAll ());

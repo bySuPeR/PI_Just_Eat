@@ -43,6 +43,7 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 				restaurant.setAvailable (rs.getInt ("available"));
 				restaurant.setIdu (rs.getLong ("idu"));
 				restaurant.setRestaurantPic (rs.getString ("restaurantPic"));
+				restaurant.setMichelin (rs.getInt ("michelin"));
 				logger.info ("Fetching restaurant (" + id + "): " + restaurant.getName () + "...");
 			}
 		}
@@ -80,6 +81,7 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 				restaurant.setAvailable (rs.getInt ("available"));
 				restaurant.setIdu (rs.getLong ("idu"));
 				restaurant.setRestaurantPic (rs.getString ("restaurantPic"));
+				restaurant.setMichelin (rs.getInt ("michelin"));
 				restaurants.add (restaurant);
 				logger.info ("Fetching restaurant (" + restaurant.getId () + "): " + restaurant.getName () + "...");
 			}
@@ -123,6 +125,7 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 				restaurant.setAvailable (rs.getInt ("available"));
 				restaurant.setIdu (rs.getLong ("idu"));
 				restaurant.setRestaurantPic (rs.getString ("restaurantPic"));
+				restaurant.setMichelin (rs.getInt ("michelin"));
 				restaurants.add (restaurant);
 				logger.info ("Fetching restaurant (" + restaurant.getId () + "): " + restaurant.getName () + "...");
 			}
@@ -163,6 +166,7 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 				restaurant.setAvailable (rs.getInt ("available"));
 				restaurant.setIdu (rs.getLong ("idu"));
 				restaurant.setRestaurantPic (rs.getString ("restaurantPic"));
+				restaurant.setMichelin (rs.getInt ("michelin"));
 				restaurants.add (restaurant);
 				logger.info ("Fetching restaurant (" + restaurant.getId () + "): " + restaurant.getName () + "...");
 			}
@@ -200,6 +204,7 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 				restaurant.setAvailable (rs.getInt ("available"));
 				restaurant.setIdu (rs.getLong ("idu"));
 				restaurant.setRestaurantPic (rs.getString ("restaurantPic"));
+				restaurant.setMichelin (rs.getInt ("michelin"));
 			}
 		}
 		catch (SQLException e) {
@@ -227,7 +232,7 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 				e.printStackTrace ();
 			}			
 			
-			String query2 = "INSERT INTO Restaurant (name, address, telephone, gradesAverage, city, minPrice, contactEmail, maxPrice, bikeFriendly, available, idu, restaurantPic) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query2 = "INSERT INTO Restaurant (name, address, telephone, gradesAverage, city, minPrice, contactEmail, maxPrice, bikeFriendly, available, idu, restaurantPic, michelin) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			try {
 				stmt = this.conn.prepareStatement (query2);
 				stmt.clearParameters ();
@@ -243,6 +248,7 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 				stmt.setInt (10, restaurant.getAvailable ());
 				stmt.setLong (11, restaurant.getIdu ());
 				stmt.setString (12, restaurant.getRestaurantPic ());
+				stmt.setInt (13, restaurant.getMichelin ());
 				updatedRows = stmt.executeUpdate ();
 			}
 			catch (SQLException e) {
@@ -285,7 +291,8 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 						   "bikeFriendly = ?, " +
 						   "available = ?, " +
 						   "idu = ?, " +
-						   "restaurantPic = ?" +
+						   "restaurantPic = ?, " +
+						   "michelin = ?" +
 						   "WHERE id = ?";
 			try {
 				stmt = this.conn.prepareStatement (query);
@@ -302,7 +309,8 @@ public class JDBCRestaurantDAOImpl implements RestaurantDAO {
 				stmt.setInt (10, restaurant.getAvailable ());
 				stmt.setLong (11, restaurant.getIdu ());
 				stmt.setString (12, restaurant.getRestaurantPic ());
-				stmt.setLong (13, restaurant.getId ());
+				stmt.setInt (13, restaurant.getMichelin ());
+				stmt.setLong (14, restaurant.getId ());
 				updatedRows = stmt.executeUpdate ();
 				if (updatedRows == 1) {
 					done = true;

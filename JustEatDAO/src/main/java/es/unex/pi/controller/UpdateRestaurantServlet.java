@@ -79,6 +79,14 @@ public class UpdateRestaurantServlet extends HttpServlet {
 		for (Restaurant_Category res_cat: resCatList) {
 			request.setAttribute (categoryDAO.get (res_cat.getIdct ()).getName (), "checked");
 		}
+		
+		if (currentRestaurant.getMichelin () == 1) {
+			request.setAttribute ("michelinyes", "selected");
+		}
+		else if (currentRestaurant.getMichelin () == 0) {
+			request.setAttribute ("michelinno", "selected");
+		}
+		
 		RequestDispatcher view = request.getRequestDispatcher ("WEB-INF/UpdateRestaurant.jsp");
 		view.forward (request, response);
 	}
@@ -165,6 +173,14 @@ public class UpdateRestaurantServlet extends HttpServlet {
 				categoryRestBD.add(restCategory);
 			}
 			RestaurantDAO restaurantBD = new JDBCRestaurantDAOImpl();
+			
+			String michStr = request.getParameter ("michelin-starts");
+			if (michStr.equals ("yes-michelin")) {
+				rest.setMichelin (1);
+			}
+			else if (michStr.equals ("no-michelin")) {
+				rest.setMichelin (0);
+			}
 			
 			restaurantBD.setConnection(conn);
 			restaurantBD.update(rest);
